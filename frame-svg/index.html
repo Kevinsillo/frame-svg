@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>frame-svg</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <button id="theme-toggle">☾ Dark</button>
+  <script type="module" src="./main.ts"></script>
+  <script>
+    const btn = document.getElementById('theme-toggle')
+    const html = document.documentElement
+    const saved = localStorage.getItem('frame-theme') ?? 'dark'
+    html.dataset.theme = saved
+    btn.textContent = saved === 'dark' ? '☾ Dark' : '☀ Light'
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark'
+      html.dataset.theme = next
+      btn.textContent = next === 'dark' ? '☾ Dark' : '☀ Light'
+      localStorage.setItem('frame-theme', next)
+    })
+  </script>
+</body>
+</html>

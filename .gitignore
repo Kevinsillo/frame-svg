@@ -1,12 +1,15 @@
 # Dependencies
 node_modules/
 .claude/
-
-# Build output
+.trash/
+.vite/
 dist/
 
+# Build output (Vite only — SVGs in dist/ are committed)
+frame-svg/dist/assets/
+frame-svg/dist/index.html
+
 # Editor
-.vscode/
 .idea/
 *.swp
 *.swo
@@ -27,3 +30,4 @@ pnpm-debug.log*
 
 # TypeScript
 *.tsbuildinfo
+.pillbox/
