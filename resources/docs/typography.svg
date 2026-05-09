@@ -1,0 +1,141 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 279" width="100%" style="max-width:640px">
+  <style>
+    .f-bg { fill: #0f172a; }
+    .s-bg { stroke: #0f172a; }
+    .f-surface { fill: #1e293b; }
+    .s-surface { stroke: #1e293b; }
+    .f-raised { fill: #334155; }
+    .s-raised { stroke: #334155; }
+    .f-subtle { fill: #475569; }
+    .s-subtle { stroke: #475569; }
+    .f-text { fill: #f8fafc; }
+    .s-text { stroke: #f8fafc; }
+    .f-muted { fill: #94a3b8; }
+    .s-muted { stroke: #94a3b8; }
+    .f-faint { fill: #475569; }
+    .s-faint { stroke: #475569; }
+    .f-accent { fill: #38bdf8; }
+    .s-accent { stroke: #38bdf8; }
+    .f-success { fill: #4ade80; }
+    .s-success { stroke: #4ade80; }
+    .f-warning { fill: #fbbf24; }
+    .s-warning { stroke: #fbbf24; }
+    .f-danger { fill: #f87171; }
+    .s-danger { stroke: #f87171; }
+    .f-accentBg { fill: #0c4a6e; }
+    .s-accentBg { stroke: #0c4a6e; }
+    .f-successBg { fill: #166534; }
+    .s-successBg { stroke: #166534; }
+    .f-warningBg { fill: #78350f; }
+    .s-warningBg { stroke: #78350f; }
+    .f-dangerBg { fill: #7f1d1d; }
+    .s-dangerBg { stroke: #7f1d1d; }
+    @media (prefers-color-scheme: light) {
+      .f-bg { fill: #ffffff; }
+      .s-bg { stroke: #ffffff; }
+      .f-surface { fill: #f1f5f9; }
+      .s-surface { stroke: #f1f5f9; }
+      .f-raised { fill: #e2e8f0; }
+      .s-raised { stroke: #e2e8f0; }
+      .f-subtle { fill: #cbd5e1; }
+      .s-subtle { stroke: #cbd5e1; }
+      .f-text { fill: #0f172a; }
+      .s-text { stroke: #0f172a; }
+      .f-muted { fill: #64748b; }
+      .s-muted { stroke: #64748b; }
+      .f-faint { fill: #94a3b8; }
+      .s-faint { stroke: #94a3b8; }
+      .f-accent { fill: #0284c7; }
+      .s-accent { stroke: #0284c7; }
+      .f-success { fill: #16a34a; }
+      .s-success { stroke: #16a34a; }
+      .f-warning { fill: #d97706; }
+      .s-warning { stroke: #d97706; }
+      .f-danger { fill: #dc2626; }
+      .s-danger { stroke: #dc2626; }
+      .f-accentBg { fill: #e0f2fe; }
+      .s-accentBg { stroke: #e0f2fe; }
+      .f-successBg { fill: #dcfce7; }
+      .s-successBg { stroke: #dcfce7; }
+      .f-warningBg { fill: #fef3c7; }
+      .s-warningBg { stroke: #fef3c7; }
+      .f-dangerBg { fill: #fee2e2; }
+      .s-dangerBg { stroke: #fee2e2; }
+    }
+  </style>
+  <g transform="translate(0, 0)">
+    <rect width="640" height="279" class="f-bg"/>
+    <g transform="translate(28, 28)">
+      <g transform="translate(0, 0)">
+        <text font-size="10" font-weight="700" font-family="system-ui, sans-serif" text-anchor="start" class="f-faint"><tspan x="0" dy="10">TYPOGRAPHY</tspan></text>
+      </g>
+      <g transform="translate(0, 26)">
+        <line x1="0" y1="0" x2="584" y2="0" stroke-width="1" class="s-subtle"/>
+      </g>
+      <g transform="translate(0, 43)">
+        <g transform="translate(0, 0)">
+          <g transform="translate(0, 0)">
+            <text font-size="40" font-weight="700" font-family="system-ui, sans-serif" text-anchor="start" class="f-text"><tspan x="0" dy="40">Ag</tspan></text>
+          </g>
+          <g transform="translate(0, 62)">
+            <text font-size="9" font-weight="normal" font-family="system-ui, sans-serif" text-anchor="start" class="f-faint"><tspan x="0" dy="9">40 bold</tspan></text>
+          </g>
+        </g>
+        <g transform="translate(97.33333333333333, 17)">
+          <g transform="translate(0, 0)">
+            <text font-size="28" font-weight="700" font-family="system-ui, sans-serif" text-anchor="start" class="f-text"><tspan x="0" dy="28">Ag</tspan></text>
+          </g>
+          <g transform="translate(0, 45)">
+            <text font-size="9" font-weight="normal" font-family="system-ui, sans-serif" text-anchor="start" class="f-faint"><tspan x="0" dy="9">28 bold</tspan></text>
+          </g>
+        </g>
+        <g transform="translate(194.66666666666666, 28)">
+          <g transform="translate(0, 0)">
+            <text font-size="20" font-weight="600" font-family="system-ui, sans-serif" text-anchor="start" class="f-text"><tspan x="0" dy="20">Ag</tspan></text>
+          </g>
+          <g transform="translate(0, 34)">
+            <text font-size="9" font-weight="normal" font-family="system-ui, sans-serif" text-anchor="start" class="f-faint"><tspan x="0" dy="9">20 600</tspan></text>
+          </g>
+        </g>
+        <g transform="translate(292, 35)">
+          <g transform="translate(0, 0)">
+            <text font-size="15" font-weight="normal" font-family="system-ui, sans-serif" text-anchor="start" class="f-text"><tspan x="0" dy="15">Ag</tspan></text>
+          </g>
+          <g transform="translate(0, 27)">
+            <text font-size="9" font-weight="normal" font-family="system-ui, sans-serif" text-anchor="start" class="f-faint"><tspan x="0" dy="9">15 reg</tspan></text>
+          </g>
+        </g>
+        <g transform="translate(389.3333333333333, 38)">
+          <g transform="translate(0, 0)">
+            <text font-size="13" font-weight="normal" font-family="system-ui, sans-serif" text-anchor="start" class="f-muted"><tspan x="0" dy="13">Ag</tspan></text>
+          </g>
+          <g transform="translate(0, 24)">
+            <text font-size="9" font-weight="normal" font-family="system-ui, sans-serif" text-anchor="start" class="f-faint"><tspan x="0" dy="9">13 muted</tspan></text>
+          </g>
+        </g>
+        <g transform="translate(486.66666666666663, 41)">
+          <g transform="translate(0, 0)">
+            <text font-size="11" font-weight="normal" font-family="system-ui, sans-serif" text-anchor="start" class="f-faint"><tspan x="0" dy="11">Ag</tspan></text>
+          </g>
+          <g transform="translate(0, 21)">
+            <text font-size="9" font-weight="normal" font-family="system-ui, sans-serif" text-anchor="start" class="f-faint"><tspan x="0" dy="9">11 faint</tspan></text>
+          </g>
+        </g>
+      </g>
+      <g transform="translate(0, 134)">
+        <rect width="584" height="89" rx="8" class="f-surface s-subtle" stroke-width="1"/>
+        <g transform="translate(16, 12)">
+          <g transform="translate(0, 0)">
+            <text font-size="14" font-weight="600" font-family="system-ui, sans-serif" text-anchor="start" class="f-text"><tspan x="0" dy="14">The quick brown fox jumps over the lazy dog</tspan></text>
+          </g>
+          <g transform="translate(0, 26)">
+            <text font-size="13" font-weight="normal" font-family="system-ui, sans-serif" text-anchor="start" class="f-muted"><tspan x="0" dy="13">The quick brown fox jumps over the lazy dog</tspan></text>
+          </g>
+          <g transform="translate(0, 50)">
+            <text font-size="11" font-weight="normal" font-family="system-ui, sans-serif" text-anchor="start" class="f-faint"><tspan x="0" dy="11">The quick brown fox jumps over the lazy dog</tspan></text>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 179" width="100%" style="max-width:640px">
+  <style>
+    .f-bg { fill: #0f172a; }
+    .s-bg { stroke: #0f172a; }
+    .f-surface { fill: #1e293b; }
+    .s-surface { stroke: #1e293b; }
+    .f-raised { fill: #334155; }
+    .s-raised { stroke: #334155; }
+    .f-subtle { fill: #475569; }
+    .s-subtle { stroke: #475569; }
+    .f-text { fill: #f8fafc; }
+    .s-text { stroke: #f8fafc; }
+    .f-muted { fill: #94a3b8; }
+    .s-muted { stroke: #94a3b8; }
+    .f-faint { fill: #475569; }
+    .s-faint { stroke: #475569; }
+    .f-accent { fill: #38bdf8; }
+    .s-accent { stroke: #38bdf8; }
+    .f-success { fill: #4ade80; }
+    .s-success { stroke: #4ade80; }
+    .f-warning { fill: #fbbf24; }
+    .s-warning { stroke: #fbbf24; }
+    .f-danger { fill: #f87171; }
+    .s-danger { stroke: #f87171; }
+    .f-accentBg { fill: #0c4a6e; }
+    .s-accentBg { stroke: #0c4a6e; }
+    .f-successBg { fill: #166534; }
+    .s-successBg { stroke: #166534; }
+    .f-warningBg { fill: #78350f; }
+    .s-warningBg { stroke: #78350f; }
+    .f-dangerBg { fill: #7f1d1d; }
+    .s-dangerBg { stroke: #7f1d1d; }
+    @media (prefers-color-scheme: light) {
+      .f-bg { fill: #ffffff; }
+      .s-bg { stroke: #ffffff; }
+      .f-surface { fill: #f1f5f9; }
+      .s-surface { stroke: #f1f5f9; }
+      .f-raised { fill: #e2e8f0; }
+      .s-raised { stroke: #e2e8f0; }
+      .f-subtle { fill: #cbd5e1; }
+      .s-subtle { stroke: #cbd5e1; }
+      .f-text { fill: #0f172a; }
+      .s-text { stroke: #0f172a; }
+      .f-muted { fill: #64748b; }
+      .s-muted { stroke: #64748b; }
+      .f-faint { fill: #94a3b8; }
+      .s-faint { stroke: #94a3b8; }
+      .f-accent { fill: #0284c7; }
+      .s-accent { stroke: #0284c7; }
+      .f-success { fill: #16a34a; }
+      .s-success { stroke: #16a34a; }
+      .f-warning { fill: #d97706; }
+      .s-warning { stroke: #d97706; }
+      .f-danger { fill: #dc2626; }
+      .s-danger { stroke: #dc2626; }
+      .f-accentBg { fill: #e0f2fe; }
+      .s-accentBg { stroke: #e0f2fe; }
+      .f-successBg { fill: #dcfce7; }
+      .s-successBg { stroke: #dcfce7; }
+      .f-warningBg { fill: #fef3c7; }
+      .s-warningBg { stroke: #fef3c7; }
+      .f-dangerBg { fill: #fee2e2; }
+      .s-dangerBg { stroke: #fee2e2; }
+    }
+  </style>
+  <g transform="translate(0, 0)">
+    <rect width="640" height="179" class="f-bg"/>
+    <g transform="translate(28, 28)">
+      <g transform="translate(0, 0)">
+        <text font-size="10" font-weight="700" font-family="system-ui, sans-serif" text-anchor="start" class="f-faint"><tspan x="0" dy="10">LINES</tspan></text>
+      </g>
+      <g transform="translate(0, 26)">
+        <line x1="0" y1="0" x2="584" y2="0" stroke-width="1" class="s-subtle"/>
+      </g>
+      <g transform="translate(0, 43)">
+        <g transform="translate(0, 0)">
+          <g transform="translate(0, 0)">
+            <g transform="translate(0, 0)">
+              <text font-size="10" font-weight="normal" font-family="system-ui, sans-serif" text-anchor="start" class="f-faint"><tspan x="0" dy="10">default</tspan></text>
+            </g>
+          </g>
+          <g transform="translate(92, 6.5)">
+            <line x1="0" y1="0" x2="492" y2="0" stroke-width="1" class="s-subtle"/>
+          </g>
+        </g>
+        <g transform="translate(0, 22)">
+          <g transform="translate(0, 0)">
+            <g transform="translate(0, 0)">
+              <text font-size="10" font-weight="normal" font-family="system-ui, sans-serif" text-anchor="start" class="f-faint"><tspan x="0" dy="10">accent 2px</tspan></text>
+            </g>
+          </g>
+          <g transform="translate(92, 6)">
+            <line x1="0" y1="0" x2="492" y2="0" stroke-width="2" class="s-accent"/>
+          </g>
+        </g>
+        <g transform="translate(0, 44)">
+          <g transform="translate(0, 0)">
+            <g transform="translate(0, 0)">
+              <text font-size="10" font-weight="normal" font-family="system-ui, sans-serif" text-anchor="start" class="f-faint"><tspan x="0" dy="10">dashed 6 4</tspan></text>
+            </g>
+          </g>
+          <g transform="translate(92, 6.5)">
+            <line x1="0" y1="0" x2="492" y2="0" stroke-width="1" stroke-dasharray="6 4" class="s-muted"/>
+          </g>
+        </g>
+        <g transform="translate(0, 66)">
+          <g transform="translate(0, 0)">
+            <g transform="translate(0, 0)">
+              <text font-size="10" font-weight="normal" font-family="system-ui, sans-serif" text-anchor="start" class="f-faint"><tspan x="0" dy="10">dotted 2 6</tspan></text>
+            </g>
+          </g>
+          <g transform="translate(92, 6)">
+            <line x1="0" y1="0" x2="492" y2="0" stroke-width="2" stroke-dasharray="2 6" class="s-success"/>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
