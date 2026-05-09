@@ -1,0 +1,71 @@
+import { theme } from '@/themes/theme.ts'
+import { Callout, FeatureList, FileTree, KeyCombo } from 'frame-svg/compound'
+
+<Page theme={theme} width={720} padding={32} background="$bg">
+  <Stack gap={24}>
+
+    <Stack direction="horizontal" gap={14} align="center">
+      <Box width={4} height={48} radius={2} background="$accent" />
+      <Stack gap={13}>
+        <Text fontSize={22} fontWeight="700" color="$text">frame-svg</Text>
+        <Text fontSize={12} color="$muted">SVG layout engine · code-first · zero dependencies</Text>
+      </Stack>
+    </Stack>
+
+    <Grid columns={2} gap={16}>
+
+      <Stack gap={16}>
+        <Callout variant="note" message="Write layouts in TypeScript. Get an SVG ready to embed in any README." />
+        <Callout variant="tip" message="The output SVG adapts automatically to dark or light mode — no JavaScript, no duplicated files." />
+        <Box background="$surface" radius={10} padding={16}>
+          <Text fontSize={10} fontWeight="700" color="$faint">FEATURES</Text>
+          <FeatureList items={[
+            { label: 'Zero dependencies', checked: true },
+            { label: 'Dark & light mode', checked: true },
+            { label: 'JSX-like syntax',   checked: true },
+            { label: 'Custom themes',     checked: true },
+          ]} />
+        </Box>
+      </Stack>
+
+      <Stack gap={16}>
+        <Box background="$surface" radius={10} padding={16}>
+          <Text fontSize={10} fontWeight="700" color="$faint">FILE TREE</Text>
+          <FileTree root="src" items={[
+            { name: 'main.frame',    type: 'file', depth: 0, highlight: true },
+            { name: 'components',    type: 'dir',  depth: 0 },
+            { name: 'hero.frame',    type: 'file', depth: 1 },
+            { name: 'features.frame',type: 'file', depth: 1 },
+          ]} />
+        </Box>
+        <Box background="$surface" radius={10} padding={14}>
+          <Stack gap={16}>
+            <Text fontSize={10} fontWeight="700" color="$faint">PRIMITIVES</Text>
+            <Stack direction="horizontal" gap={10}>
+              <Icon name="folder"   size={14} color="$accent"  />
+              <Icon name="file"     size={14} color="$muted"   />
+              <Icon name="code"     size={14} color="$accent"  />
+              <Icon name="terminal" size={14} color="$muted"   />
+              <Icon name="package"  size={14} color="$accent"  />
+              <Icon name="shield"   size={14} color="$muted"   />
+              <Icon name="star"     size={14} color="$warning" />
+              <Icon name="zap"      size={14} color="$accent"  />
+            </Stack>
+            <Stack direction="horizontal" gap={10}>
+              <Icon name="info"           size={14} color="$accent"  />
+              <Icon name="lightbulb"      size={14} color="$warning" />
+              <Icon name="triangle-alert" size={14} color="$warning" />
+              <Icon name="check"          size={14} color="$success" />
+              <Icon name="x"              size={14} color="$danger"  />
+              <Icon name="lock"           size={14} color="$muted"   />
+              <Icon name="user"           size={14} color="$accent"  />
+              <Icon name="clock"          size={14} color="$muted"   />
+            </Stack>
+            <KeyCombo keys={['Ctrl', 'Shift', 'P']} />
+          </Stack>
+        </Box>
+      </Stack>
+
+    </Grid>
+  </Stack>
+</Page>
