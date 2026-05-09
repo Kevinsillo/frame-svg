@@ -1,6 +1,9 @@
 # Dependencies
 node_modules/
-.claude/
+.claude/*
+!.claude/skills/
+.claude/skills/*
+!.claude/skills/frame-design/
 .trash/
 .vite/
 dist/

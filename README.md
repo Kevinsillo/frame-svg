@@ -81,6 +81,7 @@ npm run render
 | [Scripts](docs/09-scripts.md) | dev, render, schema, ext:install |
 | [Internals](docs/10-internals.md) | Pipeline, layout engine, renderer |
 | [Examples](docs/examples.md) | Visual reference with SVG previews |
+| [AI Skill](docs/11-ai-skill.md) | Claude Code skill for designing with frame-svg |
 
 ## VS Code
 
