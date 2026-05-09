@@ -41,6 +41,22 @@ npm run ext:install
 
 Restart VSCode after running this. See [VSCode Extension](./08-vscode-extension.md) for details.
 
+## `npm run render:img`
+
+Renders `src/main.frame` → `dist/main.<format>` as a static raster image using [sharp](https://sharp.pixelplumbing.com).
+
+```bash
+npm run render:img                  # → dist/main.webp  (light theme)
+npm run render:img png              # → dist/main.png   (light theme)
+npm run render:img webp dark        # → dist/main.webp  (dark theme)
+npm run render:img jpeg light       # → dist/main.jpeg  (light theme)
+```
+
+Supported formats: `webp`, `png`, `jpeg`, `avif`, `gif`, `tiff`, `heif`.  
+Supported themes: `light` (default), `dark`.
+
+> **Note:** The theme must be chosen at render time — raster images are static and cannot adapt to the user's system preference the way the SVG output does. For documentation and GitHub READMEs, `npm run render` (SVG) is almost always the better choice.
+
 ## Typical workflow
 
 ```bash

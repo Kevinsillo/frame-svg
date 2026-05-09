@@ -17,6 +17,7 @@
   "scripts": {
     "dev": "vite",
     "render": "vite-node scripts/render.ts",
+    "render:img": "vite-node scripts/render-img.ts",
     "ext:install": "node scripts/install-extension.mjs",
     "schema": "vite-node scripts/gen-schema.ts"
   },
@@ -28,6 +29,9 @@
     "vite-node": "^3"
   },
   "dependencies": {
-    "@types/vscode": "^1.118.0"
+    "@fontsource-variable/inter": "^5.2.8",
+    "@napi-rs/canvas": "^1.0.0",
+    "@types/vscode": "^1.118.0",
+    "sharp": "^0.34.5"
   }
 }

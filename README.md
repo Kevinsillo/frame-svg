@@ -69,7 +69,7 @@ npm run render
 | [Icons](docs/06-icons.md) | Built-in icon set and usage |
 | [Compound Components](docs/07-compound.md) | Card, Avatar, Callout, FeatureList, FileTree, KeyCombo, Stat |
 | [VSCode Extension](docs/08-vscode-extension.md) | Syntax highlighting and autocomplete |
-| [Scripts](docs/09-scripts.md) | dev, render, schema, ext:install |
+| [Scripts](docs/09-scripts.md) | dev, render, render:img, schema, ext:install |
 | [Internals](docs/10-internals.md) | Pipeline, layout engine, renderer |
 | [Examples](docs/examples.md) | Visual reference with SVG previews |
 | [AI Skill](docs/11-ai-skill.md) | Claude Code skill for designing with frame-svg |
