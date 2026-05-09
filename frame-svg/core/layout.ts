@@ -55,7 +55,7 @@ function measureIntrinsicWidth(node: LayoutNode): number {
     const p = props as TextProps
     const fontSize = Number(p.fontSize) || 16
     const [, tpr, , tpl] = parseSpacing(p.padding)
-    return measureTextWidth(p.content ?? '', fontSize, p.fontFamily) + tpl + tpr
+    return measureTextWidth(p.content ?? '', fontSize, p.fontFamily, p.fontWeight) + tpl + tpr
   }
   if (node.type === 'circle') return (props as CircleProps).size
   if (node.type === 'image') return Number((props as ImageProps).width || 0)
@@ -63,6 +63,10 @@ function measureIntrinsicWidth(node: LayoutNode): number {
     const p = props as SpacerProps
     return Number(p.width ?? p.size ?? 0)
   }
+
+  // Box / Stack: if an explicit numeric width is declared, honour it directly
+  const explicitW = getWidth(props)
+  if (typeof explicitW === 'number') return explicitW
 
   // Box / Stack: padding + children content (children contribute margin + width)
   const sp = props as StackProps
@@ -96,9 +100,14 @@ function resolveHorizontalChildren(
   // Pre-compute per-child info so margins are included in space accounting
   const childInfo = children.map(c => {
     const [, cmr, , cml] = parseSpacing(getMargin(c.props))
-    // Circles have intrinsic size but no width prop — treat as fixed
+    // Circles and spacers have intrinsic size but may lack a width prop — treat as fixed
     if (c.type === 'circle') {
       return { isAuto: false, fixedWidth: (c.props as CircleProps).size, cml, cmr }
+    }
+    if (c.type === 'spacer') {
+      const p = c.props as SpacerProps
+      const fixedWidth = Number(p.width ?? p.size ?? 0)
+      return { isAuto: false, fixedWidth, cml, cmr }
     }
     const w = getWidth(c.props)
     const isAuto = !w || w === '100%' || w === 'auto'
@@ -139,7 +148,7 @@ export function resolveLayout(node: LayoutNode, availableWidth: number): Resolve
     const innerWidth = Math.max(0, width - pl - pr)
     const fontSize = Number(p.fontSize) || 16
     const lineHeight = Number(p.lineHeight) || Math.round(fontSize * 1.4)
-    const lines = wrapText(p.content, innerWidth, fontSize, p.fontFamily)
+    const lines = wrapText(p.content, innerWidth, fontSize, p.fontFamily, p.fontWeight)
     const height = lines.length * lineHeight + pt + pb
     return {
       ...node, _width: width, _height: height, _x: 0, _y: 0,
@@ -342,7 +351,10 @@ function resolveGrid(
         cx = pl + col * (colWidth + colGap) + child._ml
       }
       const cy = cursorY + child._mt
-      positioned.push({ ...child, _x: cx, _y: cy })
+      const stretchedHeight = align === 'stretch'
+        ? rowHeight - child._mt - child._mb
+        : child._height
+      positioned.push({ ...child, _x: cx, _y: cy, _height: stretchedHeight })
     })
 
     cursorY += rowHeight + (isLastRow ? 0 : rowGap)
