@@ -1,9 +1,9 @@
-import { mkdir, writeFile, readFile } from 'node:fs/promises'
+import { renderSvg } from '@/core/index.ts'
+import type { LayoutNode, PageProps, RenderOptions } from '@/core/types.ts'
+import { initCanvas } from '@/core/utils.ts'
+import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
-import { renderSvg } from '@/core/index.ts'
-import { initCanvas } from '@/core/utils.ts'
-import type { LayoutNode, PageProps, RenderOptions } from '@/core/types.ts'
 
 const entry = resolve('./src/main.frame')
 const distDir = resolve('./dist')
@@ -18,7 +18,6 @@ try {
 
   const renderOptions: RenderOptions = (mod.default.props as PageProps).theme ?? {}
 
-  // Load font files from src and register for measurement + SVG embedding
   for (const font of renderOptions.fonts ?? []) {
     if (font.src) {
       const buf = await readFile(resolve(font.src))

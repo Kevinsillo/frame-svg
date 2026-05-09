@@ -1,12 +1,12 @@
 ---
-title: Componentes primitivos de contenido
+title: Componentes primitivos
 impact: MEDIUM
-impactDescription: Text, Circle, Image, Line e Icon son los átomos visuales — usarlos bien define la calidad del diseño
+impactDescription: Page, Stack, Box, Grid, Spacer, Text, Circle, Line e Icon son los bloques de construcción — usarlos bien define la calidad del diseño
 type: best-practice
-tags: [frame-svg, text, circle, image, line, icon, primitivos]
+tags: [frame-svg, text, circle, line, icon, stack, box, grid, spacer, primitivos]
 ---
 
-# Componentes primitivos de contenido
+# Componentes primitivos
 
 **Impact: MEDIUM** - Son los átomos del sistema. No requieren import explícito — están disponibles globalmente en cualquier .frame.
 
@@ -34,14 +34,6 @@ Jerarquía recomendada: `$text` → primario · `$muted` → secundario · `$fai
 <Circle size={48} background="$accent" shadow={{ blur: 12, color: 'rgba(56,189,248,0.3)', y: 4 }} />
 <Circle size={32} background="$surface" border={{ width: 2, color: '$accent' }} />
 ```
-
-## Image
-
-```tsx
-<Image src="@/assets/logo.png" width={120} height={40} radius={8} />
-```
-
-`width` y `height` son obligatorios. Acepta rutas relativas o con alias `@/`.
 
 ## Line
 

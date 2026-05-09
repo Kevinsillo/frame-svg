@@ -112,15 +112,6 @@ export interface CircleProps {
   margin?: SpacingValue
 }
 
-export interface ImageProps {
-  src: string
-  width: number | string
-  height: number | string
-  radius?: number
-  opacity?: number
-  margin?: SpacingValue
-}
-
 export interface LineProps {
   direction?: 'horizontal' | 'vertical'
   color?: string
@@ -162,11 +153,11 @@ export interface IconProps {
 
 export type NodeProps =
   | PageProps | StackProps | BoxProps | TextProps
-  | CircleProps | ImageProps | LineProps | GridProps | SpacerProps | IconProps
+  | CircleProps | LineProps | GridProps | SpacerProps | IconProps
 
 // ─── Layout tree ──────────────────────────────────────────────────────────────
 
-export type NodeType = 'page' | 'stack' | 'box' | 'text' | 'circle' | 'image' | 'line' | 'grid' | 'spacer' | 'icon'
+export type NodeType = 'page' | 'stack' | 'box' | 'text' | 'circle' | 'line' | 'grid' | 'spacer' | 'icon'
 
 export interface LayoutNode {
   type: NodeType

@@ -23,8 +23,7 @@ The skill triggers automatically when you:
 |-----------|--------|
 | File model | Project structure, Page as root, imports with `@/` |
 | Theme | `$*` variables, dark/light mode, raw colors |
-| Layout | Stack, Grid, Box, Spacer — alignment and sizing |
-| Primitives | Text, Circle, Image, Line, Icon |
+| Primitives | Page, Stack, Box, Grid, Spacer, Text, Circle, Line, Icon |
 | Compound | Card, Avatar, Callout, FeatureList, FileTree, KeyCombo, Stat |
 
 ## License

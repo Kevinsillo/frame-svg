@@ -23,5 +23,5 @@ Determinar contexto → Cargar references → Diseñar e implementar → Self-ch
 | `file-model.md` | Estructura del proyecto, Page como raíz, imports con `@/` |
 | `theme.md` | Variables `$*`, dark/light mode, cuándo usar raw colors |
 | `layout.md` | Stack, Grid, Box, Spacer — composición y alineación |
-| `primitives.md` | Text, Circle, Image, Line, Icon |
+| `primitives.md` | Page, Stack, Box, Grid, Spacer, Text, Circle, Line, Icon |
 | `compound.md` | Card, Avatar, Callout, FeatureList, FileTree, KeyCombo, Stat |

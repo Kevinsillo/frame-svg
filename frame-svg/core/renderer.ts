@@ -2,7 +2,7 @@ import { resolveLayout } from '@/core/layout.ts'
 import { escapeXml } from '@/core/utils.ts'
 import type {
   LayoutNode, ResolvedNode, RenderOptions, ThemeVariables,
-  TextProps, BoxProps, StackProps, CircleProps, ImageProps, LineProps, IconProps,
+  TextProps, BoxProps, StackProps, CircleProps, LineProps, IconProps,
   LinearGradient, RadialGradient, GradientBackground, Shadow, BorderProps,
   FontConfig, PageProps,
 } from '@/core/types.ts'
@@ -102,14 +102,6 @@ function addShadow(shadow: Shadow, ctx: RenderContext): string {
   return id
 }
 
-function addClipRect(w: number, h: number, radius: number, ctx: RenderContext): string {
-  const id = nextId(ctx)
-  ctx.defs.push(
-    `<clipPath id="${id}"><rect width="${w}" height="${h}" rx="${radius}"/></clipPath>`
-  )
-  return id
-}
-
 // ─── SVG attribute builder ────────────────────────────────────────────────────
 
 function attrs(obj: Record<string, string | number | undefined>): string {
@@ -148,7 +140,7 @@ function renderNode(node: ResolvedNode, ctx: RenderContext): string {
     const textAlign = p.textAlign ?? 'left'
     const pl = node._pl, pt = node._pt
 
-    const { fill, class: cls } = fillAttrs(p.color ?? '#000000', ctx)
+    const { fill, class: cls } = fillAttrs(p.color ?? '$text', ctx)
     const anchor = textAlign === 'center' ? 'middle' : textAlign === 'right' ? 'end' : 'start'
     const tspanX = textAlign === 'center' ? w / 2 : textAlign === 'right' ? w - node._pr : pl
 
@@ -196,19 +188,6 @@ function renderNode(node: ResolvedNode, ctx: RenderContext): string {
 
     lines.push(`<g transform="translate(${x}, ${y})"${opacity != null ? ` opacity="${opacity}"` : ''}>`)
     lines.push(`  <circle cx="${r}" cy="${r}" r="${r}" ${attrs({ fill: bgFill, class: circleClass, filter: shadowId ? `url(#${shadowId})` : undefined, ...strokeAttrsObj })}/>`)
-    lines.push(`</g>`)
-    return lines.join('\n')
-  }
-
-  // ── Image ─────────────────────────────────────────────────────────────────
-  if (node.type === 'image') {
-    const p = props as ImageProps
-    const radius = p.radius ?? 0
-    const clipId = radius > 0 ? addClipRect(w, h, radius, ctx) : undefined
-    const opacity = p.opacity != null ? p.opacity : undefined
-
-    lines.push(`<g transform="translate(${x}, ${y})"${opacity != null ? ` opacity="${opacity}"` : ''}>`)
-    lines.push(`  <image href="${p.src}" width="${w}" height="${h}"${clipId ? ` clip-path="url(#${clipId})"` : ''}/>`)
     lines.push(`</g>`)
     return lines.join('\n')
   }

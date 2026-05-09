@@ -22,7 +22,7 @@ labels: community-component
 
 ## Primitives used
 
-<!-- List only the frame-svg primitives this component builds on (Stack, Box, Text, Circle, Line, Grid, Spacer, Icon, Image).
+<!-- List only the frame-svg primitives this component builds on (Stack, Box, Text, Circle, Line, Grid, Spacer, Icon).
      Community components must be composed exclusively from primitives — do not wrap existing compound components.
      Wrapping compounds creates overlapping responsibilities and makes both harder to maintain. -->
 

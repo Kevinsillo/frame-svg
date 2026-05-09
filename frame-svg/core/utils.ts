@@ -24,7 +24,8 @@ export async function initCanvas(fonts?: import('./types.ts').FontConfig[]): Pro
   if (typeof document !== 'undefined') {
     if (_measureCanvas) return
     await document.fonts.ready
-    _nodeFontFamily = 'Inter'
+    const firstFont = fonts?.find(f => f.family)
+    if (firstFont) _nodeFontFamily = firstFont.family
     const canvas = document.createElement('canvas')
     const ctx = canvas.getContext('2d')
     if (ctx) _measureCanvas = { ctx }

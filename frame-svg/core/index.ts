@@ -4,7 +4,7 @@ export { parseSpacing, wrapText, measureTextWidth, escapeXml } from '@/core/util
 export type {
   LayoutNode, ResolvedNode, NodeType, NodeProps, RenderOptions,
   PageProps, StackProps, BoxProps, TextProps,
-  CircleProps, ImageProps, LineProps, GridProps, SpacerProps,
+  CircleProps, LineProps, GridProps, SpacerProps,
   BorderProps, Shadow, GradientBackground, LinearGradient, RadialGradient, GradientStop,
   ThemeVariables, FontConfig, SpacingValue,
 } from '@/core/types.ts'

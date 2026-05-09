@@ -23,8 +23,8 @@ const STATUS_COLOR: Record<AvatarStatus, string> = {
 }
 
 export interface AvatarProps {
-  // Content — initials (1-2 chars) or emoji
-  label: string
+  // Content — initials or emoji (max 2 chars)
+  label?: string
 
   // Style
   size?: AvatarSize
@@ -53,12 +53,12 @@ export function Avatar({
   const avatarCircle = Box(
     { width: box, height: box, radius: box / 2, background, shadow },
     Text({ fontSize: font, fontWeight: '700', color, textAlign: 'center', padding: fontPad },
-      label.slice(0, 2).toUpperCase()
+      (label ?? '?').slice(0, 2).toUpperCase()
     ),
   )
 
   if (!status) {
-    return Box({ margin }, avatarCircle)
+    return Box({ width: box, height: box, margin }, avatarCircle)
   }
 
   const statusDot = Circle({
@@ -69,7 +69,7 @@ export function Avatar({
   })
 
   return Stack(
-    { direction: 'horizontal', gap: 0, align: 'start', margin },
+    { direction: 'horizontal', gap: 0, align: 'start', width: box + dot + 2, margin },
     avatarCircle,
     statusDot,
   )

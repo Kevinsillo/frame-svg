@@ -2,7 +2,7 @@ import { parseSpacing, wrapText, measureTextWidth } from '@/core/utils.ts'
 import type {
   LayoutNode, ResolvedNode, NodeProps,
   TextProps, BoxProps, StackProps, GridProps,
-  CircleProps, ImageProps, LineProps, SpacerProps, IconProps,
+  CircleProps, LineProps, SpacerProps, IconProps,
   SpacingValue,
 } from '@/core/types.ts'
 
@@ -58,7 +58,6 @@ function measureIntrinsicWidth(node: LayoutNode): number {
     return measureTextWidth(p.content ?? '', fontSize, p.fontFamily, p.fontWeight) + tpl + tpr
   }
   if (node.type === 'circle') return (props as CircleProps).size
-  if (node.type === 'image') return Number((props as ImageProps).width || 0)
   if (node.type === 'spacer') {
     const p = props as SpacerProps
     return Number(p.width ?? p.size ?? 0)
@@ -100,13 +99,19 @@ function resolveHorizontalChildren(
   // Pre-compute per-child info so margins are included in space accounting
   const childInfo = children.map(c => {
     const [, cmr, , cml] = parseSpacing(getMargin(c.props))
-    // Circles and spacers have intrinsic size but may lack a width prop — treat as fixed
+    // Circles, spacers and lines have intrinsic size but may lack a width prop — treat as fixed
     if (c.type === 'circle') {
       return { isAuto: false, fixedWidth: (c.props as CircleProps).size, cml, cmr }
     }
     if (c.type === 'spacer') {
       const p = c.props as SpacerProps
       const fixedWidth = Number(p.width ?? p.size ?? 0)
+      return { isAuto: false, fixedWidth, cml, cmr }
+    }
+    if (c.type === 'line') {
+      const p = c.props as LineProps
+      const isH = (p.direction ?? 'horizontal') === 'horizontal'
+      const fixedWidth = isH ? Number(p.length ?? 0) : (p.thickness ?? 1)
       return { isAuto: false, fixedWidth, cml, cmr }
     }
     const w = getWidth(c.props)
@@ -164,18 +169,6 @@ export function resolveLayout(node: LayoutNode, availableWidth: number): Resolve
     const size = p.size
     return {
       ...node, _width: size, _height: size, _x: 0, _y: 0,
-      _pt: 0, _pr: 0, _pb: 0, _pl: 0,
-      _mt: mt, _mr: mr, _mb: mb, _ml: ml,
-      children: [],
-    }
-  }
-
-  if (node.type === 'image') {
-    const p = props as ImageProps
-    const width = resolveWidth(p.width, availableWidth)
-    const height = Number(p.height) || width
-    return {
-      ...node, _width: width, _height: height, _x: 0, _y: 0,
       _pt: 0, _pr: 0, _pb: 0, _pl: 0,
       _mt: mt, _mr: mr, _mb: mb, _ml: ml,
       children: [],

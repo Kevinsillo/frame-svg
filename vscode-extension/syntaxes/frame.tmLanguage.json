@@ -179,7 +179,11 @@
         { "include": "#number" },
         { "include": "#boolean" },
         { "include": "#js-operator" },
-        { "include": "#object-literal" }
+        { "include": "#object-literal" },
+        {
+          "match": "[a-zA-Z_$][\\w$]*",
+          "name": "variable.other.readwrite.frame"
+        }
       ]
     },
 
@@ -255,6 +259,12 @@
           "captures": {
             "1": { "name": "entity.other.attribute-name.frame" },
             "2": { "name": "punctuation.separator.key-value.frame" }
+          }
+        },
+        {
+          "match": "(?<![=\\w])([a-zA-Z_][\\w-]*)(?=\\s+[a-zA-Z_/>])",
+          "captures": {
+            "1": { "name": "entity.other.attribute-name.frame" }
           }
         },
         { "include": "#jsx-expression" },

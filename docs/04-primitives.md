@@ -1,8 +1,28 @@
 [← README](../README.md)
 
-# Primitive Components
+# Primitives
 
 Primitives are the building blocks. Every layout in frame-svg is composed from these.
+
+## Layout model
+
+Every component has `padding` (inner spacing) and `margin` (outer spacing). Both accept the same shorthand as CSS:
+
+```tsx
+padding={16}           // all sides
+padding="16 24"        // vertical horizontal
+padding="8 12 16 24"   // top right bottom left
+```
+
+By default, components shrink to fit their content. Use `width` to control sizing:
+
+```tsx
+<Box width={200} />           // fixed
+<Box width="100%" />          // fills parent
+<Box width="fit-content" />   // shrinks to children
+```
+
+`height` only accepts numbers (no percentages).
 
 ---
 
@@ -21,18 +41,23 @@ The root of every frame. Sets the SVG canvas width and background.
 | `width` | `number \| string` | Canvas width in px |
 | `padding` | `SpacingValue` | Inner padding |
 | `background` | `string \| Gradient` | Background color, variable, or gradient |
-| `theme` | `RenderOptions` | Variable overrides — see [Theme](./04-theme.md) |
+| `theme` | `RenderOptions` | Variable overrides — see [Theme](./03-theme.md) |
 
 ---
 
 ## Stack
 
-Arranges children vertically or horizontally with a gap.
+Arranges children vertically (default) or horizontally with a gap.
 
 ```tsx
-<Stack direction="horizontal" gap={12} align="center">
-  <Circle size={32} background="$accent" />
-  <Text color="$text">User name</Text>
+<Stack gap={16}>
+  <Text>One</Text>
+  <Text>Two</Text>
+</Stack>
+
+<Stack direction="horizontal" gap={12} align="center" justify="space-between">
+  <Text>Left</Text>
+  <Text>Right</Text>
 </Stack>
 ```
 
@@ -55,7 +80,7 @@ Arranges children vertically or horizontally with a gap.
 
 ## Box
 
-A single container. Like Stack, but without flex children logic — use it for a single child or a styled wrapper.
+A single container. Like Stack but without flex children logic — use it for a single child or a styled wrapper.
 
 ```tsx
 <Box background="$surface" radius={12} padding={20} shadow={{ blur: 16, color: '#00000030', y: 4 }}>
@@ -75,6 +100,54 @@ A single container. Like Stack, but without flex children logic — use it for a
 | `height` | `number` | Fixed height |
 | `opacity` | `number` | `0`–`1` |
 | `align` | `'start' \| 'center' \| 'end' \| 'stretch'` | Content alignment |
+
+---
+
+## Grid
+
+Lays out children in equal-width columns.
+
+```tsx
+<Grid columns={3} gap={12} padding={16}>
+  <Box background="$surface" radius={8} padding={12}>...</Box>
+  <Box background="$surface" radius={8} padding={12}>...</Box>
+  <Box background="$surface" radius={8} padding={12}>...</Box>
+</Grid>
+```
+
+Use `columnGap` and `rowGap` to control spacing independently.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `columns` | `number` | — | Number of columns (required) |
+| `gap` | `number` | `0` | Gap between all cells |
+| `columnGap` | `number` | — | Horizontal gap only |
+| `rowGap` | `number` | — | Vertical gap only |
+| `padding` | `SpacingValue` | — | Inner padding |
+| `background` | `string \| Gradient` | — | Background |
+| `radius` | `number` | — | Border radius |
+| `border` | `BorderProps` | — | Border |
+| `shadow` | `Shadow` | — | Drop shadow |
+
+---
+
+## Spacer
+
+Adds explicit blank space between siblings.
+
+```tsx
+<Stack>
+  <Text>Top</Text>
+  <Spacer size={32} />
+  <Text>Bottom</Text>
+</Stack>
+```
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `size` | `number` | Height (vertical stack) or width (horizontal stack) |
+| `width` | `number \| string` | Explicit width override |
+| `height` | `number` | Explicit height override |
 
 ---
 
@@ -98,11 +171,6 @@ Renders text with optional font styling.
 | `padding` | `SpacingValue` | — | Inner padding |
 | `margin` | `SpacingValue` | — | Outer margin |
 
-Text content goes as a child:
-```tsx
-<Text fontSize={16} color="$text">Your text here</Text>
-```
-
 ---
 
 ## Circle
@@ -120,25 +188,6 @@ A filled circle with optional border and shadow.
 | `background` | `string \| Gradient` | Fill color or variable |
 | `border` | `BorderProps` | Border |
 | `shadow` | `Shadow` | Drop shadow |
-| `opacity` | `number` | `0`–`1` |
-| `margin` | `SpacingValue` | Outer margin |
-
----
-
-## Image
-
-Embeds a raster or SVG image.
-
-```tsx
-<Image src="./logo.png" width={120} height={40} radius={8} />
-```
-
-| Prop | Type | Description |
-|------|------|-------------|
-| `src` | `string` | Path to image file |
-| `width` | `number \| string` | Display width (required) |
-| `height` | `number \| string` | Display height (required) |
-| `radius` | `number` | Border radius |
 | `opacity` | `number` | `0`–`1` |
 | `margin` | `SpacingValue` | Outer margin |
 
@@ -162,49 +211,3 @@ A horizontal or vertical rule.
 | `length` | `number \| string` | `'100%'` | Line length (`'100%'` or px). Required for vertical. |
 | `dash` | `string` | — | Dash pattern, e.g. `'6 4'` |
 | `margin` | `SpacingValue` | — | Outer margin |
-
----
-
-## Grid
-
-Lays out children in equal-width columns.
-
-```tsx
-<Grid columns={3} gap={12} padding={16}>
-  <Box background="$surface" radius={8} padding={12}>...</Box>
-  <Box background="$surface" radius={8} padding={12}>...</Box>
-  <Box background="$surface" radius={8} padding={12}>...</Box>
-</Grid>
-```
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `columns` | `number` | — | Number of columns (required) |
-| `gap` | `number` | `0` | Gap between all cells |
-| `columnGap` | `number` | — | Horizontal gap only |
-| `rowGap` | `number` | — | Vertical gap only |
-| `padding` | `SpacingValue` | — | Inner padding |
-| `background` | `string \| Gradient` | — | Background |
-| `radius` | `number` | — | Border radius |
-| `border` | `BorderProps` | — | Border |
-| `shadow` | `Shadow` | — | Drop shadow |
-
----
-
-## Spacer
-
-Adds blank space between siblings.
-
-```tsx
-<Stack>
-  <Text>Top section</Text>
-  <Spacer size={48} />
-  <Text>Bottom section</Text>
-</Stack>
-```
-
-| Prop | Type | Description |
-|------|------|-------------|
-| `size` | `number` | Height (vertical stack) or width (horizontal stack) |
-| `width` | `number \| string` | Explicit width override |
-| `height` | `number` | Explicit height override |

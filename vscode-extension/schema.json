@@ -258,41 +258,6 @@
         }
       ]
     },
-    "Image": {
-      "container": false,
-      "props": [
-        {
-          "name": "src",
-          "type": "string",
-          "detail": "string"
-        },
-        {
-          "name": "width",
-          "type": "size",
-          "detail": "number | string | \"fit-content\" | \"100%\""
-        },
-        {
-          "name": "height",
-          "type": "size",
-          "detail": "number | string | \"fit-content\" | \"100%\""
-        },
-        {
-          "name": "radius",
-          "type": "number",
-          "detail": "number"
-        },
-        {
-          "name": "opacity",
-          "type": "number",
-          "detail": "number"
-        },
-        {
-          "name": "margin",
-          "type": "spacing",
-          "detail": "number | \"t r b l\""
-        }
-      ]
-    },
     "Line": {
       "container": false,
       "props": [
@@ -727,22 +692,6 @@
     }
   },
   "themes": {
-    "theme": [
-      "bg",
-      "surface",
-      "raised",
-      "subtle",
-      "text",
-      "muted",
-      "faint",
-      "accent",
-      "success",
-      "warning",
-      "danger",
-      "accentBg",
-      "successBg",
-      "warningBg",
-      "dangerBg"
-    ]
+    "theme": []
   }
 }

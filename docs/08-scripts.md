@@ -39,7 +39,7 @@ Installs the VSCode extension locally by copying files to `~/.vscode/extensions/
 npm run ext:install
 ```
 
-Restart VSCode after running this. See [VSCode Extension](./08-vscode-extension.md) for details.
+Restart VSCode after running this. See [VSCode Extension](./07-vscode-extension.md) for details.
 
 ## `npm run render:img`
 

@@ -41,7 +41,7 @@ frame-svg/components/community/
 
 **Community compounds** are higher-level, opinionated components built from primitives. Rules for compounds:
 
-- Built exclusively from frame-svg primitives (`Stack`, `Box`, `Text`, `Circle`, `Line`, `Grid`, `Spacer`, `Icon`, `Image`) — wrapping existing compound components is not allowed. Compounds wrapping compounds create overlapping responsibilities and unnecessary coupling.
+- Built exclusively from frame-svg primitives (`Stack`, `Box`, `Text`, `Circle`, `Line`, `Grid`, `Spacer`, `Icon`) — wrapping existing compound components is not allowed. Compounds wrapping compounds create overlapping responsibilities and unnecessary coupling.
 - Has a single clear purpose that isn't already covered by an existing compound.
 - Accepts props that follow the existing naming conventions (`color`, `fontSize`, `gap`, etc.).
 - Works correctly with the theme variable system (`$accent`, `$text`, `$surface`, …).

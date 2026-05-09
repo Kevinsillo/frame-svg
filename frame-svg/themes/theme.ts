@@ -18,5 +18,7 @@ export const theme: RenderOptions = {
     successBg:  { dark: '#166534', light: '#dcfce7' },
     warningBg:  { dark: '#78350f', light: '#fef3c7' },
     dangerBg:   { dark: '#7f1d1d', light: '#fee2e2' },
+    violet:     { dark: '#818cf8', light: '#4f46e5' },
+    violetLine: { dark: 'rgba(129,140,248,0.3)', light: 'rgba(79,70,229,0.3)' },
   },
 }

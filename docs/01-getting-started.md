@@ -60,5 +60,5 @@ Save → the preview updates → run `npm run render` to get the SVG.
 ## Next steps
 
 - [Philosophy](./02-philosophy.md) — understand the .frame model
-- [Primitives](./05-primitives.md) — all layout components
-- [Theme](./04-theme.md) — colors and dark/light mode
+- [Primitives](./04-primitives.md) — all layout components
+- [Theme](./03-theme.md) — colors and dark/light mode
