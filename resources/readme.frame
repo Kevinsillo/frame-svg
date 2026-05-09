@@ -1,5 +1,5 @@
 import { theme } from '@/themes/theme.ts'
-import { Callout, FeatureList, FileTree, KeyCombo } from 'frame-svg/compound'
+import { Callout, FeatureList, FileTree } from 'frame-svg/compound'
 
 <Page theme={theme} width={720} padding={32} background="$bg">
   <Stack gap={24}>
@@ -61,7 +61,6 @@ import { Callout, FeatureList, FileTree, KeyCombo } from 'frame-svg/compound'
               <Icon name="user"           size={14} color="$accent"  />
               <Icon name="clock"          size={14} color="$muted"   />
             </Stack>
-            <KeyCombo keys={['Ctrl', 'Shift', 'P']} />
           </Stack>
         </Box>
       </Stack>

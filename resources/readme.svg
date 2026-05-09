@@ -63,11 +63,6 @@
       .s-dangerBg { stroke: #fee2e2; }
     }
   </style>
-  <defs>
-    <filter id="fd1_1" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="2" stdDeviation="0" flood-color="$subtle"/></filter>
-    <filter id="fd1_2" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="2" stdDeviation="0" flood-color="$subtle"/></filter>
-    <filter id="fd1_3" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="2" stdDeviation="0" flood-color="$subtle"/></filter>
-  </defs>
   <g transform="translate(0, 0)">
     <rect width="720" height="531" class="f-bg"/>
     <g transform="translate(32, 32)">
@@ -247,7 +242,7 @@
             </g>
           </g>
           <g transform="translate(0, 210)">
-            <rect width="320" height="146" rx="10" class="f-surface"/>
+            <rect width="320" height="102" rx="10" class="f-surface"/>
             <g transform="translate(14, 14)">
               <g transform="translate(0, 0)">
                 <text font-size="10" font-weight="700" font-family="system-ui, sans-serif" text-anchor="start" class="f-faint"><tspan x="0" dy="10">PRIMITIVES</tspan></text>
@@ -317,36 +312,6 @@
                 <g transform="translate(168, 0) scale(0.5833333333333334)" class="s-muted" stroke-width="3.429" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20" fill="none"/>
                   <path d="M12 6v6l4 2" fill="none"/>
-                </g>
-              </g>
-              <g transform="translate(0, 90)">
-                <g transform="translate(0, 0)">
-                  <rect width="40.93" height="28" rx="6" filter="url(#fd1_1)" class="f-raised s-subtle" stroke-width="1"/>
-                  <g transform="translate(10, 5)">
-                    <text font-size="13" font-weight="600" font-family="system-ui, sans-serif" text-anchor="middle" class="f-text"><tspan x="10.465" dy="13">Ctrl</tspan></text>
-                  </g>
-                </g>
-                <g transform="translate(40.93, 5.5)">
-                  <g transform="translate(6, 0)">
-                    <text font-size="12" font-weight="normal" font-family="system-ui, sans-serif" text-anchor="start" class="f-muted"><tspan x="0" dy="12">+</tspan></text>
-                  </g>
-                </g>
-                <g transform="translate(59.53, 0)">
-                  <rect width="46.65" height="28" rx="6" filter="url(#fd1_2)" class="f-raised s-subtle" stroke-width="1"/>
-                  <g transform="translate(10, 5)">
-                    <text font-size="13" font-weight="600" font-family="system-ui, sans-serif" text-anchor="middle" class="f-text"><tspan x="13.325" dy="13">Shift</tspan></text>
-                  </g>
-                </g>
-                <g transform="translate(106.18, 5.5)">
-                  <g transform="translate(6, 0)">
-                    <text font-size="12" font-weight="normal" font-family="system-ui, sans-serif" text-anchor="start" class="f-muted"><tspan x="0" dy="12">+</tspan></text>
-                  </g>
-                </g>
-                <g transform="translate(124.78, 0)">
-                  <rect width="27.8" height="28" rx="6" filter="url(#fd1_3)" class="f-raised s-subtle" stroke-width="1"/>
-                  <g transform="translate(10, 5)">
-                    <text font-size="13" font-weight="600" font-family="system-ui, sans-serif" text-anchor="middle" class="f-text"><tspan x="3.9000000000000004" dy="13">P</tspan></text>
-                  </g>
                 </g>
               </g>
             </g>
