@@ -4,6 +4,9 @@ import path from 'node:path'
 
 export default defineConfig({
   plugins: [framePlugin()],
+  optimizeDeps: {
+    exclude: ['@napi-rs/canvas'],
+  },
   resolve: {
     alias: [
       { find: '@',                     replacement: path.resolve('.') },

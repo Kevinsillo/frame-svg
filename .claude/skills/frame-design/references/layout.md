@@ -66,6 +66,32 @@ Usa `columnGap` y `rowGap` para controlar los ejes por separado.
 
 `width="fit-content"` reduce el box al tamaño de su contenido (útil para badges).
 
+## Distribución automática en Stack horizontal
+
+En un Stack `direction="horizontal"`, los hijos se dimensionan así:
+
+| Ancho del hijo | Comportamiento |
+|----------------|----------------|
+| sin `width` / `width="auto"` | **auto**: se reparte el espacio restante equitativamente entre todos los hijos auto |
+| `width="fit-content"` | mide su propio contenido y ocupa exactamente eso |
+| `width={N}` / `width="N%"` | fijo |
+
+Patrón para dos columnas sin cálculos manuales:
+
+```tsx
+{/* columna izquierda flexible + columna derecha ajustada a su contenido */}
+<Stack direction="horizontal" gap={40} align="center">
+  <Stack gap={16}>
+    {/* ocupa el espacio restante automáticamente */}
+  </Stack>
+  <Stack gap={8} width="fit-content">
+    {/* se mide sola: ocupa solo lo que necesita */}
+  </Stack>
+</Stack>
+```
+
+> **Importante:** dentro de un Stack horizontal usa siempre `gap` para separar columnas. `<Spacer size={N} />` funciona bien en stacks verticales, pero para separación horizontal usa `<Spacer width={N} />` (no `size`).
+
 ## Spacer — espacio puntual
 
 ```tsx

@@ -1,7 +1,7 @@
 import { resolveLayout } from '@/core/layout.ts'
 import { escapeXml } from '@/core/utils.ts'
 import type {
-  LayoutNode, ResolvedNode, RenderOptions, Theme,
+  LayoutNode, ResolvedNode, RenderOptions, ThemeVariables,
   TextProps, BoxProps, StackProps, CircleProps, ImageProps, LineProps, IconProps,
   LinearGradient, RadialGradient, GradientBackground, Shadow, BorderProps,
   FontConfig, PageProps,
@@ -13,7 +13,7 @@ interface RenderContext {
   defs: string[]
   id: number
   prefix: string  // unique per renderSvg call — avoids id collisions in inline HTML
-  theme?: Theme
+  variables?: ThemeVariables
 }
 
 let _renderSeq = 0
@@ -36,7 +36,7 @@ function tokenName(value: string): string {
 function fillAttrs(color: string | undefined, ctx: RenderContext): { fill?: string; class?: string } {
   if (!color) return {}
   if (isToken(color)) {
-    if (!ctx.theme) return {}
+    if (!ctx.variables) return {}
     return { class: `f-${tokenName(color)}` }
   }
   return { fill: color }
@@ -44,7 +44,7 @@ function fillAttrs(color: string | undefined, ctx: RenderContext): { fill?: stri
 
 function strokeAttrs(color: string, ctx: RenderContext): { stroke?: string; class?: string } {
   if (isToken(color)) {
-    if (!ctx.theme) return {}
+    if (!ctx.variables) return {}
     return { class: `s-${tokenName(color)}` }
   }
   return { stroke: color }
@@ -322,13 +322,12 @@ function renderNode(node: ResolvedNode, ctx: RenderContext): string {
 
 // ─── Style block generators ───────────────────────────────────────────────────
 
-function themeStyleBlock(theme: Theme): string {
-  const { tokens } = theme
-  const darkRules = Object.entries(tokens).flatMap(([name, { dark }]) => [
+function themeStyleBlock(variables: ThemeVariables): string {
+  const darkRules = Object.entries(variables).flatMap(([name, { dark }]) => [
     `.f-${name} { fill: ${dark}; }`,
     `.s-${name} { stroke: ${dark}; }`,
   ])
-  const lightRules = Object.entries(tokens).flatMap(([name, { light }]) => [
+  const lightRules = Object.entries(variables).flatMap(([name, { light }]) => [
     `.f-${name} { fill: ${light}; }`,
     `.s-${name} { stroke: ${light}; }`,
   ])
@@ -341,7 +340,8 @@ function themeStyleBlock(theme: Theme): string {
 }
 
 function fontFaceBlock(font: FontConfig): string {
-  const fmt = font.data.startsWith('data:') ? font.data : `data:font/woff2;base64,${font.data}`
+  if (!font._data) return ''
+  const fmt = font._data.startsWith('data:') ? font._data : `data:font/woff2;base64,${font._data}`
   return [
     '@font-face {',
     `  font-family: '${font.family}';`,
@@ -355,13 +355,13 @@ function fontFaceBlock(font: FontConfig): string {
 // ─── Public API ───────────────────────────────────────────────────────────────
 
 export function renderSvg(rootNode: LayoutNode, options: RenderOptions = {}): string {
-  const { theme, fonts } = options
+  const { variables, fonts } = options
   const rootWidth = Number((rootNode.props as PageProps).width) || 800
   const resolved = resolveLayout(rootNode, rootWidth)
   const w = resolved._width
   const h = resolved._height
 
-  const ctx: RenderContext = { defs: [], id: 0, prefix: `fd${++_renderSeq}_`, theme }
+  const ctx: RenderContext = { defs: [], id: 0, prefix: `fd${++_renderSeq}_`, variables }
   const content = renderNode(resolved, ctx)
 
   const parts: string[] = [
@@ -370,8 +370,8 @@ export function renderSvg(rootNode: LayoutNode, options: RenderOptions = {}): st
 
   // Style block
   const styleLines: string[] = []
-  if (fonts?.length) styleLines.push(...fonts.map(fontFaceBlock))
-  if (theme) styleLines.push(themeStyleBlock(theme))
+  if (fonts?.length) styleLines.push(...fonts.map(fontFaceBlock).filter(Boolean))
+  if (variables) styleLines.push(themeStyleBlock(variables))
   if (styleLines.length) {
     parts.push(`  <style>\n${styleLines.map(s => s.split('\n').map(l => `    ${l}`).join('\n')).join('\n')}\n  </style>`)
   }

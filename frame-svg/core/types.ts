@@ -36,28 +36,21 @@ export interface Shadow {
 
 export interface FontConfig {
   family: string
-  weight?: number
+  src: string           // relative path to font file (e.g. './assets/Inter.woff2')
+  weight?: number | string
   style?: 'normal' | 'italic'
-  data: string  // base64-encoded woff/woff2
+  /** @internal base64 data auto-populated from src at render time */
+  _data?: string
 }
 
 // ─── Theme ───────────────────────────────────────────────────────────────────
 // Colors prefixed with $ in props resolve to CSS theme classes,
 // enabling prefers-color-scheme support. Example: background: '$surface'
 
-export interface ThemeTokens {
-  [tokenName: string]: {
-    dark: string
-    light: string
-  }
-}
-
-export interface Theme {
-  tokens: ThemeTokens
-}
+export type ThemeVariables = Record<string, { dark: string; light: string }>
 
 export interface RenderOptions {
-  theme?: Theme
+  variables?: ThemeVariables
   fonts?: FontConfig[]
 }
 

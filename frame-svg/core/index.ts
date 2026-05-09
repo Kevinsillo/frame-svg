@@ -6,5 +6,5 @@ export type {
   PageProps, StackProps, BoxProps, TextProps,
   CircleProps, ImageProps, LineProps, GridProps, SpacerProps,
   BorderProps, Shadow, GradientBackground, LinearGradient, RadialGradient, GradientStop,
-  Theme, ThemeTokens, FontConfig, SpacingValue,
+  ThemeVariables, FontConfig, SpacingValue,
 } from '@/core/types.ts'

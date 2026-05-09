@@ -1,8 +1,9 @@
-import type { RenderOptions } from '../core/types.ts'
+import type { RenderOptions } from '@/core/types.ts'
 
 export const theme: RenderOptions = {
-  theme: { tokens: {
-    bg:         { dark: '#0f172a', light: '#ffffff' },
+  fonts: [],
+  variables: {
+    bg:         { dark: '#0f172a', light: '#e9e9e9' },
     surface:    { dark: '#1e293b', light: '#f1f5f9' },
     raised:     { dark: '#334155', light: '#e2e8f0' },
     subtle:     { dark: '#475569', light: '#cbd5e1' },
@@ -17,5 +18,5 @@ export const theme: RenderOptions = {
     successBg:  { dark: '#166534', light: '#dcfce7' },
     warningBg:  { dark: '#78350f', light: '#fef3c7' },
     dangerBg:   { dark: '#7f1d1d', light: '#fee2e2' },
-  }},
+  },
 }

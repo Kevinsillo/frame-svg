@@ -1,6 +1,6 @@
-import type { ThemeTokens } from './core/types.ts'
+import type { ThemeVariables } from '@/core/types.ts'
 
-export function generateThemeCss(tokens: ThemeTokens): string {
+export function generateThemeCss(tokens: ThemeVariables): string {
   const fillRules = (mode: 'dark' | 'light') =>
     Object.entries(tokens)
       .map(([name, val]) => `  .f-${name} { fill:   ${val[mode]} !important; }`)
@@ -24,7 +24,7 @@ export function generateThemeCss(tokens: ThemeTokens): string {
   ].join('\n')
 }
 
-export function injectThemeCss(tokens: ThemeTokens): void {
+export function injectThemeCss(tokens: ThemeVariables): void {
   const existing = document.getElementById('frame-theme-css')
   if (existing) existing.remove()
 
