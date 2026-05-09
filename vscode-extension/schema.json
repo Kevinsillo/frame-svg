@@ -18,6 +18,11 @@
           "name": "background",
           "type": "color",
           "detail": "string | $theme"
+        },
+        {
+          "name": "theme",
+          "type": "string",
+          "detail": "string"
         }
       ]
     },
@@ -497,6 +502,226 @@
           "name": "divider",
           "type": "bool",
           "detail": "boolean"
+        }
+      ]
+    },
+    "Avatar": {
+      "container": false,
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "detail": "string"
+        },
+        {
+          "name": "size",
+          "type": "string",
+          "detail": "string"
+        },
+        {
+          "name": "background",
+          "type": "color",
+          "detail": "string | $theme"
+        },
+        {
+          "name": "color",
+          "type": "color",
+          "detail": "string | $theme"
+        },
+        {
+          "name": "shadow",
+          "type": "object",
+          "detail": "{ x?, y?, blur?, color? }"
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "detail": "string"
+        },
+        {
+          "name": "margin",
+          "type": "spacing",
+          "detail": "number | \"t r b l\""
+        }
+      ]
+    },
+    "Callout": {
+      "container": false,
+      "props": [
+        {
+          "name": "variant",
+          "type": "string",
+          "detail": "string"
+        },
+        {
+          "name": "message",
+          "type": "string",
+          "detail": "string"
+        },
+        {
+          "name": "width",
+          "type": "size",
+          "detail": "number | string | \"fit-content\" | \"100%\""
+        },
+        {
+          "name": "margin",
+          "type": "spacing",
+          "detail": "number | \"t r b l\""
+        }
+      ]
+    },
+    "Icon": {
+      "container": false,
+      "props": [
+        {
+          "name": "name",
+          "type": "string",
+          "detail": "string"
+        },
+        {
+          "name": "size",
+          "type": "number",
+          "detail": "number"
+        },
+        {
+          "name": "color",
+          "type": "color",
+          "detail": "string | $theme"
+        },
+        {
+          "name": "strokeWidth",
+          "type": "number",
+          "detail": "number"
+        },
+        {
+          "name": "margin",
+          "type": "spacing",
+          "detail": "number | \"t r b l\""
+        }
+      ]
+    },
+    "FeatureList": {
+      "container": false,
+      "props": [
+        {
+          "name": "items",
+          "type": "string",
+          "detail": "string"
+        },
+        {
+          "name": "width",
+          "type": "size",
+          "detail": "number | string | \"fit-content\" | \"100%\""
+        },
+        {
+          "name": "padding",
+          "type": "spacing",
+          "detail": "number | \"t r b l\""
+        },
+        {
+          "name": "gap",
+          "type": "number",
+          "detail": "number"
+        }
+      ]
+    },
+    "FileTree": {
+      "container": false,
+      "props": [
+        {
+          "name": "items",
+          "type": "string",
+          "detail": "string"
+        },
+        {
+          "name": "root",
+          "type": "string",
+          "detail": "string"
+        },
+        {
+          "name": "width",
+          "type": "size",
+          "detail": "number | string | \"fit-content\" | \"100%\""
+        },
+        {
+          "name": "padding",
+          "type": "spacing",
+          "detail": "number | \"t r b l\""
+        }
+      ]
+    },
+    "KeyCombo": {
+      "container": false,
+      "props": [
+        {
+          "name": "keys",
+          "type": "string",
+          "detail": "string"
+        },
+        {
+          "name": "separator",
+          "type": "string",
+          "detail": "string"
+        },
+        {
+          "name": "margin",
+          "type": "spacing",
+          "detail": "number | \"t r b l\""
+        }
+      ]
+    },
+    "Stat": {
+      "container": false,
+      "props": [
+        {
+          "name": "value",
+          "type": "size",
+          "detail": "number | string | \"fit-content\" | \"100%\""
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "detail": "string"
+        },
+        {
+          "name": "trend",
+          "type": "string",
+          "detail": "string"
+        },
+        {
+          "name": "trendUp",
+          "type": "bool",
+          "detail": "boolean"
+        },
+        {
+          "name": "icon",
+          "type": "string",
+          "detail": "string"
+        },
+        {
+          "name": "width",
+          "type": "size",
+          "detail": "number | string | \"fit-content\" | \"100%\""
+        },
+        {
+          "name": "padding",
+          "type": "spacing",
+          "detail": "number | \"t r b l\""
+        },
+        {
+          "name": "background",
+          "type": "color",
+          "detail": "string | $theme"
+        },
+        {
+          "name": "border",
+          "type": "object",
+          "detail": "{ width, color }"
+        },
+        {
+          "name": "shadow",
+          "type": "object",
+          "detail": "{ x?, y?, blur?, color? }"
         }
       ]
     }
