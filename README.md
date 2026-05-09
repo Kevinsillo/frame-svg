@@ -34,15 +34,6 @@ The layout engine resolves sizes in a single deterministic pass — no DOM, no b
 npm install frame-svg
 ```
 
-Add the Vite plugin:
-
-```ts
-// vite.config.ts
-import { framePlugin } from 'frame-svg/plugin'
-
-export default { plugins: [framePlugin()] }
-```
-
 ## Quick start
 
 1. Create `src/main.frame`:
