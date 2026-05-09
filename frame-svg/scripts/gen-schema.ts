@@ -88,12 +88,21 @@ function parseThemeTokens(source: string): string[] {
 
 // ─── Main ─────────────────────────────────────────────────────────────────────
 
-const [typesContent, cardContent, indexContent, compoundContent] = await Promise.all([
+const [typesContent, primitiveContent, compoundContent] = await Promise.all([
   readFile(join(root, 'core/types.ts'), 'utf-8'),
-  readFile(join(root, 'components/compounds/card.ts'), 'utf-8'),
-  readFile(join(root, 'components/index.ts'), 'utf-8'),
+  readFile(join(root, 'components/primitives/index.ts'), 'utf-8'),
   readFile(join(root, 'components/compounds/index.ts'), 'utf-8'),
 ])
+
+// Build a source map: component name → file content, reading each compound's own file
+const compoundsDir = join(root, 'components/compounds')
+const compoundFiles = (await readdir(compoundsDir)).filter(f => f.endsWith('.ts') && f !== 'index.ts')
+const compoundSources = new Map<string, string>()
+for (const file of compoundFiles) {
+  const content = await readFile(join(compoundsDir, file), 'utf-8')
+  const names = [...content.matchAll(/export interface (\w+)Props/g)].map(m => m[1])
+  for (const name of names) compoundSources.set(name, content)
+}
 
 const CONTAINER_COMPONENTS = new Set(['Page', 'Stack', 'Box', 'Grid', 'Card'])
 
@@ -103,13 +112,13 @@ function extractExports(source: string): string[] {
 }
 
 const componentNames = [
-  ...extractExports(indexContent),
+  ...extractExports(primitiveContent),
   ...extractExports(compoundContent),
 ].filter(n => n !== 'loadImage' && /^[A-Z]/.test(n))
 
 const components: Record<string, ComponentDef> = {}
 for (const name of componentNames) {
-  const source = name === 'Card' ? cardContent : typesContent
+  const source = compoundSources.get(name) ?? typesContent
   components[name] = {
     container: CONTAINER_COMPONENTS.has(name),
     props: parseInterface(source, `${name}Props`),
@@ -125,7 +134,7 @@ for (const file of await readdir(themeDir)) {
 }
 
 const schema = { version: 1, components, themes }
-const outPath = join(root, 'vscode-extension/schema.json')
+const outPath = join(root, '../vscode-extension/schema.json')
 await writeFile(outPath, JSON.stringify(schema, null, 2) + '\n')
 
 const propCount = Object.values(components).reduce((s, c) => s + c.props.length, 0)
