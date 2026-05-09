@@ -1,0 +1,70 @@
+import { Box } from '../box.ts'
+import { Circle } from '../circle.ts'
+import { Spacer } from '../spacer.ts'
+import { Stack } from '../stack.ts'
+import { Text } from '../text.ts'
+import type { LayoutNode, SpacingValue } from '../../core/types.ts'
+
+export interface FileTreeItem {
+  name: string
+  type?: 'file' | 'dir'
+  depth?: number
+  highlight?: boolean
+  comment?: string
+}
+
+export interface FileTreeProps {
+  items: FileTreeItem[]
+  root?: string
+  width?: number | string
+  padding?: SpacingValue
+}
+
+export function FileTree({
+  items,
+  root,
+  width = '100%',
+  padding = '14 16',
+}: FileTreeProps): LayoutNode {
+  const rows: LayoutNode[] = []
+
+  if (root) {
+    rows.push(
+      Stack(
+        { direction: 'horizontal', gap: 8, align: 'center' },
+        Circle({ size: 8, background: '$accent' }),
+        Text({ fontSize: 13, fontWeight: '700', color: '$text' }, `${root}/`),
+      ),
+    )
+  }
+
+  for (const item of items) {
+    const { name, type = 'file', depth = 0, highlight = false, comment } = item
+    const indent     = ((root ? 1 : 0) + depth) * 18
+    const isDir      = type === 'dir'
+    const dotBg      = highlight ? '$accent' : isDir ? '$accent' : '$subtle'
+    const nameColor  = highlight ? '$accent' : isDir ? '$text'   : '$muted'
+    const fontWeight = isDir ? '600' : '400'
+    const display    = isDir ? `${name}/` : name
+
+    const innerChildren: LayoutNode[] = [
+      ...(indent > 0 ? [Spacer({ width: indent })] : []),
+      Circle({ size: 5, background: dotBg, margin: '0 8 0 0' }),
+      Text({ fontSize: 13, fontWeight, color: nameColor }, display),
+      ...(comment ? [Text({ fontSize: 11, color: '$faint', margin: '0 0 0 10' }, comment)] : []),
+    ]
+
+    const rowStack = Stack({ direction: 'horizontal', gap: 0, align: 'center' }, ...innerChildren)
+
+    rows.push(
+      highlight
+        ? Box({ background: '$accentBg', radius: 4, padding: '3 0' }, rowStack)
+        : rowStack,
+    )
+  }
+
+  return Box(
+    { background: '$surface', radius: 10, padding, width },
+    Stack({ gap: 6 }, ...rows),
+  )
+}

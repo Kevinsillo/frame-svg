@@ -1,0 +1,21 @@
+export function Stat({ label, value, trend, unit = '' }) {
+  const isUp = trend === 'up'
+  const isDown = trend === 'down'
+  const trendColor = isUp ? '$success' : isDown ? '$danger' : '$muted'
+  const trendIcon = isUp ? '↑' : isDown ? '↓' : ''
+
+  return (
+    <Box background="$surface" radius={12} padding={20} border={{ width: 1, color: '$subtle' }}>
+      <Stack gap={6}>
+        <Text fontSize={11} fontWeight="600" color="$muted">{label}</Text>
+        <Stack direction="horizontal" gap={6} align="end">
+          <Text fontSize={28} fontWeight="700" color="$text">{value}</Text>
+          {unit && <Text fontSize={13} color="$muted" margin="0 0 4 0">{unit}</Text>}
+        </Stack>
+        {trend && (
+          <Text fontSize={12} fontWeight="600" color={trendColor}>{trendIcon} {trend}</Text>
+        )}
+      </Stack>
+    </Box>
+  )
+}

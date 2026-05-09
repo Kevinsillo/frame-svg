@@ -1,0 +1,27 @@
+{
+  "name": "frame-svg-language",
+  "displayName": "frame-svg .frame",
+  "description": "Syntax highlighting and autocomplete for .frame files",
+  "version": "0.1.0",
+  "publisher": "frame-svg",
+  "engines": { "vscode": "^1.80.0" },
+  "categories": ["Programming Languages"],
+  "main": "./extension.js",
+"contributes": {
+    "languages": [
+      {
+        "id": "frame",
+        "aliases": ["Frame", "frame"],
+        "extensions": [".frame"],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "frame",
+        "scopeName": "source.frame",
+        "path": "./syntaxes/frame.tmLanguage.json"
+      }
+    ]
+  }
+}

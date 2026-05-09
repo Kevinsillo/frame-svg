@@ -1,0 +1,30 @@
+export function SectionFileTree() {
+  return (
+    <Stack gap={12}>
+      <Text fontSize={10} fontWeight="700" color="$faint">COMPOUND · FILE TREE</Text>
+      <Line color="$subtle" />
+      <Stack direction="horizontal" gap={16} margin="4 0 0 0">
+        <FileTree root="my-project" items={[
+          { name: 'src',          type: 'dir',  depth: 0 },
+          { name: 'index.ts',     type: 'file', depth: 1, highlight: true, comment: '// entry point' },
+          { name: 'app.ts',       type: 'file', depth: 1 },
+          { name: 'components',   type: 'dir',  depth: 1 },
+          { name: 'Button.ts',    type: 'file', depth: 2 },
+          { name: 'Card.ts',      type: 'file', depth: 2 },
+          { name: 'package.json', type: 'file', depth: 0 },
+          { name: 'tsconfig.json',type: 'file', depth: 0 },
+        ]} />
+        <FileTree root="api" items={[
+          { name: 'routes',       type: 'dir',  depth: 0 },
+          { name: 'auth.ts',      type: 'file', depth: 1 },
+          { name: 'users.ts',     type: 'file', depth: 1, highlight: true },
+          { name: 'middleware',   type: 'dir',  depth: 0 },
+          { name: 'auth.ts',      type: 'file', depth: 1 },
+          { name: 'logger.ts',    type: 'file', depth: 1 },
+          { name: 'db',           type: 'dir',  depth: 0 },
+          { name: 'schema.ts',    type: 'file', depth: 1, comment: '// Drizzle ORM' },
+        ]} />
+      </Stack>
+    </Stack>
+  )
+}

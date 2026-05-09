@@ -1,0 +1,16 @@
+export function SectionStats() {
+  return (
+    <Stack gap={12}>
+      <Text fontSize={10} fontWeight="700" color="$faint">COMPOUND · STAT</Text>
+      <Line color="$subtle" />
+      <Grid columns={3} gap={12} margin="4 0 0 0">
+        <Stat value="98.2%" label="Uptime"         trend="↑ +0.4% this month" trendUp={true}  />
+        <Stat value="1.4M"  label="Downloads"      trend="↑ +23k this week"   trendUp={true}  icon="📦" />
+        <Stat value="12ms"  label="Avg response"   trend="↓ -3ms vs last week" trendUp={true} />
+        <Stat value="4.9"   label="User rating"    trend="↑ +0.2 this quarter" trendUp={true} icon="⭐" />
+        <Stat value="$84k"  label="MRR"            trend="↓ -2.1% vs last month" trendUp={false} />
+        <Stat value="2.1%"  label="Churn rate"     trend="↑ +0.3% — review needed" trendUp={false} />
+      </Grid>
+    </Stack>
+  )
+}

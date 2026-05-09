@@ -1,0 +1,42 @@
+import { theme } from '../themes/theme.ts'
+import { SectionHeader }     from './components/section-header.frame'
+import { SectionTypography } from './components/section-typography.frame'
+import { SectionColors }     from './components/section-colors.frame'
+import { SectionGradients }  from './components/section-gradients.frame'
+import { SectionShapes }     from './components/section-shapes.frame'
+import { SectionBadges }     from './components/section-badges.frame'
+import { SectionGrid }       from './components/section-grid.frame'
+import { SectionAlignment }  from './components/section-alignment.frame'
+import { SectionLines }      from './components/section-lines.frame'
+import { SectionCards }      from './components/section-cards.frame'
+import { SectionAlerts }     from './components/section-alerts.frame'
+import { SectionAvatars }    from './components/section-avatars.frame'
+import { SectionStats }      from './components/section-stats.frame'
+import { SectionCallouts }   from './components/section-callouts.frame'
+import { SectionFeatures }   from './components/section-features.frame'
+import { SectionFileTree }   from './components/section-filetree.frame'
+import { SectionKeyCombos }  from './components/section-keycombos.frame'
+
+<Page theme={theme} width={720} padding={36} background="$bg">
+  <Stack gap={32}>
+    <SectionHeader />
+    <SectionTypography />
+    <SectionColors />
+    <SectionGradients />
+    <SectionShapes />
+    <SectionBadges />
+    <SectionGrid />
+    <SectionAlignment />
+    <SectionLines />
+    <SectionCards />
+    <SectionAlerts />
+    <SectionAvatars />
+    <SectionCallouts />
+    <SectionFeatures />
+    <SectionFileTree />
+    <SectionKeyCombos />
+    <SectionStats />
+    <Line color="$subtle" />
+    <Text fontSize={10} color="$faint" textAlign="center">frame-svg · SVG rendering engine · code-first design</Text>
+  </Stack>
+</Page>

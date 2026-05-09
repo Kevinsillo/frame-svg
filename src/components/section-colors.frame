@@ -1,0 +1,54 @@
+export function SectionColors() {
+  return (
+    <Stack gap={12}>
+      <Text fontSize={10} fontWeight="700" color="$faint">COLOR PALETTE</Text>
+      <Line color="$subtle" />
+      <Stack direction="horizontal" gap={6} margin="4 0 0 0">
+        <Stack gap={5}>
+          <Box height={40} radius={8} background="$bg" border={{ width: 1, color: '$subtle' }} />
+          <Text fontSize={9} color="$faint" textAlign="center">bg</Text>
+        </Stack>
+        <Stack gap={5}>
+          <Box height={40} radius={8} background="$surface" />
+          <Text fontSize={9} color="$faint" textAlign="center">surface</Text>
+        </Stack>
+        <Stack gap={5}>
+          <Box height={40} radius={8} background="$raised" />
+          <Text fontSize={9} color="$faint" textAlign="center">raised</Text>
+        </Stack>
+        <Stack gap={5}>
+          <Box height={40} radius={8} background="$subtle" />
+          <Text fontSize={9} color="$faint" textAlign="center">subtle</Text>
+        </Stack>
+        <Stack gap={5}>
+          <Box height={40} radius={8} background="$muted" />
+          <Text fontSize={9} color="$faint" textAlign="center">muted</Text>
+        </Stack>
+        <Stack gap={5}>
+          <Box height={40} radius={8} background="$faint" />
+          <Text fontSize={9} color="$faint" textAlign="center">faint</Text>
+        </Stack>
+        <Stack gap={5}>
+          <Box height={40} radius={8} background="$text" />
+          <Text fontSize={9} color="$faint" textAlign="center">text</Text>
+        </Stack>
+        <Stack gap={5}>
+          <Box height={40} radius={8} background="$accent" />
+          <Text fontSize={9} color="$faint" textAlign="center">accent</Text>
+        </Stack>
+        <Stack gap={5}>
+          <Box height={40} radius={8} background="$success" />
+          <Text fontSize={9} color="$faint" textAlign="center">success</Text>
+        </Stack>
+        <Stack gap={5}>
+          <Box height={40} radius={8} background="$warning" />
+          <Text fontSize={9} color="$faint" textAlign="center">warning</Text>
+        </Stack>
+        <Stack gap={5}>
+          <Box height={40} radius={8} background="$danger" />
+          <Text fontSize={9} color="$faint" textAlign="center">danger</Text>
+        </Stack>
+      </Stack>
+    </Stack>
+  )
+}

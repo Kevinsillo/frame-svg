@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>frame-svg</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0f172a;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 48px 24px;
+      gap: 48px;
+      transition: background 0.2s;
+    }
+    html[data-theme="light"] body { background: #e2e8f0; }
+
+    svg { display: block; }
+
+    /* ── Theme toggle button ─────────────────────────────────────────────── */
+    #theme-toggle {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: 8px;
+      border: 1px solid #334155;
+      background: #1e293b;
+      color: #94a3b8;
+      font-size: 12px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+    #theme-toggle:hover { background: #334155; color: #f8fafc; }
+    html[data-theme="light"] #theme-toggle {
+      border-color: #cbd5e1;
+      background: #f1f5f9;
+      color: #64748b;
+    }
+    html[data-theme="light"] #theme-toggle:hover { background: #e2e8f0; color: #0f172a; }
+
+    /* ── Force dark theme ────────────────────────────────────────────────── */
+    html[data-theme="dark"] .f-bg      { fill:   #0f172a !important; }
+    html[data-theme="dark"] .f-surface { fill:   #1e293b !important; }
+    html[data-theme="dark"] .f-raised  { fill:   #334155 !important; }
+    html[data-theme="dark"] .f-subtle  { fill:   #475569 !important; }
+    html[data-theme="dark"] .f-text    { fill:   #f8fafc !important; }
+    html[data-theme="dark"] .f-muted   { fill:   #94a3b8 !important; }
+    html[data-theme="dark"] .f-faint   { fill:   #475569 !important; }
+    html[data-theme="dark"] .f-accent  { fill:   #38bdf8 !important; }
+    html[data-theme="dark"] .f-success { fill:   #4ade80 !important; }
+    html[data-theme="dark"] .f-warning { fill:   #fbbf24 !important; }
+    html[data-theme="dark"] .f-danger     { fill:   #f87171 !important; }
+    html[data-theme="dark"] .f-accentBg  { fill:   #0c4a6e !important; }
+    html[data-theme="dark"] .f-successBg { fill:   #166534 !important; }
+    html[data-theme="dark"] .f-warningBg { fill:   #78350f !important; }
+    html[data-theme="dark"] .f-dangerBg  { fill:   #7f1d1d !important; }
+    html[data-theme="dark"] .s-bg        { stroke: #0f172a !important; }
+    html[data-theme="dark"] .s-surface { stroke: #1e293b !important; }
+    html[data-theme="dark"] .s-raised  { stroke: #334155 !important; }
+    html[data-theme="dark"] .s-subtle  { stroke: #475569 !important; }
+    html[data-theme="dark"] .s-text    { stroke: #f8fafc !important; }
+    html[data-theme="dark"] .s-muted   { stroke: #94a3b8 !important; }
+    html[data-theme="dark"] .s-faint   { stroke: #475569 !important; }
+    html[data-theme="dark"] .s-accent  { stroke: #38bdf8 !important; }
+    html[data-theme="dark"] .s-success { stroke: #4ade80 !important; }
+    html[data-theme="dark"] .s-warning { stroke: #fbbf24 !important; }
+    html[data-theme="dark"] .s-danger  { stroke: #f87171 !important; }
+
+    /* ── Force light theme ───────────────────────────────────────────────── */
+    html[data-theme="light"] .f-bg      { fill:   #ffffff !important; }
+    html[data-theme="light"] .f-surface { fill:   #f1f5f9 !important; }
+    html[data-theme="light"] .f-raised  { fill:   #e2e8f0 !important; }
+    html[data-theme="light"] .f-subtle  { fill:   #cbd5e1 !important; }
+    html[data-theme="light"] .f-text    { fill:   #0f172a !important; }
+    html[data-theme="light"] .f-muted   { fill:   #64748b !important; }
+    html[data-theme="light"] .f-faint   { fill:   #94a3b8 !important; }
+    html[data-theme="light"] .f-accent  { fill:   #0284c7 !important; }
+    html[data-theme="light"] .f-success { fill:   #16a34a !important; }
+    html[data-theme="light"] .f-warning { fill:   #d97706 !important; }
+    html[data-theme="light"] .f-danger     { fill:   #dc2626 !important; }
+    html[data-theme="light"] .f-accentBg  { fill:   #e0f2fe !important; }
+    html[data-theme="light"] .f-successBg { fill:   #dcfce7 !important; }
+    html[data-theme="light"] .f-warningBg { fill:   #fef3c7 !important; }
+    html[data-theme="light"] .f-dangerBg  { fill:   #fee2e2 !important; }
+    html[data-theme="light"] .s-bg        { stroke: #ffffff !important; }
+    html[data-theme="light"] .s-surface { stroke: #f1f5f9 !important; }
+    html[data-theme="light"] .s-raised  { stroke: #e2e8f0 !important; }
+    html[data-theme="light"] .s-subtle  { stroke: #cbd5e1 !important; }
+    html[data-theme="light"] .s-text    { stroke: #0f172a !important; }
+    html[data-theme="light"] .s-muted   { stroke: #64748b !important; }
+    html[data-theme="light"] .s-faint   { stroke: #94a3b8 !important; }
+    html[data-theme="light"] .s-accent  { stroke: #0284c7 !important; }
+    html[data-theme="light"] .s-success { stroke: #16a34a !important; }
+    html[data-theme="light"] .s-warning { stroke: #d97706 !important; }
+    html[data-theme="light"] .s-danger  { stroke: #dc2626 !important; }
+  </style>
+</head>
+<body>
+  <button id="theme-toggle">☾ Dark</button>
+  <script type="module" src="./main.ts"></script>
+  <script>
+    const btn = document.getElementById('theme-toggle')
+    const html = document.documentElement
+    const saved = localStorage.getItem('frame-theme') ?? 'dark'
+    html.dataset.theme = saved
+    btn.textContent = saved === 'dark' ? '☾ Dark' : '☀ Light'
+    btn.addEventListener('click', () => {
+      const next = html.dataset.theme === 'dark' ? 'light' : 'dark'
+      html.dataset.theme = next
+      btn.textContent = next === 'dark' ? '☾ Dark' : '☀ Light'
+      localStorage.setItem('frame-theme', next)
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+export function SectionGrid() {
+  return (
+    <Stack gap={12}>
+      <Text fontSize={10} fontWeight="700" color="$faint">GRID LAYOUT</Text>
+      <Line color="$subtle" />
+      <Grid columns={3} gap={10} margin="4 0 0 0">
+        <Box background="$surface" radius={8} padding={14} border={{ width: 1, color: '$subtle' }}>
+          <Text fontSize={12} fontWeight="600" color="$text">01  Discovery</Text>
+          <Text fontSize={11} color="$muted" margin="3 0 0 0">Research & synthesis</Text>
+        </Box>
+        <Box background="$surface" radius={8} padding={14} border={{ width: 1, color: '$subtle' }}>
+          <Text fontSize={12} fontWeight="600" color="$text">02  Design</Text>
+          <Text fontSize={11} color="$muted" margin="3 0 0 0">Wireframes & prototypes</Text>
+        </Box>
+        <Box background="$surface" radius={8} padding={14} border={{ width: 1, color: '$subtle' }}>
+          <Text fontSize={12} fontWeight="600" color="$text">03  Build</Text>
+          <Text fontSize={11} color="$muted" margin="3 0 0 0">Implementation & review</Text>
+        </Box>
+        <Box background="$surface" radius={8} padding={14} border={{ width: 1, color: '$subtle' }}>
+          <Text fontSize={12} fontWeight="600" color="$text">04  Test</Text>
+          <Text fontSize={11} color="$muted" margin="3 0 0 0">QA & user validation</Text>
+        </Box>
+        <Box background="$surface" radius={8} padding={14} border={{ width: 1.5, color: '$accent' }}>
+          <Text fontSize={12} fontWeight="600" color="$accent">05  Deploy</Text>
+          <Text fontSize={11} color="$muted" margin="3 0 0 0">CI/CD & release pipeline</Text>
+        </Box>
+        <Box background="$surface" radius={8} padding={14} border={{ width: 1, color: '$subtle' }}>
+          <Text fontSize={12} fontWeight="600" color="$text">06  Monitor</Text>
+          <Text fontSize={11} color="$muted" margin="3 0 0 0">Metrics & alerting</Text>
+        </Box>
+      </Grid>
+    </Stack>
+  )
+}

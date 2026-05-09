@@ -1,0 +1,15 @@
+export function SectionCallouts() {
+  return (
+    <Stack gap={12}>
+      <Text fontSize={10} fontWeight="700" color="$faint">COMPOUND · CALLOUT</Text>
+      <Line color="$subtle" />
+      <Stack gap={10} margin="4 0 0 0">
+        <Callout variant="note"      message="This component requires Node.js 18 or higher to function correctly." />
+        <Callout variant="tip"       message="Use the --watch flag to enable hot reload during development." />
+        <Callout variant="warning"   message="Changing this setting will restart all active connections immediately." />
+        <Callout variant="important" message="Back up your data before running any database migration scripts." />
+        <Callout variant="caution"   message="This API is deprecated and will be removed in the next major release." />
+      </Stack>
+    </Stack>
+  )
+}

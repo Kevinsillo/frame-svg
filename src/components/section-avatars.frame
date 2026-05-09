@@ -1,0 +1,32 @@
+export function SectionAvatars() {
+  return (
+    <Stack gap={12}>
+      <Text fontSize={10} fontWeight="700" color="$faint">COMPOUND · AVATAR</Text>
+      <Line color="$subtle" />
+      <Stack gap={16} margin="4 0 0 0">
+        <Stack direction="horizontal" gap={16} align="center">
+          <Avatar label="KW" size="xs" />
+          <Avatar label="KW" size="sm" />
+          <Avatar label="KW" size="md" />
+          <Avatar label="KW" size="lg" />
+          <Avatar label="KW" size="xl" />
+          <Text fontSize={10} color="$faint">sizes xs → xl</Text>
+        </Stack>
+        <Stack direction="horizontal" gap={16} align="center">
+          <Avatar label="AB" size="lg" status="online" />
+          <Avatar label="CD" size="lg" status="busy" />
+          <Avatar label="EF" size="lg" status="away" />
+          <Avatar label="GH" size="lg" status="offline" />
+          <Text fontSize={10} color="$faint">status indicators</Text>
+        </Stack>
+        <Stack direction="horizontal" gap={16} align="center">
+          <Avatar label="🦊" size="lg" background="$warningBg" color="$warning" />
+          <Avatar label="🚀" size="lg" background="$accentBg"  color="$accent" />
+          <Avatar label="✓"  size="lg" background="$successBg" color="$success" />
+          <Avatar label="!"  size="lg" background="$dangerBg"  color="$danger" />
+          <Text fontSize={10} color="$faint">emoji · custom colors</Text>
+        </Stack>
+      </Stack>
+    </Stack>
+  )
+}

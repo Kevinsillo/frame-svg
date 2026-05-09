@@ -1,0 +1,523 @@
+{
+  "version": 1,
+  "components": {
+    "Page": {
+      "container": true,
+      "props": [
+        {
+          "name": "width",
+          "type": "size",
+          "detail": "number | string | \"fit-content\" | \"100%\""
+        },
+        {
+          "name": "padding",
+          "type": "spacing",
+          "detail": "number | \"t r b l\""
+        },
+        {
+          "name": "background",
+          "type": "color",
+          "detail": "string | $theme"
+        }
+      ]
+    },
+    "Stack": {
+      "container": true,
+      "props": [
+        {
+          "name": "direction",
+          "type": "enum",
+          "values": [
+            "vertical",
+            "horizontal"
+          ],
+          "detail": "'vertical' | 'horizontal'"
+        },
+        {
+          "name": "gap",
+          "type": "number",
+          "detail": "number"
+        },
+        {
+          "name": "padding",
+          "type": "spacing",
+          "detail": "number | \"t r b l\""
+        },
+        {
+          "name": "margin",
+          "type": "spacing",
+          "detail": "number | \"t r b l\""
+        },
+        {
+          "name": "background",
+          "type": "color",
+          "detail": "string | $theme"
+        },
+        {
+          "name": "radius",
+          "type": "number",
+          "detail": "number"
+        },
+        {
+          "name": "border",
+          "type": "object",
+          "detail": "{ width, color }"
+        },
+        {
+          "name": "width",
+          "type": "size",
+          "detail": "number | string | \"fit-content\" | \"100%\""
+        },
+        {
+          "name": "height",
+          "type": "size",
+          "detail": "number | string | \"fit-content\" | \"100%\""
+        },
+        {
+          "name": "shadow",
+          "type": "object",
+          "detail": "{ x?, y?, blur?, color? }"
+        },
+        {
+          "name": "align",
+          "type": "enum",
+          "values": [
+            "start",
+            "center",
+            "end",
+            "stretch"
+          ],
+          "detail": "'start' | 'center' | 'end' | 'stretch'"
+        },
+        {
+          "name": "justify",
+          "type": "enum",
+          "values": [
+            "start",
+            "center",
+            "end",
+            "space-between"
+          ],
+          "detail": "'start' | 'center' | 'end' | 'space-between'"
+        }
+      ]
+    },
+    "Box": {
+      "container": true,
+      "props": [
+        {
+          "name": "padding",
+          "type": "spacing",
+          "detail": "number | \"t r b l\""
+        },
+        {
+          "name": "margin",
+          "type": "spacing",
+          "detail": "number | \"t r b l\""
+        },
+        {
+          "name": "background",
+          "type": "color",
+          "detail": "string | $theme"
+        },
+        {
+          "name": "radius",
+          "type": "number",
+          "detail": "number"
+        },
+        {
+          "name": "border",
+          "type": "object",
+          "detail": "{ width, color }"
+        },
+        {
+          "name": "width",
+          "type": "size",
+          "detail": "number | string | \"fit-content\" | \"100%\""
+        },
+        {
+          "name": "height",
+          "type": "size",
+          "detail": "number | string | \"fit-content\" | \"100%\""
+        },
+        {
+          "name": "opacity",
+          "type": "number",
+          "detail": "number"
+        },
+        {
+          "name": "shadow",
+          "type": "object",
+          "detail": "{ x?, y?, blur?, color? }"
+        },
+        {
+          "name": "align",
+          "type": "enum",
+          "values": [
+            "start",
+            "center",
+            "end",
+            "stretch"
+          ],
+          "detail": "'start' | 'center' | 'end' | 'stretch'"
+        }
+      ]
+    },
+    "Text": {
+      "container": false,
+      "props": [
+        {
+          "name": "content",
+          "type": "string",
+          "detail": "string"
+        },
+        {
+          "name": "fontSize",
+          "type": "number",
+          "detail": "number"
+        },
+        {
+          "name": "fontWeight",
+          "type": "size",
+          "detail": "number | string | \"fit-content\" | \"100%\""
+        },
+        {
+          "name": "fontFamily",
+          "type": "string",
+          "detail": "string"
+        },
+        {
+          "name": "color",
+          "type": "color",
+          "detail": "string | $theme"
+        },
+        {
+          "name": "textAlign",
+          "type": "enum",
+          "values": [
+            "left",
+            "center",
+            "right"
+          ],
+          "detail": "'left' | 'center' | 'right'"
+        },
+        {
+          "name": "lineHeight",
+          "type": "number",
+          "detail": "number"
+        },
+        {
+          "name": "padding",
+          "type": "spacing",
+          "detail": "number | \"t r b l\""
+        },
+        {
+          "name": "margin",
+          "type": "spacing",
+          "detail": "number | \"t r b l\""
+        }
+      ]
+    },
+    "Circle": {
+      "container": false,
+      "props": [
+        {
+          "name": "size",
+          "type": "number",
+          "detail": "number"
+        },
+        {
+          "name": "background",
+          "type": "color",
+          "detail": "string | $theme"
+        },
+        {
+          "name": "border",
+          "type": "object",
+          "detail": "{ width, color }"
+        },
+        {
+          "name": "opacity",
+          "type": "number",
+          "detail": "number"
+        },
+        {
+          "name": "shadow",
+          "type": "object",
+          "detail": "{ x?, y?, blur?, color? }"
+        },
+        {
+          "name": "margin",
+          "type": "spacing",
+          "detail": "number | \"t r b l\""
+        }
+      ]
+    },
+    "Image": {
+      "container": false,
+      "props": [
+        {
+          "name": "src",
+          "type": "string",
+          "detail": "string"
+        },
+        {
+          "name": "width",
+          "type": "size",
+          "detail": "number | string | \"fit-content\" | \"100%\""
+        },
+        {
+          "name": "height",
+          "type": "size",
+          "detail": "number | string | \"fit-content\" | \"100%\""
+        },
+        {
+          "name": "radius",
+          "type": "number",
+          "detail": "number"
+        },
+        {
+          "name": "opacity",
+          "type": "number",
+          "detail": "number"
+        },
+        {
+          "name": "margin",
+          "type": "spacing",
+          "detail": "number | \"t r b l\""
+        }
+      ]
+    },
+    "Line": {
+      "container": false,
+      "props": [
+        {
+          "name": "direction",
+          "type": "enum",
+          "values": [
+            "horizontal",
+            "vertical"
+          ],
+          "detail": "'horizontal' | 'vertical'"
+        },
+        {
+          "name": "color",
+          "type": "color",
+          "detail": "string | $theme"
+        },
+        {
+          "name": "thickness",
+          "type": "number",
+          "detail": "number"
+        },
+        {
+          "name": "length",
+          "type": "size",
+          "detail": "number | string | \"fit-content\" | \"100%\""
+        },
+        {
+          "name": "dash",
+          "type": "string",
+          "detail": "string"
+        },
+        {
+          "name": "margin",
+          "type": "spacing",
+          "detail": "number | \"t r b l\""
+        }
+      ]
+    },
+    "Grid": {
+      "container": true,
+      "props": [
+        {
+          "name": "columns",
+          "type": "number",
+          "detail": "number"
+        },
+        {
+          "name": "gap",
+          "type": "number",
+          "detail": "number"
+        },
+        {
+          "name": "columnGap",
+          "type": "number",
+          "detail": "number"
+        },
+        {
+          "name": "rowGap",
+          "type": "number",
+          "detail": "number"
+        },
+        {
+          "name": "padding",
+          "type": "spacing",
+          "detail": "number | \"t r b l\""
+        },
+        {
+          "name": "margin",
+          "type": "spacing",
+          "detail": "number | \"t r b l\""
+        },
+        {
+          "name": "background",
+          "type": "color",
+          "detail": "string | $theme"
+        },
+        {
+          "name": "radius",
+          "type": "number",
+          "detail": "number"
+        },
+        {
+          "name": "border",
+          "type": "object",
+          "detail": "{ width, color }"
+        },
+        {
+          "name": "width",
+          "type": "size",
+          "detail": "number | string | \"fit-content\" | \"100%\""
+        },
+        {
+          "name": "shadow",
+          "type": "object",
+          "detail": "{ x?, y?, blur?, color? }"
+        },
+        {
+          "name": "align",
+          "type": "enum",
+          "values": [
+            "start",
+            "center",
+            "end",
+            "stretch"
+          ],
+          "detail": "'start' | 'center' | 'end' | 'stretch'"
+        }
+      ]
+    },
+    "Spacer": {
+      "container": false,
+      "props": [
+        {
+          "name": "size",
+          "type": "number",
+          "detail": "number"
+        },
+        {
+          "name": "width",
+          "type": "size",
+          "detail": "number | string | \"fit-content\" | \"100%\""
+        },
+        {
+          "name": "height",
+          "type": "size",
+          "detail": "number | string | \"fit-content\" | \"100%\""
+        }
+      ]
+    },
+    "Card": {
+      "container": true,
+      "props": [
+        {
+          "name": "title",
+          "type": "string",
+          "detail": "string"
+        },
+        {
+          "name": "body",
+          "type": "string",
+          "detail": "string"
+        },
+        {
+          "name": "badge",
+          "type": "string",
+          "detail": "string"
+        },
+        {
+          "name": "badgeVariant",
+          "type": "enum",
+          "values": [
+            "success",
+            "accent",
+            "warning",
+            "danger",
+            "neutral"
+          ],
+          "detail": "'success' | 'accent' | 'warning' | 'danger' | 'neutral'"
+        },
+        {
+          "name": "avatar",
+          "type": "string",
+          "detail": "string"
+        },
+        {
+          "name": "avatarColor",
+          "type": "color",
+          "detail": "string | $theme"
+        },
+        {
+          "name": "avatarBg",
+          "type": "color",
+          "detail": "string | $theme"
+        },
+        {
+          "name": "width",
+          "type": "size",
+          "detail": "number | string | \"fit-content\" | \"100%\""
+        },
+        {
+          "name": "padding",
+          "type": "spacing",
+          "detail": "number | \"t r b l\""
+        },
+        {
+          "name": "radius",
+          "type": "number",
+          "detail": "number"
+        },
+        {
+          "name": "background",
+          "type": "color",
+          "detail": "string | $theme"
+        },
+        {
+          "name": "border",
+          "type": "object",
+          "detail": "{ width, color }"
+        },
+        {
+          "name": "shadow",
+          "type": "object",
+          "detail": "{ x?, y?, blur?, color? }"
+        },
+        {
+          "name": "divider",
+          "type": "bool",
+          "detail": "boolean"
+        }
+      ]
+    }
+  },
+  "themes": {
+    "theme": [
+      "bg",
+      "surface",
+      "raised",
+      "subtle",
+      "text",
+      "muted",
+      "faint",
+      "accent",
+      "success",
+      "warning",
+      "danger",
+      "accentBg",
+      "successBg",
+      "warningBg",
+      "dangerBg"
+    ]
+  }
+}

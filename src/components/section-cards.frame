@@ -1,0 +1,23 @@
+export function SectionCards() {
+  return (
+    <Stack gap={12}>
+      <Text fontSize={10} fontWeight="700" color="$faint">COMPOUND · CARD</Text>
+      <Line color="$subtle" />
+      <Grid columns={2} gap={10} margin="4 0 0 0">
+        <Card title="Discovery" body="User research, interviews and synthesis."
+          badge="Done" badgeVariant="success" avatar="D" divider={true}
+          shadow={{ blur: 8, color: '#00000040', y: 2 }} />
+        <Card title="MVP" body="First usable version shipped to early adopters."
+          badge="Active" badgeVariant="accent" avatar="M" divider={true}
+          border={{ width: 1.5, color: '$accent' }}
+          shadow={{ blur: 8, color: '#00000040', y: 2 }} />
+        <Card title="Launch" body="Public release and go-to-market execution."
+          badge="Next" badgeVariant="neutral" avatar="L" divider={true}
+          shadow={{ blur: 8, color: '#00000040', y: 2 }} />
+        <Card title="Scale" body="User growth, infrastructure and optimization."
+          badge="Planned" badgeVariant="warning" avatar="S" divider={true}
+          shadow={{ blur: 8, color: '#00000040', y: 2 }} />
+      </Grid>
+    </Stack>
+  )
+}

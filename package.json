@@ -1,0 +1,33 @@
+{
+  "name": "frame-svg",
+  "version": "0.1.0",
+  "description": "Code-first SVG layout engine with a flexbox model, theming, and a JSX-like syntax",
+  "license": "MIT",
+  "author": "Kevin Illanas Cabeza",
+  "repository": "https://github.com/kevinsillo/frame-svg",
+  "keywords": [
+    "svg",
+    "layout",
+    "design",
+    "codegen",
+    "jsx",
+    "vite-plugin"
+  ],
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "render": "vite-node scripts/render.ts",
+    "ext:install": "node scripts/install-extension.mjs",
+    "schema": "vite-node scripts/gen-schema.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.2",
+    "tsx": "^4",
+    "typescript": "^5",
+    "vite": "^6",
+    "vite-node": "^3"
+  },
+  "dependencies": {
+    "@types/vscode": "^1.118.0"
+  }
+}

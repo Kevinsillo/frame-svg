@@ -1,0 +1,308 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Frame",
+  "scopeName": "source.frame",
+  "patterns": [
+    { "include": "#frontmatter" },
+    { "include": "#import-statement" },
+    { "include": "#reexport-statement" },
+    { "include": "#export-function" },
+    { "include": "#export-const" },
+    { "include": "#js-keywords" },
+    { "include": "#jsx" }
+  ],
+  "repository": {
+
+    "frontmatter": {
+      "begin": "^(---)",
+      "end": "^(---)",
+      "beginCaptures": { "1": { "name": "punctuation.definition.frontmatter.frame" } },
+      "endCaptures":   { "1": { "name": "punctuation.definition.frontmatter.frame" } },
+      "name": "meta.frontmatter.frame",
+      "patterns": [
+        {
+          "match": "^([a-zA-Z_][\\w-]*)\\s*(:)\\s*(.*)",
+          "captures": {
+            "1": { "name": "variable.other.key.frontmatter.frame" },
+            "2": { "name": "punctuation.separator.key-value.frontmatter.frame" },
+            "3": { "name": "string.unquoted.frontmatter.frame" }
+          }
+        }
+      ]
+    },
+
+    "import-statement": {
+      "begin": "^\\s*(import)\\b",
+      "end": "$",
+      "beginCaptures": {
+        "1": { "name": "keyword.control.import.frame" }
+      },
+      "patterns": [
+        { "match": "\\bfrom\\b", "name": "keyword.control.from.frame" },
+        { "include": "#string-double" },
+        { "include": "#string-single" },
+        { "match": "[a-zA-Z_$][\\w$]*", "name": "variable.other.readwrite.frame" }
+      ]
+    },
+
+    "reexport-statement": {
+      "begin": "^\\s*(export)\\s+(?=\\{)",
+      "end": "$",
+      "beginCaptures": {
+        "1": { "name": "keyword.control.export.frame" }
+      },
+      "patterns": [
+        { "match": "\\bfrom\\b", "name": "keyword.control.from.frame" },
+        { "include": "#string-double" },
+        { "include": "#string-single" },
+        { "match": "[a-zA-Z_$][\\w$]*", "name": "variable.other.readwrite.frame" }
+      ]
+    },
+
+    "export-function": {
+      "begin": "\\b(export)\\s+(function)\\s+([a-zA-Z_$][\\w$]*)",
+      "end": "(?=^\\}|^export|^import)",
+      "beginCaptures": {
+        "1": { "name": "keyword.control.export.frame" },
+        "2": { "name": "keyword.declaration.function.frame" },
+        "3": { "name": "entity.name.function.frame" }
+      },
+      "name": "meta.function.frame",
+      "patterns": [
+        { "include": "#function-params" },
+        { "include": "#function-body" }
+      ]
+    },
+
+    "export-const": {
+      "begin": "\\b(export)\\s+(const)\\s+([a-zA-Z_$][\\w$]*)",
+      "end": "$",
+      "beginCaptures": {
+        "1": { "name": "keyword.control.export.frame" },
+        "2": { "name": "keyword.declaration.const.frame" },
+        "3": { "name": "variable.other.constant.frame" }
+      },
+      "patterns": [
+        { "include": "#string-double" },
+        { "include": "#string-single" },
+        { "include": "#number" },
+        { "include": "#boolean" }
+      ]
+    },
+
+    "function-params": {
+      "begin": "\\(",
+      "end": "\\)",
+      "name": "meta.function.parameters.frame",
+      "captures": { "0": { "name": "punctuation.definition.parameters.frame" } },
+      "patterns": [
+        {
+          "match": "([a-zA-Z_$][\\w$]*)\\s*(?=[,)}=]|$)",
+          "captures": { "1": { "name": "variable.parameter.frame" } }
+        },
+        { "include": "#string-double" },
+        { "include": "#string-single" },
+        { "include": "#number" },
+        { "include": "#boolean" }
+      ]
+    },
+
+    "function-body": {
+      "begin": "\\{",
+      "end": "\\}",
+      "name": "meta.function.body.frame",
+      "captures": { "0": { "name": "punctuation.section.block.frame" } },
+      "patterns": [
+        { "include": "#js-keywords" },
+        { "include": "#const-declaration" },
+        { "include": "#return-statement" },
+        { "include": "#jsx" },
+        { "include": "#string-double" },
+        { "include": "#string-single" },
+        { "include": "#number" },
+        { "include": "#boolean" },
+        { "include": "#theme-variable-single" },
+        { "include": "#js-operator" },
+        { "include": "#function-body" }
+      ]
+    },
+
+    "const-declaration": {
+      "match": "\\b(const|let|var)\\s+([a-zA-Z_$][\\w$]*)",
+      "captures": {
+        "1": { "name": "keyword.declaration.frame" },
+        "2": { "name": "variable.other.frame" }
+      }
+    },
+
+    "return-statement": {
+      "match": "\\b(return)\\b",
+      "captures": { "1": { "name": "keyword.control.return.frame" } }
+    },
+
+    "js-keywords": {
+      "match": "\\b(export|import|from|function|const|let|var|return|if|else|true|false|null|undefined)\\b",
+      "name": "keyword.control.frame"
+    },
+
+    "js-operator": {
+      "match": "(===|!==|==|!=|=>|>=|<=|>|<|&&|\\|\\||\\?|:)",
+      "name": "keyword.operator.frame"
+    },
+
+    "jsx": {
+      "patterns": [
+        { "include": "#jsx-comment" },
+        { "include": "#jsx-expression" },
+        { "include": "#jsx-tag" },
+        { "include": "#theme-variable" }
+      ]
+    },
+
+    "jsx-comment": {
+      "begin": "\\{/\\*",
+      "end": "\\*/\\}",
+      "name": "comment.block.jsx.frame",
+      "captures": { "0": { "name": "punctuation.definition.comment.frame" } }
+    },
+
+    "jsx-expression": {
+      "begin": "\\{",
+      "end": "\\}",
+      "name": "meta.expression.frame",
+      "captures": { "0": { "name": "punctuation.section.embedded.frame" } },
+      "patterns": [
+        { "include": "#theme-variable" },
+        { "include": "#theme-variable-single" },
+        { "include": "#string-double" },
+        { "include": "#string-single" },
+        { "include": "#number" },
+        { "include": "#boolean" },
+        { "include": "#js-operator" },
+        { "include": "#object-literal" }
+      ]
+    },
+
+    "object-literal": {
+      "begin": "\\{",
+      "end": "\\}",
+      "name": "meta.object.frame",
+      "patterns": [
+        {
+          "match": "([a-zA-Z_$][\\w$]*)\\s*(:)",
+          "captures": {
+            "1": { "name": "support.type.property-name.frame" },
+            "2": { "name": "punctuation.separator.key-value.frame" }
+          }
+        },
+        { "include": "#theme-variable" },
+        { "include": "#theme-variable-single" },
+        { "include": "#string-double" },
+        { "include": "#string-single" },
+        { "include": "#number" }
+      ]
+    },
+
+    "jsx-tag": {
+      "patterns": [
+        { "include": "#jsx-tag-open" },
+        { "include": "#jsx-tag-close" },
+        { "include": "#jsx-tag-self-close" }
+      ]
+    },
+
+    "jsx-tag-open": {
+      "begin": "(<)([A-Z][\\w]*|[a-z][\\w-]*)",
+      "end": "(/?\\s*>)",
+      "beginCaptures": {
+        "1": { "name": "punctuation.definition.tag.begin.frame" },
+        "2": { "name": "entity.name.tag.frame" }
+      },
+      "endCaptures": {
+        "1": { "name": "punctuation.definition.tag.end.frame" }
+      },
+      "name": "meta.tag.frame",
+      "patterns": [{ "include": "#tag-attributes" }]
+    },
+
+    "jsx-tag-close": {
+      "match": "(</)([A-Z][\\w]*|[a-z][\\w-]*)(>)",
+      "captures": {
+        "1": { "name": "punctuation.definition.tag.begin.frame" },
+        "2": { "name": "entity.name.tag.frame" },
+        "3": { "name": "punctuation.definition.tag.end.frame" }
+      }
+    },
+
+    "jsx-tag-self-close": {
+      "begin": "(<)([A-Z][\\w]*|[a-z][\\w-]*)",
+      "end": "(/\\s*>)",
+      "beginCaptures": {
+        "1": { "name": "punctuation.definition.tag.begin.frame" },
+        "2": { "name": "entity.name.tag.frame" }
+      },
+      "endCaptures": {
+        "1": { "name": "punctuation.definition.tag.end.frame" }
+      },
+      "name": "meta.tag.self-closing.frame",
+      "patterns": [{ "include": "#tag-attributes" }]
+    },
+
+    "tag-attributes": {
+      "patterns": [
+        {
+          "match": "([a-zA-Z_][\\w-]*)\\s*(=)",
+          "captures": {
+            "1": { "name": "entity.other.attribute-name.frame" },
+            "2": { "name": "punctuation.separator.key-value.frame" }
+          }
+        },
+        { "include": "#jsx-expression" },
+        { "include": "#string-double" },
+        { "include": "#string-single" },
+        { "include": "#number" },
+        { "include": "#boolean" }
+      ]
+    },
+
+    "theme-variable": {
+      "match": "\"(\\$[a-zA-Z][\\w]*)\"",
+      "name": "variable.other.theme.frame",
+      "captures": {
+        "0": { "name": "string.quoted.double.frame" },
+        "1": { "name": "variable.other.theme.frame" }
+      }
+    },
+
+    "theme-variable-single": {
+      "match": "'(\\$[a-zA-Z][\\w]*)'",
+      "name": "variable.other.theme.frame",
+      "captures": {
+        "0": { "name": "string.quoted.single.frame" },
+        "1": { "name": "variable.other.theme.frame" }
+      }
+    },
+
+    "string-double": {
+      "begin": "\"",
+      "end": "\"",
+      "name": "string.quoted.double.frame"
+    },
+
+    "string-single": {
+      "begin": "'",
+      "end": "'",
+      "name": "string.quoted.single.frame"
+    },
+
+    "number": {
+      "match": "\\b-?\\d+(\\.\\d+)?\\b",
+      "name": "constant.numeric.frame"
+    },
+
+    "boolean": {
+      "match": "\\b(true|false)\\b",
+      "name": "constant.language.boolean.frame"
+    }
+  }
+}

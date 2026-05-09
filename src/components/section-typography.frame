@@ -1,0 +1,41 @@
+export function SectionTypography() {
+  return (
+    <Stack gap={12}>
+      <Text fontSize={10} fontWeight="700" color="$faint">TYPOGRAPHY</Text>
+      <Line color="$subtle" />
+      <Stack direction="horizontal" gap={0} align="end" margin="4 0 0 0">
+        <Stack gap={6} align="center">
+          <Text fontSize={40} fontWeight="700" color="$text">Ag</Text>
+          <Text fontSize={9} color="$faint">40 bold</Text>
+        </Stack>
+        <Stack gap={6} align="center">
+          <Text fontSize={28} fontWeight="700" color="$text">Ag</Text>
+          <Text fontSize={9} color="$faint">28 bold</Text>
+        </Stack>
+        <Stack gap={6} align="center">
+          <Text fontSize={20} fontWeight="600" color="$text">Ag</Text>
+          <Text fontSize={9} color="$faint">20 600</Text>
+        </Stack>
+        <Stack gap={6} align="center">
+          <Text fontSize={15} color="$text">Ag</Text>
+          <Text fontSize={9} color="$faint">15 reg</Text>
+        </Stack>
+        <Stack gap={6} align="center">
+          <Text fontSize={13} color="$muted">Ag</Text>
+          <Text fontSize={9} color="$faint">13 muted</Text>
+        </Stack>
+        <Stack gap={6} align="center">
+          <Text fontSize={11} color="$faint">Ag</Text>
+          <Text fontSize={9} color="$faint">11 faint</Text>
+        </Stack>
+      </Stack>
+      <Box background="$surface" radius={8} padding="12 16" margin="4 0 0 0" border={{ width: 1, color: '$subtle' }}>
+        <Stack gap={6}>
+          <Text fontSize={14} fontWeight="600" color="$text">The quick brown fox jumps over the lazy dog</Text>
+          <Text fontSize={13} color="$muted">The quick brown fox jumps over the lazy dog</Text>
+          <Text fontSize={11} color="$faint">The quick brown fox jumps over the lazy dog</Text>
+        </Stack>
+      </Box>
+    </Stack>
+  )
+}
