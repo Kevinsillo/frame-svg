@@ -1,0 +1,11 @@
+export function Header() {
+  return (
+    <Stack direction="horizontal" gap={14} align="center">
+      <Box width={4} height={52} radius={2} background="$accent" />
+      <Stack gap={4}>
+        <Text fontSize={26} fontWeight="700" color="$text">frame-svg</Text>
+        <Text fontSize={12} color="$muted">SVG layout engine for developers</Text>
+      </Stack>
+    </Stack>
+  )
+}

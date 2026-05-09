@@ -62,11 +62,9 @@ export default { plugins: [framePlugin()] }
 npm run render
 ```
 
-3. Embed the output in your README:
+3. The rendered SVG is generated in `dist/`.
 
-```markdown
-![](output.svg)
-```
+4. Embed it wherever you need it.
 
 ## Documentation
 
@@ -82,6 +80,7 @@ npm run render
 | [VSCode Extension](docs/08-vscode-extension.md) | Syntax highlighting and autocomplete |
 | [Scripts](docs/09-scripts.md) | dev, render, schema, ext:install |
 | [Internals](docs/10-internals.md) | Pipeline, layout engine, renderer |
+| [Examples](docs/examples.md) | Visual reference with SVG previews |
 
 ## VS Code
 

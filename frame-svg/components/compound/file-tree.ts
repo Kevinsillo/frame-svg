@@ -52,7 +52,7 @@ export function FileTree({
       ...(indent > 0 ? [Spacer({ width: indent })] : []),
       Icon({ name: iconName, size: 13, color: iconColor, margin: '0 6 0 0' }),
       Text({ fontSize: 13, fontWeight, color: nameColor }, display),
-      ...(comment ? [Text({ fontSize: 11, color: '$faint', margin: '0 0 0 10' }, comment)] : []),
+      ...(comment ? [Text({ fontSize: 11, color: highlight ? '$accent' : '$faint', margin: '0 0 0 10' }, comment)] : []),
     ]
 
     const rowStack = Stack({ direction: 'horizontal', gap: 0, align: 'center' }, ...innerChildren)

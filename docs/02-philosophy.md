@@ -23,9 +23,9 @@ frame-svg follows the same convention as Vue:
 | Vue | frame-svg |
 |-----|-----------|
 | `src/main.js` | `src/main.frame` |
-| `src/components/*.vue` | `src/components/*.frame` |
+| `src/components/*.vue` | `src/frames/*.frame` |
 
-`src/main.frame` is the **only file that gets rendered**. Everything in `src/components/` is imported by it, not rendered independently.
+`src/main.frame` is the **only file that gets rendered**. Everything in `src/frames/` is imported by it, not rendered independently.
 
 ## Components as reusable pieces
 
