@@ -9,9 +9,9 @@ import { SectionGrid }       from './components/section-grid.frame'
 import { SectionAlignment }  from './components/section-alignment.frame'
 import { SectionLines }      from './components/section-lines.frame'
 import { SectionCards }      from './components/section-cards.frame'
-import { SectionAlerts }     from './components/section-alerts.frame'
 import { SectionAvatars }    from './components/section-avatars.frame'
 import { SectionStats }      from './components/section-stats.frame'
+import { SectionIcons }      from './components/section-icons.frame'
 import { SectionCallouts }   from './components/section-callouts.frame'
 import { SectionFeatures }   from './components/section-features.frame'
 import { SectionFileTree }   from './components/section-filetree.frame'
@@ -29,8 +29,8 @@ import { SectionKeyCombos }  from './components/section-keycombos.frame'
     <SectionAlignment />
     <SectionLines />
     <SectionCards />
-    <SectionAlerts />
     <SectionAvatars />
+    <SectionIcons />
     <SectionCallouts />
     <SectionFeatures />
     <SectionFileTree />

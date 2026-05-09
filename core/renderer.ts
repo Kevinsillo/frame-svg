@@ -2,7 +2,7 @@ import { resolveLayout } from './layout.ts'
 import { escapeXml } from './utils.ts'
 import type {
   LayoutNode, ResolvedNode, RenderOptions, Theme,
-  TextProps, BoxProps, StackProps, CircleProps, ImageProps, LineProps,
+  TextProps, BoxProps, StackProps, CircleProps, ImageProps, LineProps, IconProps,
   LinearGradient, RadialGradient, GradientBackground, Shadow, BorderProps,
   FontConfig, PageProps,
 } from './types.ts'
@@ -232,6 +232,33 @@ function renderNode(node: ResolvedNode, ctx: RenderContext): string {
   // ── Spacer ────────────────────────────────────────────────────────────────
   if (node.type === 'spacer') {
     return `<g transform="translate(${x}, ${y})"/>`
+  }
+
+  // ── Icon ──────────────────────────────────────────────────────────────────
+  if (node.type === 'icon') {
+    const p = props as IconProps
+    const size = node._width
+    const vb = p.viewBox ?? 24
+    const scale = size / vb
+    const sw = (p.strokeWidth ?? 2) / scale
+    const color = p.color ?? '$text'
+    const { stroke, class: cls } = strokeAttrs(color, ctx)
+
+    const groupAtt = attrs({
+      transform: `translate(${x}, ${y}) scale(${scale})`,
+      stroke,
+      class: cls,
+      'stroke-width': +sw.toFixed(3),
+      'stroke-linecap': 'round',
+      'stroke-linejoin': 'round',
+    })
+
+    const pathEls = (p.paths ?? []).map(d => `<path d="${d}" fill="none"/>`)
+
+    lines.push(`<g ${groupAtt}>`)
+    lines.push(...pathEls.map(el => `  ${el}`))
+    lines.push(`</g>`)
+    return lines.join('\n')
   }
 
   // ── Container (page, box, stack, grid) ───────────────────────────────────

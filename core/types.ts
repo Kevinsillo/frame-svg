@@ -158,13 +158,22 @@ export interface SpacerProps {
   height?: number
 }
 
+export interface IconProps {
+  paths: string[]
+  size?: number
+  color?: string
+  strokeWidth?: number
+  viewBox?: number
+  margin?: SpacingValue
+}
+
 export type NodeProps =
   | PageProps | StackProps | BoxProps | TextProps
-  | CircleProps | ImageProps | LineProps | GridProps | SpacerProps
+  | CircleProps | ImageProps | LineProps | GridProps | SpacerProps | IconProps
 
 // ─── Layout tree ──────────────────────────────────────────────────────────────
 
-export type NodeType = 'page' | 'stack' | 'box' | 'text' | 'circle' | 'image' | 'line' | 'grid' | 'spacer'
+export type NodeType = 'page' | 'stack' | 'box' | 'text' | 'circle' | 'image' | 'line' | 'grid' | 'spacer' | 'icon'
 
 export interface LayoutNode {
   type: NodeType

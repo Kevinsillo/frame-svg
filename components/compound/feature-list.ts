@@ -1,6 +1,7 @@
 import { Box } from '../box.ts'
 import { Stack } from '../stack.ts'
 import { Text } from '../text.ts'
+import { Icon } from './icon.ts'
 import type { LayoutNode, SpacingValue } from '../../core/types.ts'
 
 export interface FeatureItem {
@@ -23,14 +24,18 @@ export function FeatureList({
   gap = 10,
 }: FeatureListProps): LayoutNode {
   const rows = items.map(({ label, checked, description }) => {
-    const icon      = checked === true ? '✓' : checked === false ? '✕' : '·'
     const iconBg    = checked === true ? '$successBg' : checked === false ? '$dangerBg' : '$raised'
     const iconColor = checked === true ? '$success'   : checked === false ? '$danger'   : '$muted'
 
-    const iconNode = Box(
-      { width: 20, height: 20, radius: 10, background: iconBg, margin: '0 10 0 0' },
-      Text({ fontSize: 11, fontWeight: '700', color: iconColor, textAlign: 'center', padding: '3 0 0 0' }, icon),
-    )
+    const iconNode = checked !== undefined
+      ? Stack(
+          { width: 20, height: 20, radius: 10, background: iconBg, align: 'center', margin: '0 10 0 0' },
+          Icon({ name: checked ? 'check' : 'x', size: 12, color: iconColor, strokeWidth: 2, margin: '4 0 0 0' }),
+        )
+      : Box(
+          { width: 20, height: 20, radius: 10, background: iconBg, margin: '0 10 0 0' },
+          Text({ fontSize: 11, fontWeight: '700', color: iconColor, textAlign: 'center', padding: '3 0 0 0' }, '·'),
+        )
 
     const content = description
       ? Stack(

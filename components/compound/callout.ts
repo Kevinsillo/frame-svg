@@ -1,18 +1,19 @@
 import { Box } from '../box.ts'
 import { Stack } from '../stack.ts'
 import { Text } from '../text.ts'
+import { Icon } from './icon.ts'
+import type { IconName } from '../icons.ts'
 import type { LayoutNode, SpacingValue } from '../../core/types.ts'
 
-type CalloutVariant = 'note' | 'tip' | 'warning' | 'important' | 'caution'
+type CalloutVariant = 'note' | 'tip' | 'warning' | 'important'
 
 const VARIANT_CONFIG: Record<CalloutVariant, {
-  icon: string; label: string; bg: string; border: string; color: string
+  icon: IconName; label: string; bg: string; border: string; color: string
 }> = {
-  note:      { icon: 'ℹ', label: 'NOTE',      bg: '$accentBg',  border: '$accent',  color: '$accent'  },
-  tip:       { icon: '✦', label: 'TIP',       bg: '$successBg', border: '$success', color: '$success' },
-  warning:   { icon: '▲', label: 'WARNING',   bg: '$warningBg', border: '$warning', color: '$warning' },
-  important: { icon: '!', label: 'IMPORTANT', bg: '$dangerBg',  border: '$danger',  color: '$danger'  },
-  caution:   { icon: '⚠', label: 'CAUTION',   bg: '$warningBg', border: '$warning', color: '$warning' },
+  note:      { icon: 'info',            label: 'NOTE',      bg: '$accentBg',  border: '$accent',  color: '$accent'  },
+  tip:       { icon: 'lightbulb',       label: 'TIP',       bg: '$successBg', border: '$success', color: '$success' },
+  warning:   { icon: 'triangle-alert',  label: 'WARNING',   bg: '$warningBg', border: '$warning', color: '$warning' },
+  important: { icon: 'bell',            label: 'IMPORTANT', bg: '$dangerBg',  border: '$danger',  color: '$danger'  },
 }
 
 export interface CalloutProps {
@@ -30,15 +31,17 @@ export function Callout({
 }: CalloutProps): LayoutNode {
   const c = VARIANT_CONFIG[variant]
 
+  const header = Stack(
+    { direction: 'horizontal', gap: 6, align: 'center', margin: '0 0 6 0' },
+    Icon({ name: c.icon, size: 14, color: c.color }),
+    Text({ fontSize: 12, fontWeight: '700', color: c.color }, c.label),
+  )
+
   return Box(
     { background: c.border, radius: 8, padding: '0 0 0 4', width, margin },
     Box(
       { background: c.bg, radius: 6, padding: '12 16' },
-      Stack(
-        { gap: 0 },
-        Text({ fontSize: 12, fontWeight: '700', color: c.color, margin: '0 0 6 0' }, `${c.icon}  ${c.label}`),
-        Text({ fontSize: 13, color: '$text' }, message),
-      ),
+      Stack({ gap: 0 }, header, Text({ fontSize: 13, color: '$text' }, message)),
     ),
   )
 }

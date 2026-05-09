@@ -2,7 +2,7 @@ import { parseSpacing, wrapText, measureTextWidth } from './utils.ts'
 import type {
   LayoutNode, ResolvedNode, NodeProps,
   TextProps, BoxProps, StackProps, GridProps,
-  CircleProps, ImageProps, LineProps, SpacerProps,
+  CircleProps, ImageProps, LineProps, SpacerProps, IconProps,
   SpacingValue,
 } from './types.ts'
 
@@ -195,6 +195,17 @@ export function resolveLayout(node: LayoutNode, availableWidth: number): Resolve
       ...node, _width: width, _height: height, _x: 0, _y: 0,
       _pt: 0, _pr: 0, _pb: 0, _pl: 0,
       _mt: 0, _mr: 0, _mb: 0, _ml: 0,
+      children: [],
+    }
+  }
+
+  if (node.type === 'icon') {
+    const p = props as IconProps
+    const size = p.size ?? 20
+    return {
+      ...node, _width: size, _height: size, _x: 0, _y: 0,
+      _pt: 0, _pr: 0, _pb: 0, _pl: 0,
+      _mt: mt, _mr: mr, _mb: mb, _ml: ml,
       children: [],
     }
   }
