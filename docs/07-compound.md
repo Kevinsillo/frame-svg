@@ -2,7 +2,7 @@
 
 # Compound Components
 
-Compound components are pre-built, opinionated blocks built on top of primitives. Import them from `frame-svg/compound`.
+Compound components are pre-built, opinionated blocks built on top of primitives. Import them from `frame-svg/compounds`.
 
 ---
 

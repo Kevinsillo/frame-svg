@@ -1,4 +1,4 @@
-import type { SpacingValue } from './types.ts'
+import type { SpacingValue } from '@/core/types.ts'
 
 export function parseSpacing(value: SpacingValue | undefined | null): [number, number, number, number] {
   if (value == null) return [0, 0, 0, 0]

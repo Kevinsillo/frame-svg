@@ -1,9 +1,9 @@
-import { Box } from '../box.ts'
-import { Stack } from '../stack.ts'
-import { Text } from '../text.ts'
-import { Icon } from './icon.ts'
-import type { IconName } from '../icons.ts'
-import type { LayoutNode, SpacingValue } from '../../core/types.ts'
+import { Box } from '@/components/primitives/box.ts'
+import { Stack } from '@/components/primitives/stack.ts'
+import { Text } from '@/components/primitives/text.ts'
+import { Icon } from '@/components/compounds/icon.ts'
+import type { IconName } from '@/components/primitives/icons.ts'
+import type { LayoutNode, SpacingValue } from '@/core/types.ts'
 
 type CalloutVariant = 'note' | 'tip' | 'warning' | 'important'
 

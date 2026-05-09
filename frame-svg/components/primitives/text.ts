@@ -1,4 +1,4 @@
-import type { LayoutNode, TextProps } from '../core/types.ts'
+import type { LayoutNode, TextProps } from '@/core/types.ts'
 
 export function Text(props: TextProps, content?: string): LayoutNode {
   const text = content ?? (props.content as string ?? '')

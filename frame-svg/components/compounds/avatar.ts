@@ -1,8 +1,8 @@
-import type { GradientBackground, LayoutNode, Shadow, SpacingValue } from '../../core/types.ts'
-import { Box } from '../box.ts'
-import { Circle } from '../circle.ts'
-import { Stack } from '../stack.ts'
-import { Text } from '../text.ts'
+import type { GradientBackground, LayoutNode, Shadow, SpacingValue } from '@/core/types.ts'
+import { Box } from '@/components/primitives/box.ts'
+import { Circle } from '@/components/primitives/circle.ts'
+import { Stack } from '@/components/primitives/stack.ts'
+import { Text } from '@/components/primitives/text.ts'
 
 type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 type AvatarStatus = 'online' | 'offline' | 'busy' | 'away'

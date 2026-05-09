@@ -1,10 +1,10 @@
-import { parseSpacing, wrapText, measureTextWidth } from './utils.ts'
+import { parseSpacing, wrapText, measureTextWidth } from '@/core/utils.ts'
 import type {
   LayoutNode, ResolvedNode, NodeProps,
   TextProps, BoxProps, StackProps, GridProps,
   CircleProps, ImageProps, LineProps, SpacerProps, IconProps,
   SpacingValue,
-} from './types.ts'
+} from '@/core/types.ts'
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 

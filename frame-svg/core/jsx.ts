@@ -1,4 +1,4 @@
-import type { LayoutNode, NodeType, NodeProps } from './types.ts'
+import type { LayoutNode, NodeType, NodeProps } from '@/core/types.ts'
 
 type JsxChild = LayoutNode | LayoutNode[] | string | null | undefined | boolean | number
 

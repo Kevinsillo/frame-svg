@@ -90,9 +90,9 @@ function parseThemeTokens(source: string): string[] {
 
 const [typesContent, cardContent, indexContent, compoundContent] = await Promise.all([
   readFile(join(root, 'core/types.ts'), 'utf-8'),
-  readFile(join(root, 'components/compound/card.ts'), 'utf-8'),
+  readFile(join(root, 'components/compounds/card.ts'), 'utf-8'),
   readFile(join(root, 'components/index.ts'), 'utf-8'),
-  readFile(join(root, 'components/compound/index.ts'), 'utf-8'),
+  readFile(join(root, 'components/compounds/index.ts'), 'utf-8'),
 ])
 
 const CONTAINER_COMPONENTS = new Set(['Page', 'Stack', 'Box', 'Grid', 'Card'])

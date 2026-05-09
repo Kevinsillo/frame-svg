@@ -1,6 +1,6 @@
-import { Icon as IconNode } from '../icon.ts'
-import { ICONS, type IconName } from '../icons.ts'
-import type { LayoutNode, SpacingValue } from '../../core/types.ts'
+import { Icon as IconNode } from '@/components/primitives/icon.ts'
+import { ICONS, type IconName } from '@/components/primitives/icons.ts'
+import type { LayoutNode, SpacingValue } from '@/core/types.ts'
 
 export type { IconName }
 

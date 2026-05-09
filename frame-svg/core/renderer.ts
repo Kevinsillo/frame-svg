@@ -1,11 +1,11 @@
-import { resolveLayout } from './layout.ts'
-import { escapeXml } from './utils.ts'
+import { resolveLayout } from '@/core/layout.ts'
+import { escapeXml } from '@/core/utils.ts'
 import type {
   LayoutNode, ResolvedNode, RenderOptions, Theme,
   TextProps, BoxProps, StackProps, CircleProps, ImageProps, LineProps, IconProps,
   LinearGradient, RadialGradient, GradientBackground, Shadow, BorderProps,
   FontConfig, PageProps,
-} from './types.ts'
+} from '@/core/types.ts'
 
 // ─── Render context (collects defs during render) ─────────────────────────────
 

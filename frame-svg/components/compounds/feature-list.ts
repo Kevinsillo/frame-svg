@@ -1,8 +1,8 @@
-import { Box } from '../box.ts'
-import { Stack } from '../stack.ts'
-import { Text } from '../text.ts'
-import { Icon } from './icon.ts'
-import type { LayoutNode, SpacingValue } from '../../core/types.ts'
+import { Box } from '@/components/primitives/box.ts'
+import { Stack } from '@/components/primitives/stack.ts'
+import { Text } from '@/components/primitives/text.ts'
+import { Icon } from '@/components/compounds/icon.ts'
+import type { LayoutNode, SpacingValue } from '@/core/types.ts'
 
 export interface FeatureItem {
   label: string

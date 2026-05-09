@@ -67,6 +67,6 @@ In the dev server, `theme-css.ts` generates and injects a `<style>` tag with the
 ## Adding a new component
 
 1. Create `components/my-component.ts` — export a function that returns a `LayoutNode` tree using primitives
-2. Export it from `components/compound/index.ts`
+2. Export it from `components/compounds/index.ts`
 3. Run `npm run schema` to update autocomplete
 4. Run `npm run ext:install` and restart VSCode

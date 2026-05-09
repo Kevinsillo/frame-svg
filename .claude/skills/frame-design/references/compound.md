@@ -12,7 +12,7 @@ tags: [frame-svg, compound, card, avatar, callout, filetree, stat, keycombo]
 
 ## Task List
 
-- Importar siempre desde `frame-svg/compound`
+- Importar siempre desde `frame-svg/compounds`
 - Preferir `Card` sobre un `Box` manual para contenido con título + badge + body
 - Preferir `Stat` sobre composición manual para métricas con tendencia
 - Usar `Callout` para notas, tips, warnings e importants
@@ -21,7 +21,7 @@ tags: [frame-svg, compound, card, avatar, callout, filetree, stat, keycombo]
 ## Import
 
 ```tsx
-import { Card, Avatar, Callout, FeatureList, FileTree, KeyCombo, Stat } from 'frame-svg/compound'
+import { Card, Avatar, Callout, FeatureList, FileTree, KeyCombo, Stat } from 'frame-svg/compounds'
 ```
 
 ## Card

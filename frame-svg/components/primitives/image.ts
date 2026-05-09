@@ -1,4 +1,4 @@
-import type { LayoutNode, ImageProps } from '../core/types.ts'
+import type { LayoutNode, ImageProps } from '@/core/types.ts'
 
 export function Image(props: ImageProps): LayoutNode {
   return { type: 'image', props, children: [] }
