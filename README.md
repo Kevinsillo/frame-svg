@@ -87,6 +87,18 @@ npm run render
 
 Install [Material Icon Theme](https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme) to get an SVG icon for `.frame` files. The setting is already included in `.vscode/settings.json`.
 
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the full process — issue first, code second.
+
+## Credits
+
+Contributions are recognized here. If your pull request is merged, your name or handle and what you contributed will be listed below.
+
+| Contributor | Contribution |
+|-------------|-------------|
+| — | — |
+
 ## License
 
 [MIT](LICENSE)
