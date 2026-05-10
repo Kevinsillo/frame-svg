@@ -1,5 +1,5 @@
 import { parseSpacing } from '@/core/utils.ts'
-import { strokeAttrs, attrs } from '@/core/render-helpers.ts'
+import { strokeAttrs, attrs, applyAnimate } from '@/core/render-helpers.ts'
 import { getMargin } from '@/core/layout-helpers.ts'
 import type { Primitive, RenderContext } from '@/core/primitive.ts'
 import type { LayoutNode, ResolvedNode, SpacingValue } from '@/core/types.ts'
@@ -40,8 +40,14 @@ export const IconPrimitive: Primitive = {
     const color = p.color ?? '$text'
     const { stroke, class: cls } = strokeAttrs(color, ctx)
 
-    const groupAtt = attrs({
-      transform: `translate(${x}, ${y}) scale(${scale})`,
+    // Resolve paths: `name` takes precedence over `paths`.
+    const resolvedPaths = p.name ? ICONS[p.name] : (p.paths ?? [])
+    const pathEls = resolvedPaths.map(d => `<path d="${d}" fill="none"/>`)
+
+    const iconAnim = applyAnimate(node.animate, ctx)
+    const outerAttrs = `transform="translate(${x}, ${y})"`
+    const innerAttrs = attrs({
+      transform: `scale(${scale})`,
       stroke,
       class: cls,
       'stroke-width': +sw.toFixed(3),
@@ -49,13 +55,19 @@ export const IconPrimitive: Primitive = {
       'stroke-linejoin': 'round',
     })
 
-    // Resolve paths: `name` takes precedence over `paths`.
-    const resolvedPaths = p.name ? ICONS[p.name] : (p.paths ?? [])
-    const pathEls = resolvedPaths.map(d => `<path d="${d}" fill="none"/>`)
-
     const lines: string[] = []
-    lines.push(`<g ${groupAtt}>`)
-    lines.push(...pathEls.map(el => `  ${el}`))
+    lines.push(`<g ${outerAttrs}>`)
+    if (iconAnim) {
+      lines.push(`  <g style="${iconAnim}">`)
+      lines.push(`    <g ${innerAttrs}>`)
+      lines.push(...pathEls.map(el => `      ${el}`))
+      lines.push(`    </g>`)
+      lines.push(`  </g>`)
+    } else {
+      lines.push(`  <g ${innerAttrs}>`)
+      lines.push(...pathEls.map(el => `    ${el}`))
+      lines.push(`  </g>`)
+    }
     lines.push(`</g>`)
     return lines.join('\n')
   },

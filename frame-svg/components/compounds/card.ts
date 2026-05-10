@@ -45,7 +45,7 @@ export function Card({
   avatar,
   avatarColor,
   avatarBg,
-  width = '100%',
+  width = 'full',
   padding = 20,
   radius = 12,
   background = '$surface',

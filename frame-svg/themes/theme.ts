@@ -71,6 +71,15 @@ export const theme: RenderOptions = {
         easing: 'ease-in-out',
         iteration: 'infinite',
       },
+      float: {
+        keyframes: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%':      { transform: 'translateY(-4px)' },
+        },
+        duration: '2s',
+        easing: 'ease-in-out',
+        iteration: 'infinite',
+      },
     },
   },
 }

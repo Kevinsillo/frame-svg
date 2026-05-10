@@ -70,8 +70,8 @@ export function framePlugin(): Plugin {
         `/** @jsxRuntime classic */`,
         `/** @jsx h */`,
         `import { h } from 'frame-svg/jsx'`,
-        `import { Text, Circle, Line, Spacer, Container, Template } from 'frame-svg/components'`,
-        `import { Card, Avatar, Callout, FeatureList, FileTree, KeyCombo, Stat, Icon } from 'frame-svg/compounds'`,
+        `import { Text, Circle, Line, Spacer, Container, Template, Icon } from 'frame-svg/components'`,
+        `import { Card, Avatar, Callout, FeatureList, FileTree, KeyCombo, Stat } from 'frame-svg/compounds'`,
         ...leadingImports,
         ``,
         isComponent

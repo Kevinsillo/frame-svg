@@ -18,13 +18,15 @@ export interface CalloutProps {
   variant?: CalloutVariant
   message: string
   width?: number | string
+  height?: number | string
   margin?: SpacingValue
 }
 
 export function Callout({
   variant = 'note',
   message,
-  width = '100%',
+  width = 'full',
+  height,
   margin,
 }: CalloutProps): LayoutNode {
   const c = VARIANT_CONFIG[variant]
@@ -36,7 +38,7 @@ export function Callout({
   )
 
   return Container(
-    { background: c.border, radius: 8, padding: '0 0 0 4', width, margin },
+    { background: c.border, radius: 8, padding: '0 0 0 4', width, height, margin },
     Container(
       { background: c.bg, radius: 6, padding: '12 16' },
       Container({ gap: 0 }, header, Text({ fontSize: 13, color: '$text' }, message)),

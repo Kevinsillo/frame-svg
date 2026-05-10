@@ -9,6 +9,7 @@ export interface StatProps {
   trendUp?: boolean
   icon?: string
   width?: number | string
+  height?: number | string
   padding?: SpacingValue
   background?: string | GradientBackground
   border?: BorderProps | null
@@ -21,7 +22,8 @@ export function Stat({
   trend,
   trendUp,
   icon,
-  width = '100%',
+  width = 'full',
+  height,
   padding = '20 24',
   background = '$surface',
   border,
@@ -49,7 +51,7 @@ export function Stat({
   }
 
   return Container(
-    { background, radius: 12, padding, width, border, shadow } as Parameters<typeof Container>[0],
+    { background, radius: 12, padding, width, height, border, shadow } as Parameters<typeof Container>[0],
     Container({ gap: 0 }, ...items),
   )
 }

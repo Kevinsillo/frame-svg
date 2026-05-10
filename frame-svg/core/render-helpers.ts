@@ -66,7 +66,7 @@ export function buildKeyframesBlock(name: string, keyframes: AnimationKeyframes)
 export function applyAnimate(animate: Animate | undefined, ctx: RenderContext): string | undefined {
   if (!animate) return undefined
 
-  const prop: AnimateProp = typeof animate === 'string' ? { preset: animate } : animate
+  const prop: AnimateProp = typeof animate === 'string' ? { preset: animate } : animate as AnimateProp
   const presets = ctx.animation?.presets
   const base: Partial<AnimationPreset> = (prop.preset && presets?.[prop.preset]) ? presets[prop.preset] : {}
 

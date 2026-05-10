@@ -14,15 +14,49 @@ padding="16 24"        // vertical horizontal
 padding="8 12 16 24"   // top right bottom left
 ```
 
-By default, components shrink to fit their content. Use `width` to control sizing:
+### Sizing keywords
+
+`width`, `height`, and `length` (Line) accept numbers or the following strings:
+
+| Value | Meaning | `width` | `height` |
+|---|---|:---:|:---:|
+| `number` | Fixed pixels | ✓ | ✓ |
+| `"full"` | Fill available space from parent | ✓ | ✓ * |
+| `"50%"` / any `"X%"` | Percentage of available space | ✓ | ✓ * |
+| `"fit-content"` | Shrink to children | ✓ | — |
+| `"auto"` | Same as `"full"` for width | ✓ | — |
+
+> \* Height keywords only resolve when the parent has a **known height** before laying out children. This happens in three cases:
+> - Children of a **horizontal container** — the tallest sibling determines the cross-axis height.
+> - Children of a **vertical container with an explicit numeric `height`**.
+> - Children re-resolved by `align="stretch"` in a horizontal container.
+>
+> In a content-based vertical container none of the children can declare a percentage height (circular dependency — no one knows the height yet).
 
 ```tsx
-<Container width={200} />           // fixed
-<Container width="100%" />          // fills parent
-<Container width="fit-content" />   // shrinks to children
-```
+// width always works
+<Container width="full" />
+<Container width="50%" />
 
-`height` only accepts numbers (no percentages).
+// height works in a horizontal container (cross-axis is known)
+<Container direction="horizontal">
+  <Container>
+    <Text>Tall content</Text>      {/* drives the row height */}
+  </Container>
+  <Container height="full">       {/* fills to match the tallest sibling */}
+    ...
+  </Container>
+  <Container height="50%">        {/* half the row height */}
+    ...
+  </Container>
+</Container>
+
+// height works when the parent has an explicit height
+<Container height={200}>
+  <Container height="full">...</Container>   {/* 200 - padding */}
+  <Container height="50%">...</Container>    {/* 100px */}
+</Container>
+```
 
 ---
 
@@ -80,8 +114,8 @@ The universal layout box. Controls direction, alignment, spacing, and visual sty
 | `justify` | `'start' \| 'space-between'` | `'start'` | Main-axis distribution |
 | `padding` | `SpacingValue` | — | Inner padding |
 | `margin` | `SpacingValue` | — | Outer margin |
-| `width` | `number \| string` | — | Fixed width or `'fit-content'` |
-| `height` | `number` | — | Fixed height |
+| `width` | `number \| string` | — | Fixed, `'full'`, `'fit-content'`, `'auto'`, or `'X%'` |
+| `height` | `number \| string` | — | Fixed, `'full'`, or `'X%'` — see Sizing keywords above |
 | `background` | `string \| Gradient` | — | Background color, variable, or gradient |
 | `radius` | `number \| string` | — | Border radius |
 | `border` | `BorderProps` | — | Border — `{ width, color }` |
@@ -147,7 +181,7 @@ A horizontal or vertical rule.
 | `direction` | `'horizontal' \| 'vertical'` | `'horizontal'` | Line orientation |
 | `color` | `string` | — | Stroke color or variable |
 | `thickness` | `number` | `1` | Stroke width in px |
-| `length` | `number \| string` | `'100%'` | Line length (`'100%'` or px). Required for vertical. |
+| `length` | `number \| string` | `'full'` | Line length. Accepts px, `'full'`, or `'X%'`. Required for vertical lines. |
 | `dash` | `string` | — | Dash pattern, e.g. `'6 4'` |
 | `margin` | `SpacingValue` | — | Outer margin |
 

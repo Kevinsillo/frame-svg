@@ -54,13 +54,17 @@ export const LinePrimitive: Primitive = {
     return lines.join('\n')
   },
 
-  resolveLayout(node: LayoutNode, availableWidth: number): ResolvedNode {
+  resolveLayout(node: LayoutNode, availableWidth: number, forcedHeight?: number): ResolvedNode {
     const p = node.props as LineProps
     const [mt, mr, mb, ml] = parseSpacing(getMargin(node.props))
     const isH = (p.direction ?? 'horizontal') === 'horizontal'
     const thickness = p.thickness ?? 1
-    const width = isH ? resolveWidth(p.length ?? '100%', availableWidth) : thickness
-    const height = isH ? thickness : (Number(p.length) || 0)
+    const width  = isH ? resolveWidth(p.length ?? '100%', availableWidth) : thickness
+    const height = isH
+      ? thickness
+      : (p.length === 'full' && forcedHeight !== undefined)
+        ? forcedHeight
+        : resolveWidth(p.length ?? 0, availableWidth)
     return {
       ...node,
       _width: width, _height: height, _x: 0, _y: 0,

@@ -12,13 +12,15 @@ export interface FeatureItem {
 export interface FeatureListProps {
   items: FeatureItem[]
   width?: number | string
+  height?: number | string
   padding?: SpacingValue
   gap?: number
 }
 
 export function FeatureList({
   items,
-  width = '100%',
+  width = 'full',
+  height,
   padding = '14 16',
   gap = 10,
 }: FeatureListProps): LayoutNode {
@@ -48,7 +50,7 @@ export function FeatureList({
   })
 
   return Container(
-    { background: '$surface', radius: 10, padding, width },
+    { background: '$surface', radius: 10, padding, width, height },
     Container({ gap }, ...rows),
   )
 }

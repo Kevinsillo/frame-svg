@@ -16,13 +16,15 @@ export interface FileTreeProps {
   items: FileTreeItem[]
   root?: string
   width?: number | string
+  height?: number | string
   padding?: SpacingValue
 }
 
 export function FileTree({
   items,
   root,
-  width = '100%',
+  width = 'full',
+  height,
   padding = '14 16',
 }: FileTreeProps): LayoutNode {
   const rows: LayoutNode[] = []
@@ -64,7 +66,7 @@ export function FileTree({
   }
 
   return Container(
-    { background: '$surface', radius: 10, padding, width },
+    { background: '$surface', radius: 10, padding, width, height },
     Container({ gap: 6 }, ...rows),
   )
 }

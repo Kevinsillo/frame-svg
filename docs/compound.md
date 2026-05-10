@@ -31,6 +31,8 @@ A content card with title, body, optional badge, avatar, and divider.
 | `badgeVariant` | `'accent' \| 'success' \| 'warning' \| 'danger' \| 'neutral'` | `'neutral'` | Badge color |
 | `avatar` | `string` | — | Single-character avatar shown next to title |
 | `divider` | `boolean` | `false` | Horizontal line between header and body |
+| `width` | `number \| string` | `'full'` | Width — fixed, `'full'`, `'fit-content'`, or `'X%'` |
+| `height` | `number \| string` | — | Height — fixed, `'full'`, or `'X%'` (requires known parent height) |
 | `border` | `BorderProps` | — | Card border |
 | `shadow` | `Shadow` | — | Drop shadow |
 
@@ -71,7 +73,8 @@ Highlights important information with an icon and a colored background.
 |------|------|---------|-------------|
 | `variant` | `'note' \| 'tip' \| 'warning' \| 'important'` | `'note'` | Visual style and icon |
 | `message` | `string` | — | Body text |
-| `width` | `number \| string` | `'100%'` | Container width |
+| `width` | `number \| string` | `'full'` | Width — fixed, `'full'`, `'fit-content'`, or `'X%'` |
+| `height` | `number \| string` | — | Height — fixed, `'full'`, or `'X%'` (requires known parent height) |
 | `margin` | `SpacingValue` | — | Outer margin |
 
 ---
@@ -92,7 +95,9 @@ A list of features with check, cross, or dot markers and optional descriptions.
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `items` | `FeatureItem[]` | — | List of items |
-| `width` | `number \| string` | `'100%'` | Container width |
+| `width` | `number \| string` | `'full'` | Width — fixed, `'full'`, `'fit-content'`, or `'X%'` |
+| `height` | `number \| string` | — | Height — fixed, `'full'`, or `'X%'` (requires known parent height) |
+| `padding` | `SpacingValue` | `'14 16'` | Inner padding |
 | `gap` | `number` | `10` | Gap between rows |
 
 `FeatureItem` — `label: string` · `checked?: boolean` (true = ✓, false = ✗, omit = •) · `description?: string`
@@ -119,7 +124,9 @@ Renders a directory structure with optional highlights and inline comments.
 |------|------|-------------|
 | `items` | `FileTreeItem[]` | Files and directories (required) |
 | `root` | `string` | Optional root folder label |
-| `width` | `number \| string` | Container width |
+| `width` | `number \| string` | Width — fixed, `'full'`, `'fit-content'`, or `'X%'` |
+| `height` | `number \| string` | Height — fixed, `'full'`, or `'X%'` (requires known parent height) |
+| `padding` | `SpacingValue` | Inner padding |
 
 `FileTreeItem` — `name` · `type: 'file' | 'dir'` · `depth: number` · `highlight?: boolean` · `comment?: string`
 
@@ -160,3 +167,6 @@ Tip: wrap multiple stats in `<Grid columns={3} gap={12}>` for a dashboard row.
 | `trend` | `string` | Trend line text |
 | `trendUp` | `boolean` | `true` = green, `false` = red |
 | `icon` | `string` | Optional emoji shown next to value |
+| `width` | `number \| string` | `'full'` | Width — fixed, `'full'`, `'fit-content'`, or `'X%'` |
+| `height` | `number \| string` | — | Height — fixed, `'full'`, or `'X%'` (requires known parent height) |
+| `padding` | `SpacingValue` | — | Inner padding |

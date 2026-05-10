@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 531" width="100%" style="max-width:720px">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 398" width="100%" style="max-width:720px">
   <style>
     .f-bg { fill: #0f172a; }
     .s-bg { stroke: #0f172a; }
@@ -62,80 +62,86 @@
       .f-dangerBg { fill: #fee2e2; }
       .s-dangerBg { stroke: #fee2e2; }
     }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
   </style>
   <g transform="translate(0, 0)">
-    <rect width="720" height="531" class="f-bg"/>
-    <g transform="translate(32, 32)">
-      <g transform="translate(0, 0)">
-        <g transform="translate(0, 6.5)">
-          <rect width="4" height="48" rx="2" class="f-accent"/>
+    <rect width="720" height="398" class="f-bg"/>
+    <g transform="translate(32, 28)">
+      <g style="animation:slideUp 400ms ease-out 0s;animation-fill-mode:both">
+        <g transform="translate(0, 0)">
+          <line x1="0" y1="0" x2="0" y2="42" stroke-width="4" class="s-accent"/>
         </g>
-        <g transform="translate(18, 0)">
+        <g transform="translate(14, 0)">
           <g transform="translate(0, 0)">
-            <text font-size="22" font-weight="700" font-family="system-ui, sans-serif" text-anchor="start" class="f-text"><tspan x="0" dy="22">frame-svg</tspan></text>
+            <text font-size="18" font-weight="700" font-family="system-ui, sans-serif" text-anchor="start" class="f-text"><tspan x="0" dy="18">frame-svg</tspan></text>
           </g>
-          <g transform="translate(0, 44)">
-            <text font-size="12" font-weight="normal" font-family="system-ui, sans-serif" text-anchor="start" class="f-muted"><tspan x="0" dy="12">SVG layout engine · code-first · zero dependencies</tspan></text>
+          <g transform="translate(0, 27)">
+            <text font-size="11" font-weight="normal" font-family="system-ui, sans-serif" text-anchor="start" class="f-muted"><tspan x="0" dy="11">SVG layout engine · JSX syntax · zero dependencies</tspan></text>
           </g>
         </g>
       </g>
-      <g transform="translate(0, 85)">
+    </g>
+    <g transform="translate(32, 86)">
+      <g style="animation:slideUp 400ms ease-out 0.3s;animation-fill-mode:both">
+        <rect width="656" height="65" rx="8" class="f-success"/>
+        <g transform="translate(4, 0)">
+          <rect width="652" height="65" rx="6" class="f-successBg"/>
+          <g transform="translate(16, 12)">
+            <g transform="translate(0, 0)">
+              <g transform="translate(0, 1.5)">
+                <g transform="scale(0.5833333333333334)" class="s-success" stroke-width="3.429" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" fill="none"/>
+                  <path d="M9 18h6" fill="none"/>
+                  <path d="M10 22h4" fill="none"/>
+                </g>
+              </g>
+              <g transform="translate(20, 0)">
+                <text font-size="12" font-weight="700" font-family="system-ui, sans-serif" text-anchor="start" class="f-success"><tspan x="0" dy="12">TIP</tspan></text>
+              </g>
+            </g>
+            <g transform="translate(0, 23)">
+              <text font-size="13" font-weight="normal" font-family="system-ui, sans-serif" text-anchor="start" class="f-text"><tspan x="0" dy="13">Write layouts in TypeScript, get a single SVG that adapts to dark and light mode automatically.</tspan></text>
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+    <g transform="translate(32, 167)">
+      <line x1="0" y1="0" x2="656" y2="0" stroke-width="1" class="s-subtle"/>
+    </g>
+    <g transform="translate(32, 184)">
+      <g style="animation:slideUp 400ms ease-out 0.6s;animation-fill-mode:both">
         <g transform="translate(0, 0)">
           <g transform="translate(0, 0)">
-            <rect width="320" height="83" rx="8" class="f-accent"/>
-            <g transform="translate(4, 0)">
-              <rect width="316" height="83" rx="6" class="f-accentBg"/>
-              <g transform="translate(16, 12)">
-                <g transform="translate(0, 0)">
-                  <g transform="translate(0, 1.5) scale(0.5833333333333334)" class="s-accent" stroke-width="3.429" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20" fill="none"/>
-                    <path d="M12 16v-4" fill="none"/>
-                    <path d="M12 8h.01" fill="none"/>
-                  </g>
-                  <g transform="translate(20, 0)">
-                    <text font-size="12" font-weight="700" font-family="system-ui, sans-serif" text-anchor="start" class="f-accent"><tspan x="0" dy="12">NOTE</tspan></text>
-                  </g>
-                </g>
-                <g transform="translate(0, 23)">
-                  <text font-size="13" font-weight="normal" font-family="system-ui, sans-serif" text-anchor="start" class="f-text"><tspan x="0" dy="13">Write layouts in TypeScript. Get an SVG ready to</tspan><tspan x="0" dy="18">embed in any README.</tspan></text>
-                </g>
-              </g>
-            </g>
+            <text font-size="10" font-weight="700" font-family="system-ui, sans-serif" text-anchor="start" class="f-faint"><tspan x="0" dy="10">FEATURES</tspan></text>
           </g>
-          <g transform="translate(0, 99)">
-            <rect width="320" height="83" rx="8" class="f-success"/>
-            <g transform="translate(4, 0)">
-              <rect width="316" height="83" rx="6" class="f-successBg"/>
-              <g transform="translate(16, 12)">
-                <g transform="translate(0, 0)">
-                  <g transform="translate(0, 1.5) scale(0.5833333333333334)" class="s-success" stroke-width="3.429" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" fill="none"/>
-                    <path d="M9 18h6" fill="none"/>
-                    <path d="M10 22h4" fill="none"/>
-                  </g>
-                  <g transform="translate(20, 0)">
-                    <text font-size="12" font-weight="700" font-family="system-ui, sans-serif" text-anchor="start" class="f-success"><tspan x="0" dy="12">TIP</tspan></text>
-                  </g>
-                </g>
-                <g transform="translate(0, 23)">
-                  <text font-size="13" font-weight="normal" font-family="system-ui, sans-serif" text-anchor="start" class="f-text"><tspan x="0" dy="13">The output SVG adapts automatically to dark or</tspan><tspan x="0" dy="18">light mode — no JavaScript, no duplicated files.</tspan></text>
-                </g>
-              </g>
-            </g>
-          </g>
-          <g transform="translate(0, 198)">
-            <rect width="320" height="184" rx="10" class="f-surface"/>
-            <g transform="translate(16, 16)">
-              <text font-size="10" font-weight="700" font-family="system-ui, sans-serif" text-anchor="start" class="f-faint"><tspan x="0" dy="10">FEATURES</tspan></text>
-            </g>
-            <g transform="translate(16, 30)">
-              <rect width="288" height="138" rx="10" class="f-surface"/>
-              <g transform="translate(16, 14)">
+          <g transform="translate(0, 22)">
+            <rect width="316" height="134" rx="10" class="f-surface"/>
+            <g transform="translate(14, 12)">
+              <rect width="288" height="110" rx="10" class="f-surface"/>
+              <g transform="translate(0, 0)">
                 <g transform="translate(0, 0)">
                   <g transform="translate(0, 0)">
                     <rect width="20" height="20" rx="10" class="f-successBg"/>
-                    <g transform="translate(4, 4) scale(0.5)" class="s-success" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M20 6 9 17l-5-5" fill="none"/>
+                    <g transform="translate(4, 4)">
+                      <g transform="scale(0.5)" class="s-success" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 6 9 17l-5-5" fill="none"/>
+                      </g>
                     </g>
                   </g>
                   <g transform="translate(30, 0)">
@@ -145,8 +151,10 @@
                 <g transform="translate(0, 30)">
                   <g transform="translate(0, 0)">
                     <rect width="20" height="20" rx="10" class="f-successBg"/>
-                    <g transform="translate(4, 4) scale(0.5)" class="s-success" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M20 6 9 17l-5-5" fill="none"/>
+                    <g transform="translate(4, 4)">
+                      <g transform="scale(0.5)" class="s-success" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 6 9 17l-5-5" fill="none"/>
+                      </g>
                     </g>
                   </g>
                   <g transform="translate(30, 0)">
@@ -156,168 +164,81 @@
                 <g transform="translate(0, 60)">
                   <g transform="translate(0, 0)">
                     <rect width="20" height="20" rx="10" class="f-successBg"/>
-                    <g transform="translate(4, 4) scale(0.5)" class="s-success" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M20 6 9 17l-5-5" fill="none"/>
+                    <g transform="translate(4, 4)">
+                      <g transform="scale(0.5)" class="s-success" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 6 9 17l-5-5" fill="none"/>
+                      </g>
+                    </g>
+                  </g>
+                  <g transform="translate(30, 0)">
+                    <text font-size="14" font-weight="500" font-family="system-ui, sans-serif" text-anchor="start" class="f-text"><tspan x="0" dy="14">CSS animations</tspan></text>
+                  </g>
+                </g>
+                <g transform="translate(0, 90)">
+                  <g transform="translate(0, 0)">
+                    <rect width="20" height="20" rx="10" class="f-successBg"/>
+                    <g transform="translate(4, 4)">
+                      <g transform="scale(0.5)" class="s-success" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 6 9 17l-5-5" fill="none"/>
+                      </g>
                     </g>
                   </g>
                   <g transform="translate(30, 0)">
                     <text font-size="14" font-weight="500" font-family="system-ui, sans-serif" text-anchor="start" class="f-text"><tspan x="0" dy="14">JSX-like syntax</tspan></text>
                   </g>
                 </g>
-                <g transform="translate(0, 90)">
-                  <g transform="translate(0, 0)">
-                    <rect width="20" height="20" rx="10" class="f-successBg"/>
-                    <g transform="translate(4, 4) scale(0.5)" class="s-success" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M20 6 9 17l-5-5" fill="none"/>
-                    </g>
-                  </g>
-                  <g transform="translate(30, 0)">
-                    <text font-size="14" font-weight="500" font-family="system-ui, sans-serif" text-anchor="start" class="f-text"><tspan x="0" dy="14">Custom themes</tspan></text>
-                  </g>
-                </g>
               </g>
             </g>
           </g>
         </g>
-        <g transform="translate(336, 0)">
+        <g transform="translate(340, 0)">
           <g transform="translate(0, 0)">
-            <rect width="320" height="194" rx="10" class="f-surface"/>
-            <g transform="translate(16, 16)">
-              <text font-size="10" font-weight="700" font-family="system-ui, sans-serif" text-anchor="start" class="f-faint"><tspan x="0" dy="10">FILE TREE</tspan></text>
-            </g>
-            <g transform="translate(16, 30)">
-              <rect width="288" height="148" rx="10" class="f-surface"/>
-              <g transform="translate(16, 14)">
-                <g transform="translate(0, 0)">
-                  <g transform="translate(0, 2) scale(0.5833333333333334)" class="s-accent" stroke-width="3.429" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" fill="none"/>
-                  </g>
-                  <g transform="translate(22, 0)">
-                    <text font-size="13" font-weight="700" font-family="system-ui, sans-serif" text-anchor="start" class="f-text"><tspan x="0" dy="13">src/</tspan></text>
-                  </g>
-                </g>
-                <g transform="translate(0, 24)">
-                  <rect width="256" height="24" rx="4" class="f-accentBg"/>
-                  <g transform="translate(0, 3)">
-                    <g transform="translate(0, 9)"/>
-                    <g transform="translate(18, 2.5) scale(0.5416666666666666)" class="s-accent" stroke-width="3.692" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" fill="none"/>
-                      <path d="M13 2v7h7" fill="none"/>
-                    </g>
-                    <g transform="translate(37, 0)">
-                      <text font-size="13" font-weight="400" font-family="system-ui, sans-serif" text-anchor="start" class="f-accent"><tspan x="0" dy="13">main.frame</tspan></text>
-                    </g>
-                  </g>
-                </g>
-                <g transform="translate(0, 54)">
-                  <g transform="translate(0, 9)"/>
-                  <g transform="translate(18, 2.5) scale(0.5416666666666666)" class="s-accent" stroke-width="3.692" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" fill="none"/>
-                  </g>
-                  <g transform="translate(37, 0)">
-                    <text font-size="13" font-weight="600" font-family="system-ui, sans-serif" text-anchor="start" class="f-text"><tspan x="0" dy="13">components/</tspan></text>
-                  </g>
-                </g>
-                <g transform="translate(0, 78)">
-                  <g transform="translate(0, 9)"/>
-                  <g transform="translate(36, 2.5) scale(0.5416666666666666)" class="s-muted" stroke-width="3.692" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" fill="none"/>
-                    <path d="M13 2v7h7" fill="none"/>
-                  </g>
-                  <g transform="translate(55, 0)">
-                    <text font-size="13" font-weight="400" font-family="system-ui, sans-serif" text-anchor="start" class="f-muted"><tspan x="0" dy="13">hero.frame</tspan></text>
-                  </g>
-                </g>
-                <g transform="translate(0, 102)">
-                  <g transform="translate(0, 9)"/>
-                  <g transform="translate(36, 2.5) scale(0.5416666666666666)" class="s-muted" stroke-width="3.692" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" fill="none"/>
-                    <path d="M13 2v7h7" fill="none"/>
-                  </g>
-                  <g transform="translate(55, 0)">
-                    <text font-size="13" font-weight="400" font-family="system-ui, sans-serif" text-anchor="start" class="f-muted"><tspan x="0" dy="13">features.frame</tspan></text>
-                  </g>
-                </g>
-              </g>
-            </g>
+            <text font-size="10" font-weight="700" font-family="system-ui, sans-serif" text-anchor="start" class="f-faint"><tspan x="0" dy="10">ANIMATIONS</tspan></text>
           </g>
-          <g transform="translate(0, 210)">
-            <rect width="320" height="102" rx="10" class="f-surface"/>
-            <g transform="translate(14, 14)">
+          <g transform="translate(0, 22)">
+            <rect width="316" height="134" rx="10" class="f-surface"/>
+            <g transform="translate(16, 16)">
               <g transform="translate(0, 0)">
-                <text font-size="10" font-weight="700" font-family="system-ui, sans-serif" text-anchor="start" class="f-faint"><tspan x="0" dy="10">PRIMITIVES</tspan></text>
-              </g>
-              <g transform="translate(0, 30)">
-                <g transform="translate(0, 0) scale(0.5833333333333334)" class="s-accent" stroke-width="3.429" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" fill="none"/>
+                <g transform="translate(0.7849998474121094, 0)">
+                  <g style="animation:pulse 2s ease-in-out infinite;animation-fill-mode:both">
+                    <circle cx="12" cy="12" r="12" class="f-accent"/>
+                  </g>
                 </g>
-                <g transform="translate(24, 0) scale(0.5833333333333334)" class="s-muted" stroke-width="3.429" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" fill="none"/>
-                  <path d="M13 2v7h7" fill="none"/>
-                </g>
-                <g transform="translate(48, 0) scale(0.5833333333333334)" class="s-accent" stroke-width="3.429" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M16 18l6-6-6-6" fill="none"/>
-                  <path d="M8 6l-6 6 6 6" fill="none"/>
-                </g>
-                <g transform="translate(72, 0) scale(0.5833333333333334)" class="s-muted" stroke-width="3.429" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M4 17l6-6-6-6" fill="none"/>
-                  <path d="M12 19h8" fill="none"/>
-                </g>
-                <g transform="translate(96, 0) scale(0.5833333333333334)" class="s-accent" stroke-width="3.429" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" fill="none"/>
-                  <path d="M3.27 6.96 12 12.01 20.73 6.96" fill="none"/>
-                  <path d="M12 22.08V12" fill="none"/>
-                </g>
-                <g transform="translate(120, 0) scale(0.5833333333333334)" class="s-muted" stroke-width="3.429" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="none"/>
-                </g>
-                <g transform="translate(144, 0) scale(0.5833333333333334)" class="s-warning" stroke-width="3.429" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="none"/>
-                </g>
-                <g transform="translate(168, 0) scale(0.5833333333333334)" class="s-accent" stroke-width="3.429" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z" fill="none"/>
+                <g transform="translate(0, 32)">
+                  <text font-size="10" font-weight="normal" font-family="system-ui, sans-serif" text-anchor="middle" class="f-muted"><tspan x="12.78499984741211" dy="10">pulse</tspan></text>
                 </g>
               </g>
-              <g transform="translate(0, 60)">
-                <g transform="translate(0, 0) scale(0.5833333333333334)" class="s-accent" stroke-width="3.429" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20" fill="none"/>
-                  <path d="M12 16v-4" fill="none"/>
-                  <path d="M12 8h.01" fill="none"/>
+              <g transform="translate(65.56999969482422, 0)">
+                <g transform="translate(5.739999771118164, 0)">
+                  <g style="animation:bounce 800ms ease-in-out infinite;animation-fill-mode:both">
+                    <g transform="scale(1)" class="s-warning" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z" fill="none"/>
+                    </g>
+                  </g>
                 </g>
-                <g transform="translate(24, 0) scale(0.5833333333333334)" class="s-warning" stroke-width="3.429" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" fill="none"/>
-                  <path d="M9 18h6" fill="none"/>
-                  <path d="M10 22h4" fill="none"/>
+                <g transform="translate(0, 32)">
+                  <text font-size="10" font-weight="normal" font-family="system-ui, sans-serif" text-anchor="middle" class="f-muted"><tspan x="17.739999771118164" dy="10">bounce</tspan></text>
                 </g>
-                <g transform="translate(48, 0) scale(0.5833333333333334)" class="s-warning" stroke-width="3.429" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" fill="none"/>
-                  <path d="M12 9v4" fill="none"/>
-                  <path d="M12 17h.01" fill="none"/>
+              </g>
+              <g transform="translate(141.04999923706055, 0)">
+                <g transform="translate(-1.4499998092651367, 0)">
+                  <g style="animation:float 2s ease-in-out infinite;animation-fill-mode:both">
+                    <g transform="scale(1)" class="s-success" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="none"/>
+                    </g>
+                  </g>
                 </g>
-                <g transform="translate(72, 0) scale(0.5833333333333334)" class="s-success" stroke-width="3.429" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M20 6 9 17l-5-5" fill="none"/>
-                </g>
-                <g transform="translate(96, 0) scale(0.5833333333333334)" class="s-danger" stroke-width="3.429" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M18 6 6 18" fill="none"/>
-                  <path d="M6 6l12 12" fill="none"/>
-                </g>
-                <g transform="translate(120, 0) scale(0.5833333333333334)" class="s-muted" stroke-width="3.429" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M19 11H5a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2z" fill="none"/>
-                  <path d="M7 11V7a5 5 0 0 1 10 0v4" fill="none"/>
-                </g>
-                <g transform="translate(144, 0) scale(0.5833333333333334)" class="s-accent" stroke-width="3.429" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" fill="none"/>
-                  <path d="M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" fill="none"/>
-                </g>
-                <g transform="translate(168, 0) scale(0.5833333333333334)" class="s-muted" stroke-width="3.429" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20" fill="none"/>
-                  <path d="M12 6v6l4 2" fill="none"/>
+                <g transform="translate(0, 32)">
+                  <text font-size="10" font-weight="normal" font-family="system-ui, sans-serif" text-anchor="middle" class="f-muted"><tspan x="10.550000190734863" dy="10">float</tspan></text>
                 </g>
               </g>
             </g>
           </g>
         </g>
       </g>
+    </g>
+    <g transform="translate(32, 356)">
+      <text font-size="10" font-weight="normal" font-family="system-ui, sans-serif" text-anchor="middle" class="f-faint"><tspan x="328" dy="10">Generated with frame-svg</tspan></text>
     </g>
   </g>
 </svg>

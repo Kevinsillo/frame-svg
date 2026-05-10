@@ -22,7 +22,7 @@ type ContainerLikeProps = {
 // ─── Width / height resolvers ────────────────────────────────────────────────
 
 export function resolveWidth(propWidth: number | string | undefined, availableWidth: number): number {
-  if (!propWidth || propWidth === '100%' || propWidth === 'auto' || propWidth === 'fit-content') return availableWidth
+  if (!propWidth || propWidth === 'full' || propWidth === '100%' || propWidth === 'auto' || propWidth === 'fit-content') return availableWidth
   if (typeof propWidth === 'string' && propWidth.endsWith('%')) {
     return availableWidth * parseFloat(propWidth) / 100
   }
@@ -31,6 +31,7 @@ export function resolveWidth(propWidth: number | string | undefined, availableWi
 
 export function resolveHeight(heightProp: number | string | undefined, fallback: number): number {
   if (heightProp === undefined || heightProp === null) return fallback
+  if (heightProp === 'full') return fallback  // resolved upstream via forcedHeight
   const value = Number(heightProp)
   if (isNaN(value)) {
     if (typeof import.meta !== 'undefined' && import.meta.env?.DEV) {
