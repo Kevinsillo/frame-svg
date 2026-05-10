@@ -47,15 +47,21 @@ npm install frame-svg
 </Page>
 ```
 
-2. Run the renderer:
+2. Start the dev server to preview with hot reload:
+
+```bash
+npm run dev
+```
+
+Opens `localhost:5173` in your browser. Save any `.frame` file and the preview updates instantly. Includes a dark/light toggle to check both themes.
+
+3. When you're happy with the result, export the final SVG:
 
 ```bash
 npm run render
 ```
 
-3. The rendered SVG is generated in `dist/`.
-
-4. Embed it wherever you need it.
+4. The rendered SVG is generated in `dist/`. Embed it wherever you need it.
 
 ## Documentation
 
