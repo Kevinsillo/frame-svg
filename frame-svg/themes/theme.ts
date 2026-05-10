@@ -18,7 +18,59 @@ export const theme: RenderOptions = {
     successBg:  { dark: '#166534', light: '#dcfce7' },
     warningBg:  { dark: '#78350f', light: '#fef3c7' },
     dangerBg:   { dark: '#7f1d1d', light: '#fee2e2' },
-    violet:     { dark: '#818cf8', light: '#4f46e5' },
-    violetLine: { dark: 'rgba(129,140,248,0.3)', light: 'rgba(79,70,229,0.3)' },
+  },
+  animation: {
+    duration: { fast: '150ms', base: '300ms', slow: '600ms' },
+    easing: {
+      default: 'ease-in-out',
+      bounce:  'cubic-bezier(0.34, 1.56, 0.64, 1)',
+      linear:  'linear',
+    },
+    presets: {
+      fadeIn: {
+        keyframes: { from: { opacity: '0' }, to: { opacity: '1' } },
+        duration: '300ms',
+        easing: 'ease-out',
+      },
+      fadeOut: {
+        keyframes: { from: { opacity: '1' }, to: { opacity: '0' } },
+        duration: '300ms',
+        easing: 'ease-in',
+      },
+      slideUp: {
+        keyframes: {
+          from: { opacity: '0', transform: 'translateY(12px)' },
+          to:   { opacity: '1', transform: 'translateY(0)' },
+        },
+        duration: '400ms',
+        easing: 'ease-out',
+      },
+      slideDown: {
+        keyframes: {
+          from: { opacity: '0', transform: 'translateY(-12px)' },
+          to:   { opacity: '1', transform: 'translateY(0)' },
+        },
+        duration: '400ms',
+        easing: 'ease-out',
+      },
+      pulse: {
+        keyframes: {
+          '0%, 100%': { opacity: '1' },
+          '50%':      { opacity: '0.5' },
+        },
+        duration: '2s',
+        easing: 'ease-in-out',
+        iteration: 'infinite',
+      },
+      bounce: {
+        keyframes: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%':      { transform: 'translateY(-8px)' },
+        },
+        duration: '800ms',
+        easing: 'ease-in-out',
+        iteration: 'infinite',
+      },
+    },
   },
 }

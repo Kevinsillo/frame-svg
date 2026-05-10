@@ -4,16 +4,18 @@ import type {
   LayoutNode, ResolvedNode, RenderOptions, ThemeVariables,
   TextProps, BoxProps, StackProps, CircleProps, LineProps, IconProps,
   LinearGradient, RadialGradient, GradientBackground, Shadow, BorderProps,
-  FontConfig, PageProps,
+  FontConfig, PageProps, Animate, AnimateProp, AnimationKeyframes, AnimationPreset, AnimationTokens,
 } from '@/core/types.ts'
 
 // ─── Render context (collects defs during render) ─────────────────────────────
 
 interface RenderContext {
   defs: string[]
+  animations: Map<string, string>  // name → @keyframes block (deduplicated)
   id: number
   prefix: string  // unique per renderSvg call — avoids id collisions in inline HTML
   variables?: ThemeVariables
+  animation?: AnimationTokens
 }
 
 let _renderSeq = 0
@@ -48,6 +50,44 @@ function strokeAttrs(color: string, ctx: RenderContext): { stroke?: string; clas
     return { class: `s-${tokenName(color)}` }
   }
   return { stroke: color }
+}
+
+// ─── Animation helpers ────────────────────────────────────────────────────────
+
+function buildKeyframesBlock(name: string, keyframes: AnimationKeyframes): string {
+  const stops = Object.entries(keyframes).map(([stop, props]) => {
+    const declarations = Object.entries(props).map(([k, v]) => `${k}: ${v};`).join(' ')
+    return `  ${stop} { ${declarations} }`
+  }).join('\n')
+  return `@keyframes ${name} {\n${stops}\n}`
+}
+
+function applyAnimate(animate: Animate | undefined, ctx: RenderContext): string | undefined {
+  if (!animate) return undefined
+
+  const prop: AnimateProp = typeof animate === 'string' ? { preset: animate } : animate
+  const presets = ctx.animation?.presets
+  const base: Partial<AnimationPreset> = (prop.preset && presets?.[prop.preset]) ? presets[prop.preset] : {}
+
+  const keyframes = prop.keyframes ?? base.keyframes
+  if (!keyframes) return undefined
+
+  const duration  = prop.duration  ?? base.duration
+  const easing    = prop.easing    ?? base.easing
+  const delay     = prop.delay     ?? base.delay
+  const iteration = prop.iteration ?? base.iteration
+  const animName  = prop.preset ?? `a${nextId(ctx)}`
+
+  if (!ctx.animations.has(animName)) {
+    ctx.animations.set(animName, buildKeyframesBlock(animName, keyframes))
+  }
+
+  const parts: string[] = [animName]
+  if (duration)         parts.push(duration)
+  if (easing)           parts.push(easing)
+  if (delay)            parts.push(delay)
+  if (iteration != null) parts.push(String(iteration))
+  return `animation:${parts.join(' ')};animation-fill-mode:both`
 }
 
 // ─── Gradient helpers ─────────────────────────────────────────────────────────
@@ -148,8 +188,16 @@ function renderNode(node: ResolvedNode, ctx: RenderContext): string {
       `<tspan x="${tspanX}" dy="${i === 0 ? pt + fontSize : lineHeight}">${escapeXml(line)}</tspan>`
     ).join('')
 
+    const textAnim = applyAnimate(node.animate, ctx)
+    const textEl = `<text ${attrs({ 'font-size': fontSize, 'font-weight': fontWeight, 'font-family': fontFamily, 'text-anchor': anchor, fill, class: cls })}>${tspans}</text>`
     lines.push(`<g transform="translate(${x}, ${y})">`)
-    lines.push(`  <text ${attrs({ 'font-size': fontSize, 'font-weight': fontWeight, 'font-family': fontFamily, 'text-anchor': anchor, fill, class: cls })}>${tspans}</text>`)
+    if (textAnim) {
+      lines.push(`  <g style="${textAnim}">`)
+      lines.push(`    ${textEl}`)
+      lines.push(`  </g>`)
+    } else {
+      lines.push(`  ${textEl}`)
+    }
     lines.push(`</g>`)
     return lines.join('\n')
   }
@@ -186,8 +234,17 @@ function renderNode(node: ResolvedNode, ctx: RenderContext): string {
     const circleClass = mergeClasses(...bgClass, strokeCls)
     const opacity = p.opacity != null ? p.opacity : undefined
 
-    lines.push(`<g transform="translate(${x}, ${y})"${opacity != null ? ` opacity="${opacity}"` : ''}>`)
-    lines.push(`  <circle cx="${r}" cy="${r}" r="${r}" ${attrs({ fill: bgFill, class: circleClass, filter: shadowId ? `url(#${shadowId})` : undefined, ...strokeAttrsObj })}/>`)
+    const circleAnim = applyAnimate(node.animate, ctx)
+    const circleOuterAttrs = [`transform="translate(${x}, ${y})"`, opacity != null ? `opacity="${opacity}"` : ''].filter(Boolean).join(' ')
+    const circleEl = `<circle cx="${r}" cy="${r}" r="${r}" ${attrs({ fill: bgFill, class: circleClass, filter: shadowId ? `url(#${shadowId})` : undefined, ...strokeAttrsObj })}/>`
+    lines.push(`<g ${circleOuterAttrs}>`)
+    if (circleAnim) {
+      lines.push(`  <g style="${circleAnim}">`)
+      lines.push(`    ${circleEl}`)
+      lines.push(`  </g>`)
+    } else {
+      lines.push(`  ${circleEl}`)
+    }
     lines.push(`</g>`)
     return lines.join('\n')
   }
@@ -202,8 +259,16 @@ function renderNode(node: ResolvedNode, ctx: RenderContext): string {
     const x2 = isH ? w : 0
     const y2 = isH ? 0 : h
 
+    const lineAnim = applyAnimate(node.animate, ctx)
+    const lineEl = `<line x1="0" y1="0" x2="${x2}" y2="${y2}" ${attrs({ stroke, 'stroke-width': thickness, 'stroke-dasharray': p.dash, class: cls })}/>`
     lines.push(`<g transform="translate(${x}, ${y})">`)
-    lines.push(`  <line x1="0" y1="0" x2="${x2}" y2="${y2}" ${attrs({ stroke, 'stroke-width': thickness, 'stroke-dasharray': p.dash, class: cls })}/>`)
+    if (lineAnim) {
+      lines.push(`  <g style="${lineAnim}">`)
+      lines.push(`    ${lineEl}`)
+      lines.push(`  </g>`)
+    } else {
+      lines.push(`  ${lineEl}`)
+    }
     lines.push(`</g>`)
     return lines.join('\n')
   }
@@ -276,8 +341,12 @@ function renderNode(node: ResolvedNode, ctx: RenderContext): string {
   const shadowId = shadow ? addShadow(shadow, ctx) : undefined
   const combinedClass = mergeClasses(...bgClasses)
 
-  const groupAttrs = `transform="translate(${x}, ${y})"${opacity != null ? ` opacity="${opacity}"` : ''}`
-  lines.push(`<g ${groupAttrs}>`)
+  const containerAnim = applyAnimate(node.animate, ctx)
+  const outerGroupAttrs = [`transform="translate(${x}, ${y})"`, opacity != null ? `opacity="${opacity}"` : ''].filter(Boolean).join(' ')
+  const ni = containerAnim ? 4 : 2  // inner indent spaces
+
+  lines.push(`<g ${outerGroupAttrs}>`)
+  if (containerAnim) lines.push(`  <g style="${containerAnim}">`)
 
   if (bgFill !== undefined || combinedClass || border || shadowId) {
     const rectA = attrs({
@@ -288,13 +357,14 @@ function renderNode(node: ResolvedNode, ctx: RenderContext): string {
       class: combinedClass,
       ...strokeAttrsMap,
     })
-    lines.push(`  <rect ${rectA}/>`)
+    lines.push(`${' '.repeat(ni)}<rect ${rectA}/>`)
   }
 
   for (const child of node.children) {
-    lines.push(ind(renderNode(child, ctx)))
+    lines.push(ind(renderNode(child, ctx), ni))
   }
 
+  if (containerAnim) lines.push(`  </g>`)
   lines.push(`</g>`)
   return lines.join('\n')
 }
@@ -334,13 +404,13 @@ function fontFaceBlock(font: FontConfig): string {
 // ─── Public API ───────────────────────────────────────────────────────────────
 
 export function renderSvg(rootNode: LayoutNode, options: RenderOptions = {}): string {
-  const { variables, fonts } = options
+  const { variables, fonts, animation } = options
   const rootWidth = Number((rootNode.props as PageProps).width) || 800
   const resolved = resolveLayout(rootNode, rootWidth)
   const w = resolved._width
   const h = resolved._height
 
-  const ctx: RenderContext = { defs: [], id: 0, prefix: `fd${++_renderSeq}_`, variables }
+  const ctx: RenderContext = { defs: [], animations: new Map(), id: 0, prefix: `fd${++_renderSeq}_`, variables, animation }
   const content = renderNode(resolved, ctx)
 
   const parts: string[] = [
@@ -351,6 +421,7 @@ export function renderSvg(rootNode: LayoutNode, options: RenderOptions = {}): st
   const styleLines: string[] = []
   if (fonts?.length) styleLines.push(...fonts.map(fontFaceBlock).filter(Boolean))
   if (variables) styleLines.push(themeStyleBlock(variables))
+  if (ctx.animations.size) styleLines.push([...ctx.animations.values()].join('\n'))
   if (styleLines.length) {
     parts.push(`  <style>\n${styleLines.map(s => s.split('\n').map(l => `    ${l}`).join('\n')).join('\n')}\n  </style>`)
   }

@@ -43,6 +43,35 @@ export interface FontConfig {
   _data?: string
 }
 
+// ─── Animation ───────────────────────────────────────────────────────────────
+
+export type AnimationKeyframes = Record<string, Record<string, string | number>>
+
+export interface AnimationPreset {
+  keyframes: AnimationKeyframes
+  duration?: string
+  easing?: string
+  delay?: string
+  iteration?: string | number
+}
+
+export interface AnimationTokens {
+  duration?: { fast?: string; base?: string; slow?: string }
+  easing?: { default?: string; bounce?: string; linear?: string }
+  presets?: Record<string, AnimationPreset>
+}
+
+export interface AnimateProp {
+  preset?: string
+  keyframes?: AnimationKeyframes
+  duration?: string
+  easing?: string
+  delay?: string
+  iteration?: string | number
+}
+
+export type Animate = string | AnimateProp
+
 // ─── Theme ───────────────────────────────────────────────────────────────────
 // Colors prefixed with $ in props resolve to CSS theme classes,
 // enabling prefers-color-scheme support. Example: background: '$surface'
@@ -52,6 +81,7 @@ export type ThemeVariables = Record<string, { dark: string; light: string }>
 export interface RenderOptions {
   variables?: ThemeVariables
   fonts?: FontConfig[]
+  animation?: AnimationTokens
 }
 
 // ─── Node props ───────────────────────────────────────────────────────────────
@@ -162,12 +192,14 @@ export type NodeType = 'page' | 'stack' | 'box' | 'text' | 'circle' | 'line' | '
 export interface LayoutNode {
   type: NodeType
   props: NodeProps
+  animate?: Animate
   children: LayoutNode[]
 }
 
 export interface ResolvedNode {
   type: NodeType
   props: NodeProps
+  animate?: Animate
   children: ResolvedNode[]
   _width: number
   _height: number
