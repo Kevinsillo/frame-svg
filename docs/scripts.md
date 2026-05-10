@@ -55,7 +55,7 @@ Installs the VSCode extension locally by copying files to `~/.vscode/extensions/
 npm run ext:install
 ```
 
-Restart VSCode after running this. See [VSCode Extension](./07-vscode-extension.md) for details.
+Restart VSCode after running this. See [VS Code Extension](./vscode-extension.md) for details.
 
 ## Typical workflow
 

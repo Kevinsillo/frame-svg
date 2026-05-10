@@ -12,11 +12,22 @@ Built-in stroke-based icons. 24×24 viewBox, scales cleanly to any size.
 <Icon name="zap"    size={16} color="$warning" strokeWidth={1.5} />
 ```
 
+## Custom paths
+
+Use `paths` instead of `name` to render any SVG path data:
+
+```tsx
+<Icon paths={['M12 2l3.09 6.26L22 9.27l-5 4.87...']} size={24} color="$text" />
+```
+
+`name` takes precedence if both are provided.
+
 ## Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `name` | `IconName` | — | Icon identifier (required) |
+| `name` | `IconName` | — | Built-in icon identifier |
+| `paths` | `string[]` | — | Custom SVG path data |
 | `size` | `number` | `20` | Width and height in px |
 | `color` | `string` | `'$text'` | Stroke color or variable |
 | `strokeWidth` | `number` | `2` | Stroke weight |
@@ -54,19 +65,19 @@ Built-in stroke-based icons. 24×24 viewBox, scales cleanly to any size.
 ## Combining with text
 
 ```tsx
-<Stack direction="horizontal" gap={8} align="center">
+<Container direction="horizontal" gap={8} align="center">
   <Icon name="check" size={16} color="$success" />
   <Text fontSize={14} color="$text">Task complete</Text>
-</Stack>
+</Container>
 ```
 
 ## In a badge
 
 ```tsx
-<Box width="fit-content" background="$accentBg" radius={6} padding="5 10">
-  <Stack direction="horizontal" gap={6} align="center">
+<Container width="fit-content" background="$accentBg" radius={6} padding="5 10">
+  <Container direction="horizontal" gap={6} align="center">
     <Icon name="zap" size={12} color="$accent" />
     <Text fontSize={12} fontWeight="600" color="$accent">New</Text>
-  </Stack>
-</Box>
+  </Container>
+</Container>
 ```

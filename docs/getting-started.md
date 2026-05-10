@@ -46,12 +46,12 @@ Edit `src/main.frame`:
 
 ```tsx
 export default (
-  <Page width={600}>
-    <Stack gap={16} padding={32}>
+  <Template theme={theme}>
+    <Container direction="vertical" gap={16} padding={32} background="$bg">
       <Text fontSize={28} fontWeight="700" color="$text">Hello, world</Text>
       <Text fontSize={14} color="$muted">Your first SVG, rendered from a .frame file.</Text>
-    </Stack>
-  </Page>
+    </Container>
+  </Template>
 )
 ```
 
@@ -59,6 +59,6 @@ Save → the preview updates → run `npm run render` to get the SVG.
 
 ## Next steps
 
-- [Philosophy](./02-philosophy.md) — understand the .frame model
-- [Primitives](./04-primitives.md) — all layout components
-- [Theme](./03-theme.md) — colors and dark/light mode
+- [Primitives](./primitives.md) — all layout components
+- [Theme](./theme.md) — colors and dark/light mode
+- [Philosophy](./philosophy.md) — understand the .frame model

@@ -23,10 +23,11 @@ The layout engine resolves sizes in a single deterministic pass — no DOM, no b
 | Term | Meaning |
 |------|---------|
 | `.frame` file | A TypeScript/JSX file with `.frame` extension — auto-imports all primitives and compound components |
-| Primitive | A layout node: `Stack`, `Box`, `Text`, `Circle`, `Line`, `Grid`, `Spacer`, `Icon` |
+| Primitive | A layout node: `Template`, `Container`, `Text`, `Circle`, `Line`, `Spacer`, `Icon` |
 | Compound component | A higher-level component built from primitives: `Card`, `Avatar`, `Callout`, `FeatureList`, `FileTree`, `KeyCombo`, `Stat` |
 | Theme variable | A `$name` string in any color prop that resolves to a CSS class with dark/light values |
-| Page | The root node — sets canvas width, padding, background, and embeds the theme |
+| Template | The document root — injects theme, fonts, and animation tokens |
+| Container | The universal layout box — vertical stack, horizontal row, or grid |
 
 ## Quick install
 
@@ -39,12 +40,12 @@ npm install frame-svg
 1. Create `src/main.frame`:
 
 ```tsx
-<Page theme={theme} width={720} padding={36} background="$bg">
-  <Stack gap={16}>
+<Template theme={theme}>
+  <Container gap={16} padding={36} background="$bg">
     <Text fontSize={24} fontWeight="700" color="$text">Hello, frame-svg</Text>
     <Callout variant="tip" message="This renders as an SVG." />
-  </Stack>
-</Page>
+  </Container>
+</Template>
 ```
 
 2. Start the dev server to preview with hot reload:
@@ -67,17 +68,18 @@ npm run render
 
 | | |
 |---|---|
-| [Getting Started](docs/01-getting-started.md) | Installation, first render, project structure |
-| [Philosophy](docs/02-philosophy.md) | The .frame model, Vue-style conventions |
-| [Theme](docs/03-theme.md) | Variables, dark/light mode, customization |
-| [Primitives](docs/04-primitives.md) | Page, Stack, Box, Text, Circle, Line, Grid, Spacer |
-| [Icons](docs/05-icons.md) | Built-in icon set and usage |
-| [Compound Components](docs/06-compound.md) | Card, Avatar, Callout, FeatureList, FileTree, KeyCombo, Stat |
-| [VSCode Extension](docs/07-vscode-extension.md) | Syntax highlighting and autocomplete |
-| [Scripts](docs/08-scripts.md) | dev, render, render:img, schema, ext:install |
-| [Internals](docs/09-internals.md) | Pipeline, layout engine, renderer |
+| [Getting Started](docs/getting-started.md) | Installation, first render, project structure |
+| [Primitives](docs/primitives.md) | Template, Container, Text, Circle, Line, Spacer, Icon |
+| [Compound Components](docs/compound.md) | Card, Avatar, Callout, FeatureList, FileTree, KeyCombo, Stat |
+| [Icons](docs/icons.md) | Built-in icon set and custom paths |
+| [Theme](docs/theme.md) | Variables, dark/light mode, customization |
+| [Animations](docs/animations.md) | The `animate` prop, presets, and keyframes |
+| [Scripts](docs/scripts.md) | dev, render, render:img, schema, ext:install |
 | [Examples](docs/examples.md) | Visual reference with SVG previews |
-| [AI Skill](docs/10-ai-skill.md) | Claude Code skill for designing with frame-svg |
+| [Internals](docs/internals.md) | Pipeline, primitives registry, renderer |
+| [VS Code Extension](docs/vscode-extension.md) | Syntax highlighting and autocomplete |
+| [Philosophy](docs/philosophy.md) | The .frame model, design rationale |
+| [AI Skill](docs/ai-skill.md) | Claude Code skill for designing with frame-svg |
 
 ## VS Code
 
