@@ -4,7 +4,7 @@ import { Features } from '@/src/frames/features.frame'
 import { Structure } from '@/src/frames/structure.frame'
 import { Footer } from '@/src/frames/footer.frame'
 
-<Page theme={theme} width={560} padding={40} background="$bg">
+<Page theme={theme} width={800} padding={40} background="$bg">
   <Stack gap={28}>
     <Box animate={{ preset: 'slideUp', delay: '0s' }}>
       <Header />

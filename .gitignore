@@ -34,3 +34,4 @@ pnpm-debug.log*
 # TypeScript
 *.tsbuildinfo
 .pillbox/
+PENDIENTE.md

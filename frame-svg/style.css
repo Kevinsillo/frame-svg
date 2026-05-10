@@ -1,4 +1,8 @@
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 body {
   background: #0f172a;
@@ -8,11 +12,15 @@ body {
   align-items: center;
   padding: 48px 24px;
   gap: 48px;
-  transition: background 0.2s;
 }
-html[data-theme="light"] body { background: #e2e8f0; }
 
-svg { display: block; }
+html[data-theme="light"] body {
+  background: #ffffff;
+}
+
+svg {
+  display: block;
+}
 
 /* ── Theme toggle button ─────────────────────────────────────────────── */
 #theme-toggle {
@@ -32,12 +40,20 @@ svg { display: block; }
   font-family: system-ui, sans-serif;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
-#theme-toggle:hover { background: #334155; color: #f8fafc; }
+
+#theme-toggle:hover {
+  background: #334155;
+  color: #f8fafc;
+}
+
 html[data-theme="light"] #theme-toggle {
   border-color: #cbd5e1;
   background: #f1f5f9;
   color: #64748b;
 }
-html[data-theme="light"] #theme-toggle:hover { background: #e2e8f0; color: #0f172a; }
+
+html[data-theme="light"] #theme-toggle:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
