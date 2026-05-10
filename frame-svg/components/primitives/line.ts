@@ -2,7 +2,18 @@ import { parseSpacing } from '@/core/utils.ts'
 import { strokeAttrs, applyAnimate, attrs } from '@/core/render-helpers.ts'
 import { getMargin, resolveWidth } from '@/core/layout-helpers.ts'
 import type { Primitive, RenderContext } from '@/core/primitive.ts'
-import type { LayoutNode, ResolvedNode, LineProps } from '@/core/types.ts'
+import type { LayoutNode, ResolvedNode, SpacingValue } from '@/core/types.ts'
+
+// ─── Props ───────────────────────────────────────────────────────────────────
+
+export interface LineProps {
+  direction?: 'horizontal' | 'vertical'
+  color?: string
+  thickness?: number
+  length?: number | string  // explicit length; defaults to 100% for horizontal, required for vertical
+  dash?: string             // stroke-dasharray
+  margin?: SpacingValue
+}
 
 // ─── Factory (public API — unchanged) ────────────────────────────────────────
 
@@ -57,5 +68,11 @@ export const LinePrimitive: Primitive = {
       _mt: mt, _mr: mr, _mb: mb, _ml: ml,
       children: [],
     }
+  },
+
+  measureIntrinsic(node: LayoutNode): number {
+    const p = node.props as LineProps
+    const isH = (p.direction ?? 'horizontal') === 'horizontal'
+    return isH ? Number(p.length ?? 0) : (p.thickness ?? 1)
   },
 }

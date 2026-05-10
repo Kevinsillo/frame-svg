@@ -1,5 +1,4 @@
-import { Box } from '@/components/primitives/box.ts'
-import { Stack } from '@/components/primitives/stack.ts'
+import { Container } from '@/components/primitives/container.ts'
 import { Text } from '@/components/primitives/text.ts'
 import type { LayoutNode, SpacingValue, GradientBackground, Shadow, BorderProps } from '@/core/types.ts'
 
@@ -32,7 +31,7 @@ export function Stat({
 
   if (icon) {
     items.push(
-      Stack(
+      Container(
         { direction: 'horizontal', gap: 10, align: 'center' },
         Text({ fontSize: 22 }, icon),
         Text({ fontSize: 30, fontWeight: '700', color: '$text' }, String(value)),
@@ -49,8 +48,8 @@ export function Stat({
     items.push(Text({ fontSize: 12, fontWeight: '600', color: trendColor, margin: '4 0 0 0' }, trend))
   }
 
-  return Box(
-    { background, radius: 12, padding, width, border, shadow } as Parameters<typeof Box>[0],
-    Stack({ gap: 0 }, ...items),
+  return Container(
+    { background, radius: 12, padding, width, border, shadow } as Parameters<typeof Container>[0],
+    Container({ gap: 0 }, ...items),
   )
 }

@@ -1,8 +1,7 @@
-import { Box } from '@/components/primitives/box.ts'
-import { Stack } from '@/components/primitives/stack.ts'
+import { Container, type ContainerProps } from '@/components/primitives/container.ts'
 import { Text } from '@/components/primitives/text.ts'
 import { Line } from '@/components/primitives/line.ts'
-import type { LayoutNode, BoxProps, GradientBackground, Shadow, SpacingValue, BorderProps } from '@/core/types.ts'
+import type { LayoutNode, GradientBackground, Shadow, SpacingValue, BorderProps } from '@/core/types.ts'
 
 type BadgeVariant = 'success' | 'accent' | 'warning' | 'danger' | 'neutral'
 
@@ -62,7 +61,7 @@ export function Card({
 
   if (avatar) {
     headerItems.push(
-      Box(
+      Container(
         { width: 32, height: 32, radius: 16, background: avatarBg ?? badgeColors.bg, margin: '0 12 0 0' },
         Text({ fontSize: 14, fontWeight: '700', color: avatarColor ?? badgeColors.text, textAlign: 'center', padding: '8 0 0 0' }, avatar),
       )
@@ -70,7 +69,7 @@ export function Card({
   }
 
   headerItems.push(
-    Stack(
+    Container(
       { gap: 0 },
       Text({ fontSize: 15, fontWeight: '600', color: '$text' }, title),
     )
@@ -78,7 +77,7 @@ export function Card({
 
   if (badge) {
     headerItems.push(
-      Box(
+      Container(
         { background: badgeColors.bg, radius: 6, padding: '4 10', margin: '0 0 0 12', width: 'fit-content' },
         Text({ fontSize: 11, fontWeight: '700', color: badgeColors.text }, badge),
       )
@@ -86,7 +85,7 @@ export function Card({
   }
 
   children.push(
-    Stack({ direction: 'horizontal', gap: 0, align: 'center' }, ...headerItems)
+    Container({ direction: 'horizontal', gap: 0, align: 'center' }, ...headerItems)
   )
 
   if (divider && body) {
@@ -99,8 +98,8 @@ export function Card({
     )
   }
 
-  return Box(
-    { background, radius, padding, width, border, shadow } as BoxProps,
-    Stack({ gap: 0 }, ...children),
+  return Container(
+    { background, radius, padding, width, border, shadow } as ContainerProps,
+    Container({ gap: 0 }, ...children),
   )
 }

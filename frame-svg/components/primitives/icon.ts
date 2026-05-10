@@ -2,9 +2,25 @@ import { parseSpacing } from '@/core/utils.ts'
 import { strokeAttrs, attrs } from '@/core/render-helpers.ts'
 import { getMargin } from '@/core/layout-helpers.ts'
 import type { Primitive, RenderContext } from '@/core/primitive.ts'
-import type { LayoutNode, ResolvedNode, IconProps } from '@/core/types.ts'
+import type { LayoutNode, ResolvedNode, SpacingValue } from '@/core/types.ts'
+import { ICONS, type IconName } from '@/components/primitives/icons/index.ts'
 
-// ─── Factory (public API — unchanged) ────────────────────────────────────────
+export type { IconName }
+
+// ─── Props (colocated) ───────────────────────────────────────────────────────
+// `name` and `paths` are mutually exclusive. If both are present, `name` wins.
+
+export interface IconProps {
+  name?: IconName
+  paths?: string[]
+  size?: number
+  color?: string
+  strokeWidth?: number
+  viewBox?: number
+  margin?: SpacingValue
+}
+
+// ─── Factory (public API) ────────────────────────────────────────────────────
 
 export function Icon(props: IconProps): LayoutNode {
   return { type: 'icon', props, children: [] }
@@ -33,7 +49,9 @@ export const IconPrimitive: Primitive = {
       'stroke-linejoin': 'round',
     })
 
-    const pathEls = (p.paths ?? []).map(d => `<path d="${d}" fill="none"/>`)
+    // Resolve paths: `name` takes precedence over `paths`.
+    const resolvedPaths = p.name ? ICONS[p.name] : (p.paths ?? [])
+    const pathEls = resolvedPaths.map(d => `<path d="${d}" fill="none"/>`)
 
     const lines: string[] = []
     lines.push(`<g ${groupAtt}>`)

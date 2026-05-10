@@ -4,7 +4,21 @@ import {
 } from '@/core/render-helpers.ts'
 import { getMargin, resolveWidth } from '@/core/layout-helpers.ts'
 import type { Primitive, RenderContext } from '@/core/primitive.ts'
-import type { LayoutNode, ResolvedNode, TextProps } from '@/core/types.ts'
+import type { LayoutNode, ResolvedNode, SpacingValue } from '@/core/types.ts'
+
+// ─── Props ───────────────────────────────────────────────────────────────────
+
+export interface TextProps {
+  content?: string
+  fontSize?: number
+  fontWeight?: string | number
+  fontFamily?: string
+  color?: string
+  textAlign?: 'left' | 'center' | 'right'
+  lineHeight?: number
+  padding?: SpacingValue
+  margin?: SpacingValue
+}
 
 // ─── Factory (public API — unchanged, preserves size/weight aliases) ─────────
 

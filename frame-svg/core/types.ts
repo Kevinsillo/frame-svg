@@ -86,108 +86,25 @@ export interface RenderOptions {
 
 // ─── Node props ───────────────────────────────────────────────────────────────
 
-export interface PageProps {
-  width?: number | string
-  padding?: SpacingValue
-  background?: string | GradientBackground
-  theme?: RenderOptions
-}
-
-export interface StackProps {
-  direction?: 'vertical' | 'horizontal'
-  gap?: number
-  padding?: SpacingValue
-  margin?: SpacingValue
-  background?: string | GradientBackground
-  radius?: number
-  border?: BorderProps | null
-  width?: number | string
-  height?: number  // percentage strings not supported — use a fixed number
-  shadow?: Shadow
-  align?: 'start' | 'center' | 'end' | 'stretch'
-  justify?: 'start' | 'center' | 'end' | 'space-between'
-}
-
-export interface BoxProps {
-  padding?: SpacingValue
-  margin?: SpacingValue
-  background?: string | GradientBackground
-  radius?: number
-  border?: BorderProps | null
-  width?: number | string
-  height?: number  // percentage strings not supported — use a fixed number
-  opacity?: number
-  shadow?: Shadow
-  align?: 'start' | 'center' | 'end' | 'stretch'
-}
-
-export interface TextProps {
-  content?: string
-  fontSize?: number
-  fontWeight?: string | number
-  fontFamily?: string
-  color?: string
-  textAlign?: 'left' | 'center' | 'right'
-  lineHeight?: number
-  padding?: SpacingValue
-  margin?: SpacingValue
-}
-
-export interface CircleProps {
-  size: number
-  background?: string | GradientBackground
-  border?: BorderProps | null
-  opacity?: number
-  shadow?: Shadow
-  margin?: SpacingValue
-}
-
-export interface LineProps {
-  direction?: 'horizontal' | 'vertical'
-  color?: string
-  thickness?: number
-  length?: number | string  // explicit length; defaults to 100% for horizontal, required for vertical
-  dash?: string             // stroke-dasharray
-  margin?: SpacingValue
-}
-
-export interface GridProps {
-  columns: number
-  gap?: number
-  columnGap?: number
-  rowGap?: number
-  padding?: SpacingValue
-  margin?: SpacingValue
-  background?: string | GradientBackground
-  radius?: number
-  border?: BorderProps | null
-  width?: number | string
-  shadow?: Shadow
-  align?: 'start' | 'center' | 'end' | 'stretch'
-}
-
-export interface SpacerProps {
-  size?: number
-  width?: number | string
-  height?: number
-}
-
-export interface IconProps {
-  paths: string[]
-  size?: number
-  color?: string
-  strokeWidth?: number
-  viewBox?: number
-  margin?: SpacingValue
-}
+// Props colocated with their primitives — re-exported for backward compatibility.
+import type { TextProps } from '@/components/primitives/text.ts'
+import type { CircleProps } from '@/components/primitives/circle.ts'
+import type { LineProps } from '@/components/primitives/line.ts'
+import type { SpacerProps } from '@/components/primitives/spacer.ts'
+import type { IconProps } from '@/components/primitives/icon.ts'
+import type { ContainerProps } from '@/components/primitives/container.ts'
+import type { TemplateProps } from '@/components/primitives/template.ts'
+export type { TextProps, CircleProps, LineProps, SpacerProps, IconProps, ContainerProps, TemplateProps }
 
 export type NodeProps =
-  | PageProps | StackProps | BoxProps | TextProps
-  | CircleProps | LineProps | GridProps | SpacerProps | IconProps
+  | TextProps | CircleProps | LineProps | SpacerProps | IconProps
+  | ContainerProps | TemplateProps
 
 // ─── Layout tree ──────────────────────────────────────────────────────────────
 
-export type NodeType = 'page' | 'stack' | 'box' | 'text' | 'circle' | 'line' | 'grid' | 'spacer' | 'icon'
+export type NodeType =
+  | 'text' | 'circle' | 'line' | 'spacer' | 'icon'
+  | 'container' | 'template'
 
 export interface LayoutNode {
   type: NodeType

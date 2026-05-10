@@ -6,26 +6,24 @@ import { CirclePrimitive } from '@/components/primitives/circle.ts'
 import { LinePrimitive } from '@/components/primitives/line.ts'
 import { IconPrimitive } from '@/components/primitives/icon.ts'
 import { TextPrimitive } from '@/components/primitives/text.ts'
-import { BoxPrimitive } from '@/components/primitives/box.ts'
-import { StackPrimitive } from '@/components/primitives/stack.ts'
-import { GridPrimitive } from '@/components/primitives/grid.ts'
-import { PagePrimitive } from '@/components/primitives/page.ts'
+import { ContainerPrimitive } from '@/components/primitives/container.ts'
+import { TemplatePrimitive } from '@/components/primitives/template.ts'
 
 // ─── Primitive registry ──────────────────────────────────────────────────────
 // Single source of truth mapping `NodeType` → `Primitive` implementation.
 // The renderer and layout dispatchers consult this map and delegate; they
 // own no per-type logic of their own.
 
+// Single source of truth mapping `NodeType` → `Primitive`. lookupPrimitive()
+// throws on missing types so the runtime path stays explicit.
 export const REGISTRY: Record<NodeType, Primitive> = {
-  page:   PagePrimitive,
-  stack:  StackPrimitive,
-  box:    BoxPrimitive,
-  text:   TextPrimitive,
-  circle: CirclePrimitive,
-  line:   LinePrimitive,
-  grid:   GridPrimitive,
-  spacer: SpacerPrimitive,
-  icon:   IconPrimitive,
+  text:      TextPrimitive,
+  circle:    CirclePrimitive,
+  line:      LinePrimitive,
+  spacer:    SpacerPrimitive,
+  icon:      IconPrimitive,
+  container: ContainerPrimitive,
+  template:  TemplatePrimitive,
 }
 
 export function lookupPrimitive(type: string): Primitive {

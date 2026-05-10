@@ -4,8 +4,8 @@ export { parseSpacing, wrapText, measureTextWidth, escapeXml } from '@/core/util
 export type { Primitive, RenderContext } from '@/core/primitive.ts'
 export type {
   LayoutNode, ResolvedNode, NodeType, NodeProps, RenderOptions,
-  PageProps, StackProps, BoxProps, TextProps,
-  CircleProps, LineProps, GridProps, SpacerProps,
+  TextProps, ContainerProps, TemplateProps,
+  CircleProps, LineProps, SpacerProps,
   BorderProps, Shadow, GradientBackground, LinearGradient, RadialGradient, GradientStop,
   ThemeVariables, FontConfig, SpacingValue,
 } from '@/core/types.ts'

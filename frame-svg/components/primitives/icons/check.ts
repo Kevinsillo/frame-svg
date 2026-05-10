@@ -1,0 +1,3 @@
+export default [
+  'M20 6 9 17l-5-5',
+]

@@ -1,8 +1,8 @@
 export function Footer() {
   return (
-    <Stack gap={10}>
+    <Container gap={10}>
       <Line color="$subtle" />
       <Text fontSize={11} color="$faint" textAlign="center">Everything you see here is an SVG — generated from src/main.frame</Text>
-    </Stack>
+    </Container>
   )
 }

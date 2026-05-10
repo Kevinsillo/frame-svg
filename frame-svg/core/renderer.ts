@@ -3,9 +3,9 @@ import { ind } from '@/core/render-helpers.ts'
 import { lookupPrimitive } from '@/core/registry.ts'
 import type { RenderContext } from '@/core/primitive.ts'
 import type {
-  LayoutNode, ResolvedNode, RenderOptions, ThemeVariables,
-  FontConfig, PageProps,
+  LayoutNode, ResolvedNode, ThemeVariables, FontConfig,
 } from '@/core/types.ts'
+import type { TemplateProps } from '@/components/primitives/template.ts'
 
 export type { RenderContext } from '@/core/primitive.ts'
 
@@ -53,10 +53,15 @@ function fontFaceBlock(font: FontConfig): string {
 
 // ─── Public API ──────────────────────────────────────────────────────────────
 
-export function renderSvg(rootNode: LayoutNode, options: RenderOptions = {}): string {
-  const { variables, fonts, animation } = options
-  const rootWidth = Number((rootNode.props as PageProps).width) || 800
-  const resolved = resolveLayout(rootNode, rootWidth)
+export function renderSvg(rootNode: LayoutNode): string {
+  if (rootNode.type !== 'template') {
+    throw new Error(
+      `[frame-svg] renderSvg requires a Template root node. Got: "${rootNode.type}". ` +
+      `Wrap your design in <Template theme={...}>.`
+    )
+  }
+  const { variables, fonts, animation } = (rootNode.props as TemplateProps).theme ?? {}
+  const resolved = resolveLayout(rootNode, 1e6)
   const w = resolved._width
   const h = resolved._height
 

@@ -7,9 +7,6 @@ export type { AvatarProps } from '@/components/compounds/avatar.ts'
 export { Callout } from '@/components/compounds/callout.ts'
 export type { CalloutProps } from '@/components/compounds/callout.ts'
 
-export { Icon } from '@/components/compounds/icon.ts'
-export type { IconName, IconProps } from '@/components/compounds/icon.ts'
-
 export { FeatureList } from '@/components/compounds/feature-list.ts'
 export type { FeatureItem, FeatureListProps } from '@/components/compounds/feature-list.ts'
 

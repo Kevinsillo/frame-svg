@@ -3,7 +3,7 @@ import { resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { renderSvg } from '@/core/index.ts'
 import { initCanvas } from '@/core/utils.ts'
-import type { LayoutNode, PageProps, RenderOptions, ThemeVariables } from '@/core/types.ts'
+import type { LayoutNode, TemplateProps, RenderOptions, ThemeVariables } from '@/core/types.ts'
 import sharp from 'sharp'
 
 type Format = 'webp' | 'png' | 'jpeg' | 'avif' | 'gif' | 'tiff' | 'heif'
@@ -50,7 +50,7 @@ try {
     process.exit(1)
   }
 
-  const renderOptions: RenderOptions = (mod.default.props as PageProps).theme ?? {}
+  const renderOptions: RenderOptions = (mod.default.props as TemplateProps).theme ?? {}
 
   for (const font of renderOptions.fonts ?? []) {
     if (font.src) {
@@ -61,7 +61,7 @@ try {
   await initCanvas(renderOptions.fonts)
 
   const svg = injectFlatTheme(
-    renderSvg(mod.default, renderOptions),
+    renderSvg(mod.default),
     renderOptions.variables,
     theme,
   )

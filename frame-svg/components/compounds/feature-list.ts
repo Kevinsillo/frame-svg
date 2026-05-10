@@ -1,7 +1,6 @@
-import { Box } from '@/components/primitives/box.ts'
-import { Stack } from '@/components/primitives/stack.ts'
+import { Container } from '@/components/primitives/container.ts'
 import { Text } from '@/components/primitives/text.ts'
-import { Icon } from '@/components/compounds/icon.ts'
+import { Icon } from '@/components/primitives/icon.ts'
 import type { LayoutNode, SpacingValue } from '@/core/types.ts'
 
 export interface FeatureItem {
@@ -28,28 +27,28 @@ export function FeatureList({
     const iconColor = checked === true ? '$success'   : checked === false ? '$danger'   : '$muted'
 
     const iconNode = checked !== undefined
-      ? Stack(
+      ? Container(
           { width: 20, height: 20, radius: 10, background: iconBg, align: 'center', margin: '0 10 0 0' },
           Icon({ name: checked ? 'check' : 'x', size: 12, color: iconColor, strokeWidth: 2, margin: '4 0 0 0' }),
         )
-      : Box(
+      : Container(
           { width: 20, height: 20, radius: 10, background: iconBg, margin: '0 10 0 0' },
           Text({ fontSize: 11, fontWeight: '700', color: iconColor, textAlign: 'center', padding: '3 0 0 0' }, '·'),
         )
 
     const content = description
-      ? Stack(
+      ? Container(
           { gap: 2 },
           Text({ fontSize: 14, fontWeight: '500', color: '$text' }, label),
           Text({ fontSize: 12, color: '$muted' }, description),
         )
       : Text({ fontSize: 14, fontWeight: '500', color: '$text' }, label)
 
-    return Stack({ direction: 'horizontal', gap: 0, align: 'start' }, iconNode, content)
+    return Container({ direction: 'horizontal', gap: 0, align: 'start' }, iconNode, content)
   })
 
-  return Box(
+  return Container(
     { background: '$surface', radius: 10, padding, width },
-    Stack({ gap }, ...rows),
+    Container({ gap }, ...rows),
   )
 }

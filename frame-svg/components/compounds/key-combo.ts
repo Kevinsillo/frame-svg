@@ -1,5 +1,4 @@
-import { Box } from '@/components/primitives/box.ts'
-import { Stack } from '@/components/primitives/stack.ts'
+import { Container } from '@/components/primitives/container.ts'
 import { Text } from '@/components/primitives/text.ts'
 import type { LayoutNode, SpacingValue } from '@/core/types.ts'
 
@@ -19,14 +18,14 @@ export function KeyCombo({
   keys.forEach((key, i) => {
     if (i > 0) {
       children.push(
-        Box(
+        Container(
           { width: 'fit-content', padding: '0 6' },
           Text({ fontSize: 12, color: '$muted' }, separator),
         ),
       )
     }
     children.push(
-      Box(
+      Container(
         {
           width: 'fit-content',
           background: '$raised',
@@ -40,5 +39,5 @@ export function KeyCombo({
     )
   })
 
-  return Stack({ direction: 'horizontal', gap: 0, align: 'center', margin }, ...children)
+  return Container({ direction: 'horizontal', gap: 0, align: 'center', margin }, ...children)
 }

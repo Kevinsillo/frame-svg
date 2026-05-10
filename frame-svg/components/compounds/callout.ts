@@ -1,8 +1,6 @@
-import { Box } from '@/components/primitives/box.ts'
-import { Stack } from '@/components/primitives/stack.ts'
+import { Container } from '@/components/primitives/container.ts'
 import { Text } from '@/components/primitives/text.ts'
-import { Icon } from '@/components/compounds/icon.ts'
-import type { IconName } from '@/components/primitives/icons.ts'
+import { Icon, type IconName } from '@/components/primitives/icon.ts'
 import type { LayoutNode, SpacingValue } from '@/core/types.ts'
 
 type CalloutVariant = 'note' | 'tip' | 'warning' | 'important'
@@ -31,17 +29,17 @@ export function Callout({
 }: CalloutProps): LayoutNode {
   const c = VARIANT_CONFIG[variant]
 
-  const header = Stack(
+  const header = Container(
     { direction: 'horizontal', gap: 6, align: 'center', margin: '0 0 6 0' },
     Icon({ name: c.icon, size: 14, color: c.color }),
     Text({ fontSize: 12, fontWeight: '700', color: c.color }, c.label),
   )
 
-  return Box(
+  return Container(
     { background: c.border, radius: 8, padding: '0 0 0 4', width, margin },
-    Box(
+    Container(
       { background: c.bg, radius: 6, padding: '12 16' },
-      Stack({ gap: 0 }, header, Text({ fontSize: 13, color: '$text' }, message)),
+      Container({ gap: 0 }, header, Text({ fontSize: 13, color: '$text' }, message)),
     ),
   )
 }

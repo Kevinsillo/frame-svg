@@ -1,7 +1,6 @@
 import type { GradientBackground, LayoutNode, Shadow, SpacingValue } from '@/core/types.ts'
-import { Box } from '@/components/primitives/box.ts'
+import { Container } from '@/components/primitives/container.ts'
 import { Circle } from '@/components/primitives/circle.ts'
-import { Stack } from '@/components/primitives/stack.ts'
 import { Text } from '@/components/primitives/text.ts'
 
 type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
@@ -50,7 +49,7 @@ export function Avatar({
 }: AvatarProps): LayoutNode {
   const { box, font, fontPad, dot } = SIZE_MAP[size]
 
-  const avatarCircle = Box(
+  const avatarCircle = Container(
     { width: box, height: box, radius: box / 2, background, shadow },
     Text({ fontSize: font, fontWeight: '700', color, textAlign: 'center', padding: fontPad },
       (label ?? '?').slice(0, 2).toUpperCase()
@@ -58,7 +57,7 @@ export function Avatar({
   )
 
   if (!status) {
-    return Box({ width: box, height: box, margin }, avatarCircle)
+    return Container({ width: box, height: box, margin }, avatarCircle)
   }
 
   const statusDot = Circle({
@@ -68,7 +67,7 @@ export function Avatar({
     margin: `0 0 0 -${dot + 2}`,
   })
 
-  return Stack(
+  return Container(
     { direction: 'horizontal', gap: 0, align: 'start', width: box + dot + 2, margin },
     avatarCircle,
     statusDot,

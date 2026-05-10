@@ -27,4 +27,8 @@ export interface RenderContext {
 export interface Primitive {
   render(node: ResolvedNode, ctx: RenderContext): string
   resolveLayout(node: LayoutNode, availableWidth: number): ResolvedNode
+  // Optional: returns the intrinsic (fit-content) width for leaf primitives.
+  // Used by measureIntrinsicWidth in layout-helpers.ts so the registry — not
+  // hardcoded type checks — owns each primitive's intrinsic-size knowledge.
+  measureIntrinsic?(node: LayoutNode): number
 }

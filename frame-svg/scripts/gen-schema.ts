@@ -94,31 +94,39 @@ const [typesContent, primitiveContent, compoundContent] = await Promise.all([
   readFile(join(root, 'components/compounds/index.ts'), 'utf-8'),
 ])
 
-// Build a source map: component name → file content, reading each compound's own file
-const compoundsDir = join(root, 'components/compounds')
-const compoundFiles = (await readdir(compoundsDir)).filter(f => f.endsWith('.ts') && f !== 'index.ts')
-const compoundSources = new Map<string, string>()
-for (const file of compoundFiles) {
-  const content = await readFile(join(compoundsDir, file), 'utf-8')
-  const names = [...content.matchAll(/export interface (\w+)Props/g)].map(m => m[1])
-  for (const name of names) compoundSources.set(name, content)
+// Build a source map: component name → file content, reading each component's own
+// file. Both primitives and compounds colocate `*Props` interfaces with their
+// implementation, so we scan both directories.
+async function readSources(dir: string, sources: Map<string, string>): Promise<void> {
+  const files = (await readdir(dir)).filter(f => f.endsWith('.ts') && f !== 'index.ts')
+  for (const file of files) {
+    const content = await readFile(join(dir, file), 'utf-8')
+    const names = [...content.matchAll(/export interface (\w+)Props/g)].map(m => m[1])
+    for (const name of names) sources.set(name, content)
+  }
 }
 
-const CONTAINER_COMPONENTS = new Set(['Page', 'Stack', 'Box', 'Grid', 'Card'])
+const componentSources = new Map<string, string>()
+await readSources(join(root, 'components/primitives'), componentSources)
+await readSources(join(root, 'components/compounds'), componentSources)
+
+const CONTAINER_COMPONENTS = new Set(['Container', 'Template', 'Card'])
 
 function extractExports(source: string): string[] {
   return [...source.matchAll(/export \{ ([^}]+) \}/g)]
     .flatMap(m => m[1].split(',').map(s => s.trim().split(/\s+/)[0]))
 }
 
+// `*Primitive` exports are runtime registry objects, not JSX components — they
+// have no `*Props` interface and aren't meant to appear as VSCode completions.
 const componentNames = [
   ...extractExports(primitiveContent),
   ...extractExports(compoundContent),
-].filter(n => n !== 'loadImage' && /^[A-Z]/.test(n))
+].filter(n => n !== 'loadImage' && /^[A-Z]/.test(n) && !n.endsWith('Primitive'))
 
 const components: Record<string, ComponentDef> = {}
 for (const name of componentNames) {
-  const source = compoundSources.get(name) ?? typesContent
+  const source = componentSources.get(name) ?? typesContent
   components[name] = {
     container: CONTAINER_COMPONENTS.has(name),
     props: parseInterface(source, `${name}Props`),

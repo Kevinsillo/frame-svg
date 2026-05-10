@@ -1,6 +1,6 @@
 export function Structure() {
   return (
-    <Stack gap={10}>
+    <Container gap={10}>
       <Text fontSize={11} color="$faint">Project structure</Text>
       <FileTree root="frame-svg" items={[
         { name: 'src',           type: 'dir',  depth: 0 },
@@ -15,6 +15,6 @@ export function Structure() {
         { name: 'tsconfig.json', type: 'file', depth: 0 },
         { name: 'vite.config.ts',type: 'file', depth: 0 },
       ]} />
-    </Stack>
+    </Container>
   )
 }

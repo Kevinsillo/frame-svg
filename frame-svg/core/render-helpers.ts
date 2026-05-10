@@ -4,8 +4,19 @@ import type {
   ResolvedNode,
   Animate, AnimateProp, AnimationKeyframes, AnimationPreset,
   GradientBackground, LinearGradient, RadialGradient, Shadow,
-  BorderProps, BoxProps, StackProps,
+  BorderProps,
 } from '@/core/types.ts'
+
+// Local structural view of a container's visual style props. Kept private to
+// this module so renderContainer stays primitive-agnostic — it only knows the
+// shape it consumes (background, radius, border, shadow, opacity).
+type ContainerStyleProps = {
+  background?: string | GradientBackground
+  radius?: number | string
+  border?: BorderProps | null
+  opacity?: number
+  shadow?: Shadow
+}
 
 // ─── Id allocation ───────────────────────────────────────────────────────────
 
@@ -163,7 +174,7 @@ export function renderContainer(
   ctx: RenderContext,
   renderChild: (child: ResolvedNode, ctx: RenderContext) => string,
 ): string {
-  const cp = node.props as BoxProps & StackProps
+  const cp = node.props as ContainerStyleProps
   const x = node._x
   const y = node._y
   const w = node._width

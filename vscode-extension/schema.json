@@ -1,173 +1,6 @@
 {
   "version": 1,
   "components": {
-    "Page": {
-      "container": true,
-      "props": [
-        {
-          "name": "width",
-          "type": "size",
-          "detail": "number | string | \"fit-content\" | \"100%\""
-        },
-        {
-          "name": "padding",
-          "type": "spacing",
-          "detail": "number | \"t r b l\""
-        },
-        {
-          "name": "background",
-          "type": "color",
-          "detail": "string | $theme"
-        },
-        {
-          "name": "theme",
-          "type": "string",
-          "detail": "string"
-        }
-      ]
-    },
-    "Stack": {
-      "container": true,
-      "props": [
-        {
-          "name": "direction",
-          "type": "enum",
-          "values": [
-            "vertical",
-            "horizontal"
-          ],
-          "detail": "'vertical' | 'horizontal'"
-        },
-        {
-          "name": "gap",
-          "type": "number",
-          "detail": "number"
-        },
-        {
-          "name": "padding",
-          "type": "spacing",
-          "detail": "number | \"t r b l\""
-        },
-        {
-          "name": "margin",
-          "type": "spacing",
-          "detail": "number | \"t r b l\""
-        },
-        {
-          "name": "background",
-          "type": "color",
-          "detail": "string | $theme"
-        },
-        {
-          "name": "radius",
-          "type": "number",
-          "detail": "number"
-        },
-        {
-          "name": "border",
-          "type": "object",
-          "detail": "{ width, color }"
-        },
-        {
-          "name": "width",
-          "type": "size",
-          "detail": "number | string | \"fit-content\" | \"100%\""
-        },
-        {
-          "name": "height",
-          "type": "size",
-          "detail": "number | string | \"fit-content\" | \"100%\""
-        },
-        {
-          "name": "shadow",
-          "type": "object",
-          "detail": "{ x?, y?, blur?, color? }"
-        },
-        {
-          "name": "align",
-          "type": "enum",
-          "values": [
-            "start",
-            "center",
-            "end",
-            "stretch"
-          ],
-          "detail": "'start' | 'center' | 'end' | 'stretch'"
-        },
-        {
-          "name": "justify",
-          "type": "enum",
-          "values": [
-            "start",
-            "center",
-            "end",
-            "space-between"
-          ],
-          "detail": "'start' | 'center' | 'end' | 'space-between'"
-        }
-      ]
-    },
-    "Box": {
-      "container": true,
-      "props": [
-        {
-          "name": "padding",
-          "type": "spacing",
-          "detail": "number | \"t r b l\""
-        },
-        {
-          "name": "margin",
-          "type": "spacing",
-          "detail": "number | \"t r b l\""
-        },
-        {
-          "name": "background",
-          "type": "color",
-          "detail": "string | $theme"
-        },
-        {
-          "name": "radius",
-          "type": "number",
-          "detail": "number"
-        },
-        {
-          "name": "border",
-          "type": "object",
-          "detail": "{ width, color }"
-        },
-        {
-          "name": "width",
-          "type": "size",
-          "detail": "number | string | \"fit-content\" | \"100%\""
-        },
-        {
-          "name": "height",
-          "type": "size",
-          "detail": "number | string | \"fit-content\" | \"100%\""
-        },
-        {
-          "name": "opacity",
-          "type": "number",
-          "detail": "number"
-        },
-        {
-          "name": "shadow",
-          "type": "object",
-          "detail": "{ x?, y?, blur?, color? }"
-        },
-        {
-          "name": "align",
-          "type": "enum",
-          "values": [
-            "start",
-            "center",
-            "end",
-            "stretch"
-          ],
-          "detail": "'start' | 'center' | 'end' | 'stretch'"
-        }
-      ]
-    },
     "Text": {
       "container": false,
       "props": [
@@ -297,9 +130,89 @@
         }
       ]
     },
-    "Grid": {
+    "Spacer": {
+      "container": false,
+      "props": [
+        {
+          "name": "size",
+          "type": "number",
+          "detail": "number"
+        },
+        {
+          "name": "width",
+          "type": "size",
+          "detail": "number | string | \"fit-content\" | \"100%\""
+        },
+        {
+          "name": "height",
+          "type": "size",
+          "detail": "number | string | \"fit-content\" | \"100%\""
+        }
+      ]
+    },
+    "Icon": {
+      "container": false,
+      "props": [
+        {
+          "name": "name",
+          "type": "string",
+          "detail": "string"
+        },
+        {
+          "name": "paths",
+          "type": "string",
+          "detail": "string"
+        },
+        {
+          "name": "size",
+          "type": "number",
+          "detail": "number"
+        },
+        {
+          "name": "color",
+          "type": "color",
+          "detail": "string | $theme"
+        },
+        {
+          "name": "strokeWidth",
+          "type": "number",
+          "detail": "number"
+        },
+        {
+          "name": "viewBox",
+          "type": "number",
+          "detail": "number"
+        },
+        {
+          "name": "margin",
+          "type": "spacing",
+          "detail": "number | \"t r b l\""
+        }
+      ]
+    },
+    "Container": {
       "container": true,
       "props": [
+        {
+          "name": "width",
+          "type": "size",
+          "detail": "number | string | \"fit-content\" | \"100%\""
+        },
+        {
+          "name": "height",
+          "type": "size",
+          "detail": "number | string | \"fit-content\" | \"100%\""
+        },
+        {
+          "name": "direction",
+          "type": "enum",
+          "values": [
+            "vertical",
+            "horizontal",
+            "grid"
+          ],
+          "detail": "'vertical' | 'horizontal' | 'grid'"
+        },
         {
           "name": "columns",
           "type": "number",
@@ -307,16 +220,6 @@
         },
         {
           "name": "gap",
-          "type": "number",
-          "detail": "number"
-        },
-        {
-          "name": "columnGap",
-          "type": "number",
-          "detail": "number"
-        },
-        {
-          "name": "rowGap",
           "type": "number",
           "detail": "number"
         },
@@ -337,8 +240,8 @@
         },
         {
           "name": "radius",
-          "type": "number",
-          "detail": "number"
+          "type": "size",
+          "detail": "number | string | \"fit-content\" | \"100%\""
         },
         {
           "name": "border",
@@ -346,14 +249,14 @@
           "detail": "{ width, color }"
         },
         {
-          "name": "width",
-          "type": "size",
-          "detail": "number | string | \"fit-content\" | \"100%\""
-        },
-        {
           "name": "shadow",
           "type": "object",
           "detail": "{ x?, y?, blur?, color? }"
+        },
+        {
+          "name": "opacity",
+          "type": "number",
+          "detail": "number"
         },
         {
           "name": "align",
@@ -365,26 +268,35 @@
             "stretch"
           ],
           "detail": "'start' | 'center' | 'end' | 'stretch'"
-        }
-      ]
-    },
-    "Spacer": {
-      "container": false,
-      "props": [
+        },
         {
-          "name": "size",
+          "name": "justify",
+          "type": "enum",
+          "values": [
+            "start",
+            "space-between"
+          ],
+          "detail": "'start' | 'space-between'"
+        },
+        {
+          "name": "columnGap",
           "type": "number",
           "detail": "number"
         },
         {
-          "name": "width",
-          "type": "size",
-          "detail": "number | string | \"fit-content\" | \"100%\""
-        },
+          "name": "rowGap",
+          "type": "number",
+          "detail": "number"
+        }
+      ]
+    },
+    "Template": {
+      "container": true,
+      "props": [
         {
-          "name": "height",
-          "type": "size",
-          "detail": "number | string | \"fit-content\" | \"100%\""
+          "name": "theme",
+          "type": "string",
+          "detail": "string"
         }
       ]
     },
@@ -527,36 +439,6 @@
           "name": "width",
           "type": "size",
           "detail": "number | string | \"fit-content\" | \"100%\""
-        },
-        {
-          "name": "margin",
-          "type": "spacing",
-          "detail": "number | \"t r b l\""
-        }
-      ]
-    },
-    "Icon": {
-      "container": false,
-      "props": [
-        {
-          "name": "name",
-          "type": "string",
-          "detail": "string"
-        },
-        {
-          "name": "size",
-          "type": "number",
-          "detail": "number"
-        },
-        {
-          "name": "color",
-          "type": "color",
-          "detail": "string | $theme"
-        },
-        {
-          "name": "strokeWidth",
-          "type": "number",
-          "detail": "number"
         },
         {
           "name": "margin",

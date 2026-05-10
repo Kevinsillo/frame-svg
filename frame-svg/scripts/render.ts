@@ -1,5 +1,5 @@
 import { renderSvg } from '@/core/index.ts'
-import type { LayoutNode, PageProps, RenderOptions } from '@/core/types.ts'
+import type { LayoutNode, TemplateProps, RenderOptions } from '@/core/types.ts'
 import { initCanvas } from '@/core/utils.ts'
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
@@ -16,7 +16,7 @@ try {
     process.exit(1)
   }
 
-  const renderOptions: RenderOptions = (mod.default.props as PageProps).theme ?? {}
+  const renderOptions: RenderOptions = (mod.default.props as TemplateProps).theme ?? {}
 
   for (const font of renderOptions.fonts ?? []) {
     if (font.src) {
@@ -27,7 +27,7 @@ try {
   await initCanvas(renderOptions.fonts)
 
   await mkdir(distDir, { recursive: true })
-  await writeFile(resolve(distDir, 'main.svg'), renderSvg(mod.default, renderOptions), 'utf-8')
+  await writeFile(resolve(distDir, 'main.svg'), renderSvg(mod.default), 'utf-8')
   console.log('✓  dist/main.svg')
 } catch (err) {
   console.error(`✗  ${(err as Error).message}`)

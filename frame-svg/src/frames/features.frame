@@ -1,24 +1,24 @@
 export function Features() {
   return (
-    <Grid columns={3} gap={10}>
-      <Box background="$surface" radius={10} padding={16} border={{ width: 1, color: '$subtle' }}>
-        <Stack gap={6}>
+    <Container direction="grid" columns={3} gap={10}>
+      <Container background="$surface" radius={10} padding={16} border={{ width: 1, color: '$subtle' }}>
+        <Container gap={6}>
           <Text fontSize={13} fontWeight="700" color="$text">README cards</Text>
           <Text fontSize={11} color="$muted">Profile cards, GitHub stats, repo badges. Embed anywhere as a single image.</Text>
-        </Stack>
-      </Box>
-      <Box background="$surface" radius={10} padding={16} border={{ width: 1, color: '$accent' }}>
-        <Stack gap={6}>
+        </Container>
+      </Container>
+      <Container background="$surface" radius={10} padding={16} border={{ width: 1, color: '$accent' }}>
+        <Container gap={6}>
           <Text fontSize={13} fontWeight="700" color="$accent">Docs diagrams</Text>
           <Text fontSize={11} color="$muted">Architecture charts, file trees, API schemas. Code-maintained, always in sync.</Text>
-        </Stack>
-      </Box>
-      <Box background="$surface" radius={10} padding={16} border={{ width: 1, color: '$subtle' }}>
-        <Stack gap={6}>
+        </Container>
+      </Container>
+      <Container background="$surface" radius={10} padding={16} border={{ width: 1, color: '$subtle' }}>
+        <Container gap={6}>
           <Text fontSize={13} fontWeight="700" color="$text">Design tokens</Text>
           <Text fontSize={11} color="$muted">Color palettes, type scales, component previews. Your design system in code.</Text>
-        </Stack>
-      </Box>
-    </Grid>
+        </Container>
+      </Container>
+    </Container>
   )
 }

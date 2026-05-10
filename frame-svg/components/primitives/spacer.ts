@@ -1,6 +1,14 @@
 import { resolveWidth } from '@/core/layout-helpers.ts'
 import type { Primitive, RenderContext } from '@/core/primitive.ts'
-import type { LayoutNode, ResolvedNode, SpacerProps } from '@/core/types.ts'
+import type { LayoutNode, ResolvedNode } from '@/core/types.ts'
+
+// ─── Props ───────────────────────────────────────────────────────────────────
+
+export interface SpacerProps {
+  size?: number
+  width?: number | string
+  height?: number
+}
 
 // ─── Factory (public API — unchanged) ────────────────────────────────────────
 
@@ -26,5 +34,10 @@ export const SpacerPrimitive: Primitive = {
       _mt: 0, _mr: 0, _mb: 0, _ml: 0,
       children: [],
     }
+  },
+
+  measureIntrinsic(node: LayoutNode): number {
+    const p = node.props as SpacerProps
+    return Number(p.width ?? p.size ?? 0)
   },
 }

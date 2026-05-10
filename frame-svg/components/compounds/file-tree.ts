@@ -1,8 +1,7 @@
-import { Box } from '@/components/primitives/box.ts'
+import { Container } from '@/components/primitives/container.ts'
 import { Spacer } from '@/components/primitives/spacer.ts'
-import { Stack } from '@/components/primitives/stack.ts'
 import { Text } from '@/components/primitives/text.ts'
-import { Icon } from '@/components/compounds/icon.ts'
+import { Icon } from '@/components/primitives/icon.ts'
 import type { LayoutNode, SpacingValue } from '@/core/types.ts'
 
 export interface FileTreeItem {
@@ -30,7 +29,7 @@ export function FileTree({
 
   if (root) {
     rows.push(
-      Stack(
+      Container(
         { direction: 'horizontal', gap: 8, align: 'center' },
         Icon({ name: 'folder', size: 14, color: '$accent' }),
         Text({ fontSize: 13, fontWeight: '700', color: '$text' }, `${root}/`),
@@ -55,17 +54,17 @@ export function FileTree({
       ...(comment ? [Text({ fontSize: 11, color: highlight ? '$accent' : '$faint', margin: '0 0 0 10' }, comment)] : []),
     ]
 
-    const rowStack = Stack({ direction: 'horizontal', gap: 0, align: 'center' }, ...innerChildren)
+    const rowStack = Container({ direction: 'horizontal', gap: 0, align: 'center' }, ...innerChildren)
 
     rows.push(
       highlight
-        ? Box({ background: '$accentBg', radius: 4, padding: '3 0' }, rowStack)
+        ? Container({ background: '$accentBg', radius: 4, padding: '3 0' }, rowStack)
         : rowStack,
     )
   }
 
-  return Box(
+  return Container(
     { background: '$surface', radius: 10, padding, width },
-    Stack({ gap: 6 }, ...rows),
+    Container({ gap: 6 }, ...rows),
   )
 }

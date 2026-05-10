@@ -5,7 +5,20 @@ import {
 } from '@/core/render-helpers.ts'
 import { getMargin } from '@/core/layout-helpers.ts'
 import type { Primitive, RenderContext } from '@/core/primitive.ts'
-import type { LayoutNode, ResolvedNode, CircleProps, BorderProps } from '@/core/types.ts'
+import type {
+  LayoutNode, ResolvedNode, BorderProps, GradientBackground, Shadow, SpacingValue,
+} from '@/core/types.ts'
+
+// ─── Props ───────────────────────────────────────────────────────────────────
+
+export interface CircleProps {
+  size: number
+  background?: string | GradientBackground
+  border?: BorderProps | null
+  opacity?: number
+  shadow?: Shadow
+  margin?: SpacingValue
+}
 
 // ─── Factory (public API — unchanged) ────────────────────────────────────────
 
@@ -79,5 +92,9 @@ export const CirclePrimitive: Primitive = {
       _mt: mt, _mr: mr, _mb: mb, _ml: ml,
       children: [],
     }
+  },
+
+  measureIntrinsic(node: LayoutNode): number {
+    return (node.props as CircleProps).size
   },
 }
