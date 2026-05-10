@@ -3,7 +3,19 @@ import type { SpacingValue } from '@/core/types.ts'
 export function parseSpacing(value: SpacingValue | undefined | null): [number, number, number, number] {
   if (value == null) return [0, 0, 0, 0]
   if (typeof value === 'number') return [value, value, value, value]
-  const parts = String(value).trim().split(/\s+/).map(Number)
+  const raw = String(value).trim()
+  if (raw === '') return [0, 0, 0, 0]
+  const tokens = raw.split(/\s+/)
+  const parts = tokens.map(token => {
+    const n = Number(token)
+    if (isNaN(n)) {
+      if (typeof import.meta !== 'undefined' && import.meta.env?.DEV) {
+        console.warn(`[frame-svg] parseSpacing: token "${token}" is not a valid number — falling back to 0.`)
+      }
+      return 0
+    }
+    return n
+  })
   if (parts.length === 1) return [parts[0], parts[0], parts[0], parts[0]]
   if (parts.length === 2) return [parts[0], parts[1], parts[0], parts[1]]
   if (parts.length === 3) return [parts[0], parts[1], parts[2], parts[1]]

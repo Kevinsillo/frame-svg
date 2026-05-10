@@ -19,10 +19,15 @@ type ContainerLikeProps = {
   columns?: number
 }
 
+// Width tokens that mean "fill all available space" (no fixed value). The
+// resolver and the horizontal child-distributor share this list so the two
+// stay in lock-step — adding a new keyword (e.g. 'flex') only needs one edit.
+export const AUTO_WIDTH_VALUES: readonly (string | number)[] = ['full', '100%', 'auto', 'fit-content']
+
 // ─── Width / height resolvers ────────────────────────────────────────────────
 
 export function resolveWidth(propWidth: number | string | undefined, availableWidth: number): number {
-  if (!propWidth || propWidth === 'full' || propWidth === '100%' || propWidth === 'auto' || propWidth === 'fit-content') return availableWidth
+  if (!propWidth || AUTO_WIDTH_VALUES.includes(propWidth)) return availableWidth
   if (typeof propWidth === 'string' && propWidth.endsWith('%')) {
     return availableWidth * parseFloat(propWidth) / 100
   }
@@ -132,11 +137,16 @@ export function resolveHorizontalChildren(
       return { isAuto: false, fixedWidth: intrinsic, cml, cmr }
     }
     const w = getWidth(c.props)
-    const isAuto = !w || w === '100%' || w === 'auto'
+    // Note: 'fit-content' shares the AUTO_WIDTH_VALUES constant for resolveWidth's
+    // benefit (it means "no fixed pixel value"), but here it is handled separately
+    // below — we want its measured intrinsic, not an even share of remaining space.
+    if (w === 'fit-content') {
+      return { isAuto: false, fixedWidth: measureIntrinsicWidth(c), cml, cmr }
+    }
+    const isAuto = !w || AUTO_WIDTH_VALUES.includes(w)
     let fixedWidth = 0
     if (!isAuto) {
-      if (w === 'fit-content') fixedWidth = measureIntrinsicWidth(c)
-      else if (typeof w === 'string' && w.endsWith('%')) fixedWidth = innerWidth * parseFloat(w) / 100
+      if (typeof w === 'string' && w.endsWith('%')) fixedWidth = innerWidth * parseFloat(w) / 100
       else fixedWidth = Number(w)
     }
     return { isAuto, fixedWidth, cml, cmr }

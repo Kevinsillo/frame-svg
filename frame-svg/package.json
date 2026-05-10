@@ -19,14 +19,17 @@
     "render": "vite-node scripts/render.ts",
     "render:img": "vite-node scripts/render-img.ts",
     "ext:install": "node scripts/install-extension.mjs",
-    "schema": "vite-node scripts/gen-schema.ts"
+    "schema": "vite-node scripts/gen-schema.ts",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "devDependencies": {
     "@types/node": "^25.6.2",
     "tsx": "^4",
     "typescript": "^5",
     "vite": "^6",
-    "vite-node": "^3"
+    "vite-node": "^3",
+    "vitest": "^3.2.4"
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.2.8",

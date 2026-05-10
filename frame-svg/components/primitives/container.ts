@@ -123,100 +123,116 @@ function parseRatio(h: string | number | undefined): number | 'full' | null {
   return null
 }
 
-function resolveFlowLayout(
-  node: LayoutNode,
-  props: ContainerProps,
-  width: number,
+// Vertical layout pass when the parent has a *known* height (numeric prop or
+// forcedHeight from the parent). Resolves '50%' / 'full' children against the
+// known inner height; non-ratio children pass through untouched.
+function resolveVerticalChildrenWithKnownHeight(
+  children: LayoutNode[],
   innerWidth: number,
-  pt: number, pr: number, pb: number, pl: number,
-  mt: number, mr: number, mb: number, ml: number,
-  forcedHeight?: number,
-): ResolvedNode {
-  const direction = props.direction ?? 'vertical'
-  const gap = Number(props.gap) || 0
-  const align = props.align ?? 'stretch'
-  const heightPropRaw = props.height
+  innerHeight: number,
+  gap: number,
+): ResolvedNode[] {
+  const ratios = children.map(c =>
+    parseRatio(((c.props as ContainerProps | null) ?? ({} as ContainerProps)).height)
+  )
+  const firstPass = children.map((c, i) => ratios[i] === null ? resolveLayout(c, innerWidth) : null)
+  const fixedH = firstPass.reduce((s, c) => c ? s + c._mt + c._height + c._mb : s, 0)
+  const totalGaps = gap * Math.max(0, children.length - 1)
+  // Fixed-ratio children (e.g. "50%") are resolved against innerHeight.
+  const fixedRatioH = ratios.reduce<number>(
+    (s, r) => (r !== null && r !== 'full') ? s + innerHeight * (r as number) : s,
+    0,
+  )
+  // "full" children split the remaining space equally.
+  const fullCount = ratios.filter(r => r === 'full').length
+  const remainingH = Math.max(0, innerHeight - fixedH - fixedRatioH - totalGaps)
+  const perFullH = fullCount > 0 ? remainingH / fullCount : 0
+  return children.map((c, i) => {
+    const r = ratios[i]
+    if (r === null)   return firstPass[i]!
+    if (r === 'full') return resolveLayout(c, innerWidth, perFullH)
+    return resolveLayout(c, innerWidth, innerHeight * r)
+  })
+}
 
-  let resolvedChildren: ReturnType<typeof resolveLayout>[]
+// Horizontal cross-axis re-resolution.
+//   • align='stretch'  → every child gets forcedH = innerCrossH
+//   • other aligns     → only children declaring height='X%'/'full' (or vertical
+//                        Line with length='X%'/'full') get forcedH applied.
+// Children without a cross-axis directive pass through unchanged.
+function applyCrossAxisStretch(
+  resolvedChildren: ResolvedNode[],
+  originals: LayoutNode[],
+  maxCrossHeight: number,
+  align: string,
+): ResolvedNode[] {
+  return resolvedChildren.map((child, i) => {
+    const orig = originals[i]
+    const { _mt: cmt, _mb: cmb } = child
+    const innerCrossH = maxCrossHeight - cmt - cmb
 
-  if (direction === 'horizontal') {
-    resolvedChildren = resolveHorizontalChildren(node.children, innerWidth, gap, resolveLayout)
-  } else {
-    // Vertical: resolve percentage/full children only when parent height is known.
-    const knownHeight = forcedHeight ?? (typeof heightPropRaw === 'number' ? heightPropRaw : undefined)
-    if (knownHeight !== undefined) {
-      const innerHeight = knownHeight - pt - pb
-      const ratios = node.children.map(c => parseRatio((c.props as ContainerProps).height))
-      const firstPass = node.children.map((c, i) => ratios[i] === null ? resolveLayout(c, innerWidth) : null)
-      const fixedH = firstPass.reduce((s, c) => c ? s + c._mt + c._height + c._mb : s, 0)
-      const totalGaps = gap * Math.max(0, node.children.length - 1)
-      // Fixed-ratio children (e.g. "50%") are resolved against innerHeight.
-      const fixedRatioH = ratios.reduce<number>((s, r) => (r !== null && r !== 'full') ? s + innerHeight * (r as number) : s, 0)
-      // "full" children split the remaining space equally.
-      const fullCount = ratios.filter(r => r === 'full').length
-      const remainingH = Math.max(0, innerHeight - fixedH - (fixedRatioH as number) - totalGaps)
-      const perFullH = fullCount > 0 ? remainingH / fullCount : 0
-      resolvedChildren = node.children.map((c, i) => {
-        const r = ratios[i]
-        if (r === null)   return firstPass[i]!
-        if (r === 'full') return resolveLayout(c, innerWidth, perFullH)
-        return resolveLayout(c, innerWidth, innerHeight * r)
-      })
+    let forcedH: number | undefined
+    if (align === 'stretch') {
+      forcedH = innerCrossH
     } else {
-      resolvedChildren = node.children.map(c => resolveLayout(c, innerWidth))
+      const origProps = (orig.props as ContainerProps | null) ?? ({} as ContainerProps)
+      const hr = parseRatio(origProps.height)
+      if (hr === 'full') forcedH = innerCrossH
+      else if (hr !== null) forcedH = innerCrossH * hr
+
+      // Vertical Line with length as ratio
+      if (orig.type === 'line' && ((origProps as { direction?: string }).direction ?? 'horizontal') === 'vertical') {
+        const lr = parseRatio((origProps as { length?: unknown }).length as string | undefined)
+        if (lr === 'full') forcedH = innerCrossH
+        else if (lr !== null) forcedH = innerCrossH * lr
+      }
     }
-  }
 
-  const maxCrossHeight = direction === 'horizontal'
-    ? resolvedChildren.reduce((m, c) => Math.max(m, c._mt + c._height + c._mb), 0)
-    : 0
+    if (forcedH === undefined) return child
+    const reresolved = resolveLayout(orig, child._width, forcedH)
+    return { ...reresolved, _height: Math.max(reresolved._height, forcedH), _x: 0, _y: 0 }
+  })
+}
 
-  // Horizontal: re-resolve children that declare a cross-axis size.
-  // • align='stretch'  → all children fill the full cross-axis
-  // • any align        → children with height='X%'/'full', or vertical Line with length='X%'/'full'
-  const layoutChildren = direction === 'horizontal'
-    ? resolvedChildren.map((child, i) => {
-        const orig = node.children[i]
-        const { _mt: cmt, _mb: cmb } = child
-        const innerCrossH = maxCrossHeight - cmt - cmb  // available height for this child
-
-        let forcedH: number | undefined
-        if (align === 'stretch') {
-          forcedH = innerCrossH
-        } else {
-          const hr = parseRatio((orig.props as ContainerProps).height)
-          if (hr === 'full') forcedH = innerCrossH
-          else if (hr !== null) forcedH = innerCrossH * hr
-
-          // Vertical Line with length as ratio
-          if (orig.type === 'line' && ((orig.props as { direction?: string }).direction ?? 'horizontal') === 'vertical') {
-            const lr = parseRatio((orig.props as { length?: unknown }).length as string | undefined)
-            if (lr === 'full') forcedH = innerCrossH
-            else if (lr !== null) forcedH = innerCrossH * lr
-          }
-        }
-
-        if (forcedH === undefined) return child
-        const reresolved = resolveLayout(orig, child._width, forcedH)
-        return { ...reresolved, _height: Math.max(reresolved._height, forcedH), _x: 0, _y: 0 }
-      })
-    : resolvedChildren
-
-  const heightProp = props.height
+// Compute the additional gap to insert between siblings when justify is
+// 'space-between' on a vertical container with a known height. Returns 0 in
+// every other configuration so callers can unconditionally add it.
+function computeJustifyExtraGap(
+  layoutChildren: ResolvedNode[],
+  props: ContainerProps,
+  direction: string,
+  gap: number,
+  pt: number, pb: number,
+): number {
   const justify = props.justify ?? 'start'
-  let extraGap = 0
+  const heightProp = props.height
   if (
-    justify === 'space-between' &&
-    direction === 'vertical' &&
-    heightProp !== undefined &&
-    layoutChildren.length > 1
+    justify !== 'space-between' ||
+    direction !== 'vertical' ||
+    heightProp === undefined ||
+    layoutChildren.length <= 1
   ) {
-    const totalChildH = layoutChildren.reduce((s, c) => s + c._mt + c._height + c._mb, 0)
-    const totalGaps = gap * (layoutChildren.length - 1)
-    const available = resolveHeight(heightProp, 0) - pt - pb
-    extraGap = Math.max(0, available - totalChildH - totalGaps) / (layoutChildren.length - 1)
+    return 0
   }
+  const totalChildH = layoutChildren.reduce((s, c) => s + c._mt + c._height + c._mb, 0)
+  const totalGaps = gap * (layoutChildren.length - 1)
+  const available = resolveHeight(heightProp, 0) - pt - pb
+  return Math.max(0, available - totalChildH - totalGaps) / (layoutChildren.length - 1)
+}
 
+// Position children along the main axis, applying cross-axis alignment. Returns
+// both the positioned children and the content height accumulated by the
+// cursor — the caller uses it to derive the final container height.
+function positionFlowChildren(
+  layoutChildren: ResolvedNode[],
+  direction: string,
+  align: string,
+  gap: number,
+  extraGap: number,
+  innerWidth: number,
+  maxCrossHeight: number,
+  pt: number, pl: number,
+): { positioned: ResolvedNode[]; contentHeight: number } {
   let cursorX = pl
   let cursorY = pt
   let contentHeight = 0
@@ -231,9 +247,8 @@ function resolveFlowLayout(
         cy = pt + (maxCrossHeight - child._height) / 2
       } else if (align === 'end') {
         cy = pt + maxCrossHeight - child._height - cmb
-      } else if (align === 'stretch') {
-        cy = pt + cmt
       } else {
+        // stretch & start both pin to top + child margin
         cy = pt + cmt
       }
       cx = cursorX + cml
@@ -255,6 +270,66 @@ function resolveFlowLayout(
     return { ...child, _x: cx, _y: cy }
   })
 
+  return { positioned, contentHeight }
+}
+
+function resolveFlowLayout(
+  node: LayoutNode,
+  props: ContainerProps,
+  width: number,
+  innerWidth: number,
+  pt: number, pr: number, pb: number, pl: number,
+  mt: number, mr: number, mb: number, ml: number,
+  forcedHeight?: number,
+): ResolvedNode {
+  const direction = props.direction ?? 'vertical'
+  const gap = Number(props.gap) || 0
+  const align = props.align ?? 'stretch'
+  const heightPropRaw = props.height
+
+  // Defensive: if a malformed child arrives without a props object, substitute
+  // an empty record so downstream primitives can read fields safely.
+  if (node.children.some(c => c.props == null)) {
+    node = {
+      ...node,
+      children: node.children.map(c =>
+        c.props == null ? { ...c, props: {} as typeof c.props } : c
+      ),
+    }
+  }
+
+  // 1 — Resolve children (sizes only, no positions yet)
+  let resolvedChildren: ResolvedNode[]
+  if (direction === 'horizontal') {
+    resolvedChildren = resolveHorizontalChildren(node.children, innerWidth, gap, resolveLayout)
+  } else {
+    const knownHeight = forcedHeight ?? (typeof heightPropRaw === 'number' ? heightPropRaw : undefined)
+    if (knownHeight !== undefined) {
+      const innerHeight = knownHeight - pt - pb
+      resolvedChildren = resolveVerticalChildrenWithKnownHeight(node.children, innerWidth, innerHeight, gap)
+    } else {
+      resolvedChildren = node.children.map(c => resolveLayout(c, innerWidth))
+    }
+  }
+
+  // 2 — Cross-axis sizing (horizontal-only re-pass)
+  const maxCrossHeight = direction === 'horizontal'
+    ? resolvedChildren.reduce((m, c) => Math.max(m, c._mt + c._height + c._mb), 0)
+    : 0
+
+  const layoutChildren = direction === 'horizontal'
+    ? applyCrossAxisStretch(resolvedChildren, node.children, maxCrossHeight, align)
+    : resolvedChildren
+
+  // 3 — Justify (vertical, space-between only)
+  const extraGap = computeJustifyExtraGap(layoutChildren, props, direction, gap, pt, pb)
+
+  // 4 — Position children along the main axis
+  const { positioned, contentHeight } = positionFlowChildren(
+    layoutChildren, direction, align, gap, extraGap, innerWidth, maxCrossHeight, pt, pl,
+  )
+
+  const heightProp = props.height
   const contentBasedHeight = pt + contentHeight + pb
   const finalHeight = forcedHeight !== undefined
     ? forcedHeight
@@ -278,10 +353,13 @@ export const ContainerPrimitive: Primitive = {
   },
 
   resolveLayout(node: LayoutNode, availableWidth: number, forcedHeight?: number): ResolvedNode {
-    const props = node.props as ContainerProps
-    const [mt, mr, mb, ml] = parseSpacing(getMargin(node.props))
-    const width = resolveWidth(getWidth(node.props), availableWidth)
-    const [pt, pr, pb, pl] = parseSpacing(getPadding(node.props))
+    // Null-safe view of node.props — defends against malformed nodes where a
+    // builder/compound forgot to attach props. Layout falls back to defaults.
+    const safeProps = (node.props as ContainerProps | null) ?? ({} as ContainerProps)
+    const props = safeProps
+    const [mt, mr, mb, ml] = parseSpacing(getMargin(safeProps))
+    const width = resolveWidth(getWidth(safeProps), availableWidth)
+    const [pt, pr, pb, pl] = parseSpacing(getPadding(safeProps))
     const innerWidth = Math.max(0, width - pl - pr)
 
     const direction = props.direction ?? 'vertical'

@@ -100,6 +100,16 @@ export function isGradient(bg: unknown): bg is GradientBackground {
 export function addGradient(bg: GradientBackground, ctx: RenderContext): string {
   const id = nextId(ctx)
 
+  // Gradients with fewer than 2 stops are invalid SVG. Warn and skip emission
+  // so we don't push malformed `<linearGradient>` / `<radialGradient>` markup
+  // into ctx.defs (which would later be referenced via url(#id) and break).
+  if (!bg.stops || bg.stops.length < 2) {
+    console.warn(
+      `[frame-svg] addGradient: ${bg.type} gradient requires at least 2 stops, got ${bg.stops?.length ?? 0}. Skipped.`
+    )
+    return id
+  }
+
   if (bg.type === 'linear') {
     const lg = bg as LinearGradient
     const angle = lg.angle ?? 0
@@ -148,7 +158,7 @@ export function addShadow(shadow: Shadow, ctx: RenderContext): string {
 export function attrs(obj: Record<string, string | number | undefined>): string {
   return Object.entries(obj)
     .filter(([, v]) => v != null && v !== '')
-    .map(([k, v]) => `${k}="${v}"`)
+    .map(([k, v]) => `${k}="${typeof v === 'string' ? escapeXml(v) : v}"`)
     .join(' ')
 }
 

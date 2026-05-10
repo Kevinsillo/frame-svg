@@ -1,3 +1,4 @@
+/// <reference types="vitest/config" />
 import { defineConfig } from 'vite'
 import { framePlugin } from './plugins/frame.ts'
 import path from 'node:path'
@@ -18,5 +19,10 @@ export default defineConfig({
       { find: 'frame-svg/community',   replacement: path.resolve('./components/community/index.ts') },
       { find: /^frame-svg\/themes\/(.+)$/, replacement: path.resolve('./themes/$1.ts') },
     ],
+  },
+  test: {
+    globals: true,
+    environment: 'node',
+    include: ['**/__tests__/**/*.test.ts'],
   },
 })
