@@ -10,7 +10,7 @@ import { renderNode } from '@/core/renderer.ts'
 import type { Primitive, RenderContext } from '@/core/primitive.ts'
 import type {
   LayoutNode, ResolvedNode,
-  BorderProps, GradientBackground, Shadow, SpacingValue,
+  BorderProps, GradientBackground, Shadow, SpacingValue, Animate,
 } from '@/core/types.ts'
 
 // ─── Props ───────────────────────────────────────────────────────────────────
@@ -36,12 +36,13 @@ export interface ContainerProps {
   // Grid-specific gap overrides (only consulted when direction='grid').
   columnGap?: number
   rowGap?: number
+  animate?: Animate
 }
 
 // ─── Factory (public API) ────────────────────────────────────────────────────
 
-export function Container(props: ContainerProps, ...children: LayoutNode[]): LayoutNode {
-  return { type: 'container', props, children: children.flat(1) }
+export function Container({ animate, ...props }: ContainerProps, ...children: LayoutNode[]): LayoutNode {
+  return { type: 'container', props, animate, children: children.flat(1) }
 }
 
 // ─── Internal grid layout ────────────────────────────────────────────────────

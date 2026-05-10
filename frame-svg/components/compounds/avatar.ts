@@ -1,24 +1,24 @@
-import type { GradientBackground, LayoutNode, Shadow, SpacingValue } from '@/core/types.ts'
-import { Container } from '@/components/primitives/container.ts'
 import { Circle } from '@/components/primitives/circle.ts'
+import { Container } from '@/components/primitives/container.ts'
 import { Text } from '@/components/primitives/text.ts'
+import type { GradientBackground, LayoutNode, Shadow, SpacingValue } from '@/core/types.ts'
 
 type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 type AvatarStatus = 'online' | 'offline' | 'busy' | 'away'
 
 const SIZE_MAP: Record<AvatarSize, { box: number; font: number; fontPad: string; dot: number }> = {
-  xs: { box: 24, font: 10, fontPad: '6 0 0 0',  dot: 6  },
-  sm: { box: 32, font: 13, fontPad: '8 0 0 0',  dot: 7  },
-  md: { box: 40, font: 16, fontPad: '10 0 0 0', dot: 8  },
+  xs: { box: 24, font: 10, fontPad: '6 0 0 0', dot: 6 },
+  sm: { box: 32, font: 13, fontPad: '8 0 0 0', dot: 7 },
+  md: { box: 40, font: 16, fontPad: '10 0 0 0', dot: 8 },
   lg: { box: 52, font: 20, fontPad: '14 0 0 0', dot: 10 },
   xl: { box: 68, font: 26, fontPad: '18 0 0 0', dot: 12 },
 }
 
 const STATUS_COLOR: Record<AvatarStatus, string> = {
-  online:  '$success',
+  online: '$success',
   offline: '$muted',
-  busy:    '$danger',
-  away:    '$warning',
+  busy: '$danger',
+  away: '$warning',
 }
 
 export interface AvatarProps {
@@ -65,6 +65,7 @@ export function Avatar({
     background: STATUS_COLOR[status],
     border: { width: 2, color: '$surface' },
     margin: `0 0 0 -${dot + 2}`,
+    animate: { preset: 'pulse' },
   })
 
   return Container(

@@ -6,7 +6,7 @@ import {
 import { getMargin } from '@/core/layout-helpers.ts'
 import type { Primitive, RenderContext } from '@/core/primitive.ts'
 import type {
-  LayoutNode, ResolvedNode, BorderProps, GradientBackground, Shadow, SpacingValue,
+  LayoutNode, ResolvedNode, BorderProps, GradientBackground, Shadow, SpacingValue, Animate,
 } from '@/core/types.ts'
 
 // ─── Props ───────────────────────────────────────────────────────────────────
@@ -18,12 +18,13 @@ export interface CircleProps {
   opacity?: number
   shadow?: Shadow
   margin?: SpacingValue
+  animate?: Animate
 }
 
 // ─── Factory (public API — unchanged) ────────────────────────────────────────
 
-export function Circle(props: CircleProps): LayoutNode {
-  return { type: 'circle', props, children: [] }
+export function Circle({ animate, ...props }: CircleProps): LayoutNode {
+  return { type: 'circle', props, animate, children: [] }
 }
 
 // ─── Primitive (self-contained render + layout) ──────────────────────────────

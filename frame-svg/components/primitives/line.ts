@@ -2,7 +2,7 @@ import { parseSpacing } from '@/core/utils.ts'
 import { strokeAttrs, applyAnimate, attrs } from '@/core/render-helpers.ts'
 import { getMargin, resolveWidth } from '@/core/layout-helpers.ts'
 import type { Primitive, RenderContext } from '@/core/primitive.ts'
-import type { LayoutNode, ResolvedNode, SpacingValue } from '@/core/types.ts'
+import type { LayoutNode, ResolvedNode, SpacingValue, Animate } from '@/core/types.ts'
 
 // ─── Props ───────────────────────────────────────────────────────────────────
 
@@ -13,12 +13,13 @@ export interface LineProps {
   length?: number | string  // explicit length; defaults to 100% for horizontal, required for vertical
   dash?: string             // stroke-dasharray
   margin?: SpacingValue
+  animate?: Animate
 }
 
 // ─── Factory (public API — unchanged) ────────────────────────────────────────
 
-export function Line(props: LineProps = {}): LayoutNode {
-  return { type: 'line', props, children: [] }
+export function Line({ animate, ...props }: LineProps = {}): LayoutNode {
+  return { type: 'line', props, animate, children: [] }
 }
 
 // ─── Primitive (self-contained render + layout) ──────────────────────────────

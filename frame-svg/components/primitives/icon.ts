@@ -2,7 +2,7 @@ import { parseSpacing } from '@/core/utils.ts'
 import { strokeAttrs, attrs, applyAnimate } from '@/core/render-helpers.ts'
 import { getMargin } from '@/core/layout-helpers.ts'
 import type { Primitive, RenderContext } from '@/core/primitive.ts'
-import type { LayoutNode, ResolvedNode, SpacingValue } from '@/core/types.ts'
+import type { LayoutNode, ResolvedNode, SpacingValue, Animate } from '@/core/types.ts'
 import { ICONS, type IconName } from '@/components/primitives/icons/index.ts'
 
 export type { IconName }
@@ -18,12 +18,13 @@ export interface IconProps {
   strokeWidth?: number
   viewBox?: number
   margin?: SpacingValue
+  animate?: Animate
 }
 
 // ─── Factory (public API) ────────────────────────────────────────────────────
 
-export function Icon(props: IconProps): LayoutNode {
-  return { type: 'icon', props, children: [] }
+export function Icon({ animate, ...props }: IconProps): LayoutNode {
+  return { type: 'icon', props, animate, children: [] }
 }
 
 // ─── Primitive (self-contained render + layout) ──────────────────────────────

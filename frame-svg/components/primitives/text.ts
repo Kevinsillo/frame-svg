@@ -4,7 +4,7 @@ import {
 } from '@/core/render-helpers.ts'
 import { getMargin, resolveWidth } from '@/core/layout-helpers.ts'
 import type { Primitive, RenderContext } from '@/core/primitive.ts'
-import type { LayoutNode, ResolvedNode, SpacingValue } from '@/core/types.ts'
+import type { LayoutNode, ResolvedNode, SpacingValue, Animate } from '@/core/types.ts'
 
 // ─── Props ───────────────────────────────────────────────────────────────────
 
@@ -18,20 +18,21 @@ export interface TextProps {
   lineHeight?: number
   padding?: SpacingValue
   margin?: SpacingValue
+  animate?: Animate
 }
 
 // ─── Factory (public API — unchanged, preserves size/weight aliases) ─────────
 
 export function Text(props: TextProps & { size?: number; weight?: string | number }, content?: string): LayoutNode {
   const text = content ?? (props.content as string ?? '')
-  const { size, weight, ...rest } = props
+  const { size, weight, animate, ...rest } = props
   const normalized: TextProps = {
     fontSize: rest.fontSize ?? size,
     fontWeight: rest.fontWeight ?? weight,
     ...rest,
     content: String(text).trim(),
   }
-  return { type: 'text', props: normalized, children: [] }
+  return { type: 'text', props: normalized, animate, children: [] }
 }
 
 // ─── Primitive (self-contained render + layout) ──────────────────────────────
